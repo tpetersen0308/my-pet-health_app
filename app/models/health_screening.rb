@@ -3,10 +3,14 @@ class HealthScreening < ApplicationRecord
 
   def current?
     now = DateTime.now
-    if renewal_interval
-      (now.year * 12 + now.month) - (last_updated.year * 12 + last_updated.month) > 0
+    if last_updated
+      if renewal_interval
+        (now.year * 12 + now.month) - (last_updated.year * 12 + last_updated.month) > 0
+      else
+        true #some screenings must only be performed once
+      end
     else
-      true
+      false #screening has never been performed
     end
   end
 end
