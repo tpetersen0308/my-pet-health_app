@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  species: MyString
+  renewal_interval: MyString
+  last_updated: 2018-04-03 15:21:56
+
+two:
+  type: 
+  species: MyString
+  renewal_interval: MyString
+  last_updated: 2018-04-03 15:21:56
