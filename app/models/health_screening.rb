@@ -16,13 +16,16 @@ class HealthScreening < ApplicationRecord
 
   def dog_screenings
     # generate set of new screenings for dogs
+    # parvo, canine influenza, bordetella (annually), stool sample (biennially)
   end
 
   def cat_screenings
     # generate set of new screenings for cats
+    # feline influenza, FVRCP (annually), stool sample (annually) 
   end
 
   def dog_and_cat_screenings
     # generate set of new screenings that apply to both dogs and cats
+    # rabies (1 yr cats 3 yr dogs), fleas/ticks
   end
 end
