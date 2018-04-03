@@ -13,4 +13,16 @@ class HealthScreening < ApplicationRecord
       false #screening has never been performed
     end
   end
+
+  def dog_screenings
+    # generate set of new screenings for dogs
+  end
+
+  def cat_screenings
+    # generate set of new screenings for cats
+  end
+
+  def dog_and_cat_screenings
+    # generate set of new screenings that apply to both dogs and cats
+  end
 end
