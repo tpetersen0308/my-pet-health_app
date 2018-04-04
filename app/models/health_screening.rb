@@ -15,7 +15,7 @@ class HealthScreening < ApplicationRecord
   end
 
   def self.current
-    
+    where(status: "Current")
   end
 
   def self.dog_screenings
