@@ -14,7 +14,7 @@ class HealthScreening < ApplicationRecord
     end
   end
 
-  def dog_screenings
+  def self.dog_screenings
 
     {"Parvovirus" => 3, 
      "CAV-1/Canine Hepatitis" => 3, 
@@ -27,7 +27,7 @@ class HealthScreening < ApplicationRecord
 
   end
 
-  def cat_screenings
+  def self.cat_screenings
     {"Feline Influenza" => 1,
      "Felines Leukemia" => 1,
      "Bordetella" => 1,
