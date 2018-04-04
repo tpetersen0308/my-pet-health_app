@@ -1,6 +1,19 @@
 class HealthScreening < ApplicationRecord
   belongs_to :pet
 
+
+
+  def update_status
+    now = DateTime.now
+    if last_updated
+      if (now.year * 12 + now.month) - (last_updated.year * 12 + last_updated.month) < renewal_interval*12
+        self.status = "Current"
+      else self.status = "Overdue"
+    else self.status = "Overdue"
+    end
+    self.save
+  end
+
   def current?
     now = DateTime.now
     if last_updated
