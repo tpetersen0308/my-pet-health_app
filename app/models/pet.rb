@@ -25,4 +25,10 @@ class Pet < ApplicationRecord
   def dog?
     self.species == "Dog"
   end
+
+  def age
+    now = DateTime.now
+    months = (now.year*12 + now.month) - (self.birth_date.year*12 + self.birth_date.month)
+    "#{months/12} years, #{months%12} months"
+  end
 end
