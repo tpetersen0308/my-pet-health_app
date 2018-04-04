@@ -14,6 +14,10 @@ class HealthScreening < ApplicationRecord
     end
   end
 
+  def self.current
+
+  end
+
   def self.dog_screenings
 
     {"Parvovirus" => 3, 
