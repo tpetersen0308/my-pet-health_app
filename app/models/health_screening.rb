@@ -4,21 +4,21 @@ class HealthScreening < ApplicationRecord
 
 
   def update_status
-    now = DateTime.now
-    if last_updated
-      if (now.year * 12 + now.month) - (last_updated.year * 12 + last_updated.month) < renewal_interval*12
+    if months_since_last_updated
+      if months_since_last_updated > renewal_interval
+        self.status = "Overdue"
+      else
         self.status = "Current"
-      else self.status = "Overdue"
+      end
     else self.status = "Overdue"
     end
     self.save
   end
 
   def current?
-    now = DateTime.now
     if last_updated
       if renewal_interval
-        (now.year * 12 + now.month) - (last_updated.year * 12 + last_updated.month) < renewal_interval*12
+        months_since_last_updated < renewal_interval*12
       else
         true #some screenings must only be performed once
       end
@@ -28,11 +28,12 @@ class HealthScreening < ApplicationRecord
   end
 
   def months_since_last_updated
+    now = DateTime.now
     if last_updated
       (now.year * 12 + now.month) - (last_updated.year * 12 + last_updated.month)
     end
   end
-  
+
   def self.current
     where(status: "Current")
   end
