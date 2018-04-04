@@ -53,7 +53,7 @@ class HealthScreening < ApplicationRecord
 
   def self.cat_screenings
     {"Feline Influenza" => 1,
-     "Felines Leukemia" => 1,
+     "Feline Leukemia" => 1,
      "Bordetella" => 1,
      "Rabies" => 1,
      "Stool Analysis" => 1,
