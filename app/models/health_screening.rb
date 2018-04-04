@@ -27,6 +27,12 @@ class HealthScreening < ApplicationRecord
     end
   end
 
+  def months_since_last_updated
+    if last_updated
+      (now.year * 12 + now.month) - (last_updated.year * 12 + last_updated.month)
+    end
+  end
+  
   def self.current
     where(status: "Current")
   end
