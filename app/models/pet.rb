@@ -3,6 +3,10 @@ class Pet < ApplicationRecord
   has_many :veterinarians
   has_many :health_screenings
 
+  validates :name, presence: true
+  validates :species, presence: true
+  validates :owner_id, presence: true
+
   after_initialize :initialize_screenings
 
   def initialize_screenings
