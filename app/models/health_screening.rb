@@ -1,7 +1,7 @@
 class HealthScreening < ApplicationRecord
   belongs_to :pet
 
-
+  after_find :update_status
 
   def update_status
     if months_since_last_updated
