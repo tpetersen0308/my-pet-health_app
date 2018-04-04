@@ -5,7 +5,7 @@ class HealthScreening < ApplicationRecord
 
   def update_status
     if months_since_last_updated
-      if months_since_last_updated > renewal_interval
+      if months_since_last_updated > renewal_interval*12
         self.status = "Overdue"
       else
         self.status = "Current"
