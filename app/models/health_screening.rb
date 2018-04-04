@@ -5,7 +5,7 @@ class HealthScreening < ApplicationRecord
     now = DateTime.now
     if last_updated
       if renewal_interval
-        (now.year * 12 + now.month) - (last_updated.year * 12 + last_updated.month) > 0
+        (now.year * 12 + now.month) - (last_updated.year * 12 + last_updated.month) < renewal_interval*12
       else
         true #some screenings must only be performed once
       end
@@ -15,17 +15,27 @@ class HealthScreening < ApplicationRecord
   end
 
   def dog_screenings
-    # generate set of new screenings for dogs
-    # parvo, canine influenza, bordetella (annually), stool sample (biennially)
+
+    {"Parvovirus" => 3, 
+     "CAV-1/Canine Hepatitis" => 3, 
+     "CAV-2/Kennel Cough" => 3,
+     "Distemper" => 3,
+     "Rabies" => 3,
+     "Canine Influenza" => 1,
+     "Lyme" => 1,
+     "Stool Analysis" => 1}
+
   end
 
   def cat_screenings
-    # generate set of new screenings for cats
-    # feline influenza, FVRCP (annually), stool sample (annually) 
+    {"Feline Influenza" => 1,
+     "Felines Leukemia" => 1,
+     "Bordetella" => 1,
+     "Rabies" => 1,
+     "Stool Analysis" => 1,
+     "Feline Distemper" => 3,
+     "Feline Herpesvirus" => 3,
+     "Calcivirus" => 3}
   end
 
-  def dog_and_cat_screenings
-    # generate set of new screenings that apply to both dogs and cats
-    # rabies (1 yr cats 3 yr dogs), fleas/ticks
-  end
 end
