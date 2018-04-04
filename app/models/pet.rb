@@ -6,6 +6,7 @@ class Pet < ApplicationRecord
   validates :name, presence: true
   validates :species, presence: true
   validates :owner_id, presence: true
+  validates :birth_date, presence: true
 
   after_initialize :initialize_screenings
 
