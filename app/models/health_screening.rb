@@ -38,6 +38,10 @@ class HealthScreening < ApplicationRecord
     where(status: "Current")
   end
 
+  def self.overdue
+    where(status: "Overdue")
+  end
+
   def self.dog_screenings
 
     {"Parvovirus" => 3, 
