@@ -8,4 +8,12 @@ class User < ApplicationRecord
   def name
     "#{self.first_name} #{self.last_name}"
   end
+
+  def owner?
+    self.class.name == "Owner"
+  end
+
+  def vet?
+    self.class.name == "Veterinarian"
+  end
 end
