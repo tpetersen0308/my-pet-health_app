@@ -1,6 +1,7 @@
 class Pet < ApplicationRecord
   belongs_to :owner
-  has_and_belongs_to_many :veterinarians
+  has_many :pets_veterinarians
+  has_many :veterinarians, through: :pets_veterinarians
   has_many :health_screenings
 
   validates :name, presence: true
