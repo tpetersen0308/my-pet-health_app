@@ -9,8 +9,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    raise params.inspect
-    if params[:user][:vet]
+    if params[:vet]
       @user = Veterinarian.new(user_params)
     else
       @user = Owner.new(user_params)
