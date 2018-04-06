@@ -6,14 +6,14 @@ class UsersController < ApplicationController
 
   def create
     if params[:user][:vet]
-      user = Veterinarian.new(user_params)
+      @user = Veterinarian.new(user_params)
     else
-      user = Owner.new(user_params)
+      @user = Owner.new(user_params)
     end
 
-    if user.save
-      session[:user_id] = user.id
-      redirect_to user_path(user)
+    if @user.save
+      session[:user_id] = @user.id
+      redirect_to user_path(@user)
     else
       render :new
     end
