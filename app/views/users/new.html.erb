@@ -10,6 +10,6 @@
   <%= f.password_field :password %> <br>
   Confirm Password: <br>
   <%= f.password_field :password_confirmation %> <br>
-  Check if you are a veterinarian: <%= f.check_box :vet? %> <br>
+  Check if you are a veterinarian: <%= f.check_box :vet?, {}, true, false %> <br>
   <%= f.submit "Sign Up" %>
 <% end %>
