@@ -34,11 +34,7 @@ class Pet < ApplicationRecord
     "#{months/12} years, #{months%12} months"
   end
 
-  def self.get_pet_by_user_type(user)
-    if user.owner?
-      Pet.all.select{|pet| pet.owner_id == user.id}
-    elsif user.vet?
-      Pet.all.select{|pet| pet.veterinarian_id == user.id}
-    end
+  def self.get_pets_by_user_type(user)
+    self.all.select{|pet| pet.send("#{user.class.name.downcase}_id") == user.id}
   end
 end
