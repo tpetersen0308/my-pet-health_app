@@ -12,17 +12,13 @@
   </div>
 <% end %>
 
-<%= form_for(@user) do |f| %>
+<%= form_tag(users_path) do %>
   First Name: <br>
-  <%= f.text_field :first_name %> <br>
-  Last Name:  <br>
-  <%= f.text_field :last_name %> <br>
-  E-mail:     <br>
-  <%= f.text_field :email %> <br>
-  Password:   <br> 
-  <%= f.password_field :password %> <br>
-  Confirm Password: <br>
-  <%= f.password_field :password_confirmation %> <br>
-  Check if you are a veterinarian: <%= f.check_box :vet?, {}, true, false %> <br>
-  <%= f.submit "Sign Up" %>
+  <%= text_field_tag 'user[first_name]' %> <br>
+  Last Name:  <br>  <%= text_field_tag 'user[last_name]' %> <br>
+  E-mail:     <br>  <%= text_field_tag 'user[email]' %> <br>
+  Password:   <br>   <%= password_field_tag 'user[password]' %> <br>
+  Confirm Password: <br>  <%= password_field_tag 'user[password_confirmation]' %> <br>
+  Check if you are a veterinarian: <%= check_box_tag 'vet', true %> <br>
+  <%= submit_tag "Sign Up" %>
 <% end %>
