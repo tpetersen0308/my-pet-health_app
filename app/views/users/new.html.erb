@@ -12,7 +12,7 @@
   </div>
 <% end %>
 
-<%= form_for(@user) do |f| %>
+<%= form_for(@user, url: users_path) do |f| %>
   First Name: <br>
   <%= f.text_field :first_name %> <br>
   Last Name:  <br>
