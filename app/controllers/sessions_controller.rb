@@ -7,11 +7,17 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(:email => params[:email])
 
-    
-    return head(:forbidden) unless user.authenticate(params[:password])
-    session[:user_id] = user.id
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
 
-    redirect_to user_path(user)
+      redirect_to user_path(user)
+    elsif user
+      flash[:alert] = "Incorrect password for #{user.email}"
+      render :new
+    else
+      flash[:alert] = "The email address #{params[:email]} does not exist in our records."
+      render :new
+    end
   end
 
   def destroy
