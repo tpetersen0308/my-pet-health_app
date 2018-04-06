@@ -16,7 +16,8 @@ class PetsController < ApplicationController
 
 
   def show
-    
+    @pet = Pet.find_by(:id => params[:id])
+    @health_screenings = @pet.health_screenings
   end
 
   def new
