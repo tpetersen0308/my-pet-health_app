@@ -12,10 +12,10 @@ class SessionsController < ApplicationController
 
       redirect_to user_path(user)
     elsif user
-      flash[:alert] = "Incorrect password for #{user.email}"
+      flash.now[:alert] = "Incorrect password for #{user.email}"
       render :new
     else
-      flash[:alert] = "The email address #{params[:email]} does not exist in our records."
+      flash.now[:alert] = "The email address #{params[:email]} does not exist in our records."
       render :new
     end
   end
