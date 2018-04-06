@@ -35,6 +35,10 @@ class Pet < ApplicationRecord
   end
 
   def self.get_pets_by_user_type(user)
-    self.all.select{|pet| pet.send("#{user.class.name.downcase}_id") == user.id}
+    if user.owner?
+      self.all.select{|pet| pet.owner_id == user.id}
+    elsif user.vet?
+      self.all.select{|pet| pet.veterinarian_ids.include?(user.id)}
+    end
   end
 end
