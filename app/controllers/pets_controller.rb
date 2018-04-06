@@ -16,8 +16,16 @@ class PetsController < ApplicationController
 
 
   def show
-    @pet = Pet.find_by(:id => params[:id])
-    @health_screenings = @pet.health_screenings
+    @pet = Pet.find_by(:id => params.require(:id))
+
+    if params[:user_id]
+      user = User.find_by(:id => params.require(:user_id))
+      if @pet.owner == user || @pet.veterinarians.include?(user)
+        #everything's cool
+      else
+        #invalid request, redirect... somewhere
+      end
+    end
   end
 
   def new
