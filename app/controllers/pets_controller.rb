@@ -4,11 +4,7 @@ class PetsController < ApplicationController
     if params[:user_id]
       @user = User.find_by(:id => params.require(:user_id))
       if @user
-        if @user.owner?
-          @pets = Pet.all.select{|pet| pet.owner_id == @user.id}
-        elsif @user.vet?
-          @pets = Pet.all.select{|pet| pet.veterinarian_id == @user.id}
-        end
+        @pets = Pet.get_pets_by_user_type(@user)
       else
         flash[:alert] = "Cannot find user."
         redirect_to root_path

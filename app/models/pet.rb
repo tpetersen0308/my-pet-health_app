@@ -33,4 +33,12 @@ class Pet < ApplicationRecord
     months = (now.year*12 + now.month) - (self.birth_date.year*12 + self.birth_date.month)
     "#{months/12} years, #{months%12} months"
   end
+
+  def self.get_pet_by_user_type(user)
+    if user.owner?
+      Pet.all.select{|pet| pet.owner_id == user.id}
+    elsif user.vet?
+      Pet.all.select{|pet| pet.veterinarian_id == user.id}
+    end
+  end
 end
