@@ -16,7 +16,7 @@ class PetsController < ApplicationController
 
 
   def show
-
+    
   end
 
   def new
