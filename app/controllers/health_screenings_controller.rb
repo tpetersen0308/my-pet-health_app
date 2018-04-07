@@ -1,7 +1,8 @@
 class HealthScreeningsController < ApplicationController
 
   def index
-    @health_screenings = HealthScreening.find_by(:pet_id => params.require(:pet_id))
+    pet = Pet.find_by(:id => params.require(:pet_id))
+    @health_screenings = HealthScreening.all.select{|hs| hs.pet == pet}
   end
 
 end
