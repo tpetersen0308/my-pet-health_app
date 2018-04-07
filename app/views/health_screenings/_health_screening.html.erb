@@ -1,4 +1,4 @@
-<p><%= health_screening.kind %> <%= link_to "(update)", edit_pet_health_screening(health_screening.pet, health_screening) if current_user.vet? %></p>
+<p><%= health_screening.kind %> <%= link_to "(update)", edit_pet_health_screening_path(health_screening.pet, health_screening) if current_user.vet? %></p>
 <ul>
   <li>Last Updated: <%= last_updated(health_screening) %></li>
   <li>Status: <%= health_screening.status %></li>
