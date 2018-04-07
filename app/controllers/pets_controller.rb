@@ -18,13 +18,17 @@ class PetsController < ApplicationController
   def show
     @pet = Pet.find_by(:id => params.require(:id))
 
-    if params[:user_id]
-      user = User.find_by(:id => params.require(:user_id))
-      if @pet.owner == user || @pet.veterinarians.include?(user)
-        #everything's cool
-      else
-        #invalid request, redirect... somewhere
+    if @pet
+      if params[:user_id]
+        user = User.find_by(:id => params.require(:user_id))
+        if @pet.owner != user || @pet.veterinarians.include?(user)
+          flash[:alert] = "The requests pet and user do not match"
+          redirect_to root_path
+        end
       end
+    else
+      flash[:alert] = "Invalid request"
+      redirect_to root_path
     end
   end
 
