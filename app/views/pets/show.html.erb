@@ -1,1 +1,2 @@
 <%= render(@pet) %>
+<p><%= button_to "Register a New Pet", new_user_pet_path(user), method: :get if user == current_user %></p>
