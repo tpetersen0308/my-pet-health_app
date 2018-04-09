@@ -1,4 +1,5 @@
-<%= form_for(@pet) do |f| %>
+<%= form_for(@pet, url: "/users/#{params[:user_id]}/pets") do |f| %>
+  <%= f.hidden_field :owner_id, value: params[:user_id] %>
   <%= f.label :name %> <br>
   <%= f.text_field :name %> <br>
   <%= f.label :species %> <br>
