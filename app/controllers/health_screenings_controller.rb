@@ -5,4 +5,12 @@ class HealthScreeningsController < ApplicationController
     @health_screenings = HealthScreening.all.select{|hs| hs.pet == pet}
   end
 
+  def edit
+
+  end
+
+  def update
+
+  end
+
 end
