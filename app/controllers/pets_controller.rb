@@ -73,7 +73,8 @@ class PetsController < ApplicationController
   end
 
   def destroy
-
+    Pet.find_by(:id => params[:id]).destroy
+    redirect_to user_path(current_user)
   end
 
 private
