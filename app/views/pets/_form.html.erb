@@ -1,0 +1,5 @@
+<%= form_for(@pet) do |f| %>
+  <%= f.text_field :name %>
+  <%= f.select :species, options_for_select(['Dog', 1], ['Cat', 2]) %>
+  <%= f.date_select :birth_date %>
+<% end %>
