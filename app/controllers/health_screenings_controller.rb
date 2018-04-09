@@ -24,4 +24,9 @@ class HealthScreeningsController < ApplicationController
     end
   end
 
+  private
+  def screening_params
+    params.require(:health_screening).permit(:last_updated)
+  end
+
 end
