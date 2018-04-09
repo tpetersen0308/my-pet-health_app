@@ -53,7 +53,14 @@ class PetsController < ApplicationController
   end
 
   def edit
-
+    @pet = Pet.find_by(:id => params.require(:id))
+    if @pet && @pet.owner != current_user
+      flash[:alert] = "Only a pet's owner may edit their information!"
+      render user_path(current_user)
+    elsif !@pet
+      flash[:alert] = "Sorry, we were unable to locate that pet in our database."
+      render user_path(current_user)
+    end
   end
 
   def update
