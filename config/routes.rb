@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   resources :users do 
     resources :pets
+    patch "/pets" => "pets#update"
   end
 
   resources :health_screenings
