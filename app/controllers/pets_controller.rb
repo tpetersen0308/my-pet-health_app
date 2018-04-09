@@ -43,7 +43,7 @@ class PetsController < ApplicationController
   end
 
   def create
-
+    raise params.inspect
   end
 
   def edit
@@ -56,6 +56,11 @@ class PetsController < ApplicationController
 
   def destroy
 
+  end
+
+private
+  def pet_params
+    params.require(:pet).permit(:name, :birth_date, :species, :owner_id)
   end
 
 end
