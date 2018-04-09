@@ -18,6 +18,8 @@ class HealthScreeningsController < ApplicationController
     health_screening = HealthScreening.find_by(:id => params.require(:id))
     
     if health_screening.update(screening_params)
+      health_screening.pet.veterinarians << current_user unless health_screening.pet.veterinarians.include?(current_user)
+      health_screening.pet.save
       redirect_to pet_health_screenings_path(health_screening.pet)
     else
       render :edit
