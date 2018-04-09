@@ -77,9 +77,19 @@ class PetsController < ApplicationController
     redirect_to user_path(current_user)
   end
 
+  def search
+    raise params.inspect
+
+  end
+
 private
   def pet_params
     params.require(:pet).permit(:name, :birth_date, :species, :sex, :owner_id)
   end
+
+  def pet_search_params
+    params.require(:pet).permit(:name, :species)
+  end
+end
 
 end
