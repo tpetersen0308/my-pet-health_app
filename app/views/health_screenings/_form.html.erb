@@ -1,0 +1,7 @@
+<h2>Update <%= health_screening.kind %> for <%= health_screening.pet.name %>: </h2>
+
+<%= form_for(health_screening) do |f| %>
+  <%= f.label :last_updated %>
+  <%= f.date_select :last_updated %> <br>
+  <%= f.submit "Update Record" %>
+<% end %>
