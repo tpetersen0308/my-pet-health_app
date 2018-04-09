@@ -12,8 +12,9 @@ module ApplicationHelper
       end
     else
       nav_html += content_tag(:li, link_to("Sign Up", new_user_path)) +
-                  content_tag(:li, link_to("Log In", login_path)) +
+                  content_tag(:li, link_to("Log In", login_path))
                   content_tag(:li, link_to("Find a Pet", pets_path))
     end
+    nav_html += content_tag(:li, link_to("Find a Pet", pets_path))
   end
 end
