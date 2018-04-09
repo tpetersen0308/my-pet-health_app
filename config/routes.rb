@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   get "login" => "sessions#new", as: "login"
   post "login" => "sessions#create"
   get "logout" => "sessions#destroy", as: "logout"
-
+  post "pets/search" => "pets#search"
+  
   resources :pets, only: [:index, :show] do
     resources :health_screenings
   end
