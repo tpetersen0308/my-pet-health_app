@@ -64,7 +64,7 @@ class PetsController < ApplicationController
   end
 
   def update
-
+    pet = Pet.find_by(:id => params.require(:id))
   end
 
   def destroy
