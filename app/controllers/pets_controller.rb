@@ -43,11 +43,17 @@ class PetsController < ApplicationController
   end
 
   def create
-    raise params.inspect
+    pet = Pet.new(pet_params)
+
+    if pet.save
+      redirect_to user_pet_path(pet.owner, pet)
+    else
+      render :new
+    end
   end
 
   def edit
-
+    
   end
 
   def update
