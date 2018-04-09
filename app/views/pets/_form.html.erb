@@ -1,5 +1,9 @@
 <%= form_for(@pet) do |f| %>
-  <%= f.text_field :name %>
-  <%= f.select :species, options_for_select(['Dog', 1], ['Cat', 2]) %>
-  <%= f.date_select :birth_date %>
+  <%= f.label :name %> <br>
+  <%= f.text_field :name %> <br>
+  <%= f.label :species %> <br>
+  <%= f.select :species, options_for_select(['Dog', 'Cat']) %> <br>
+  <%= f.label :birth_date %> <br>
+  <%= f.date_select :birth_date %> <br>
+  <%= f.submit "Register Pet" %>
 <% end %>
