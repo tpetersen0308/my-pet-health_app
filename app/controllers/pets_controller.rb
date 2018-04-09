@@ -33,6 +33,12 @@ class PetsController < ApplicationController
   end
 
   def new
+    if User.find_by(:id => params.require(:user_id)) == current_user
+      @pet = current_user.pets.build
+    elsif current_user
+      flash[:alert] = "New pets may only be added to the current user account."
+      redirect_to root_path
+    end
 
   end
 
