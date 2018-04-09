@@ -15,7 +15,13 @@ class HealthScreeningsController < ApplicationController
   end
 
   def update
-
+    health_screening = HealthScreening.find_by(:id => params.require(:id))
+    
+    if health_screening.update(screening_params)
+      redirect_to pet_health_screenings_path(health_screening.pet)
+    else
+      render :edit
+    end
   end
 
 end
