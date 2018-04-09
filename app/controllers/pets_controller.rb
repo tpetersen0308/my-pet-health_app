@@ -53,7 +53,7 @@ class PetsController < ApplicationController
   end
 
   def edit
-    
+
   end
 
   def update
@@ -66,7 +66,7 @@ class PetsController < ApplicationController
 
 private
   def pet_params
-    params.require(:pet).permit(:name, :birth_date, :species, :owner_id)
+    params.require(:pet).permit(:name, :birth_date, :species, :sex, :owner_id)
   end
 
 end

@@ -19,21 +19,21 @@ end
 joe = Veterinarian.create(first_name: "Dr. Joe", last_name: "Smith", email: "drjoesmith@fake.com", password: "password")
 jane = Veterinarian.create(first_name: "Dr. Jane", last_name: "Doe", email: "drjanedoe@fake.com", password: "password")
 
-leo = Pet.create(name: "Leo", species: "Cat", birth_date: DateTime.new(2017, 6,3), owner: Owner.find_by(first_name: "Hanna"))
+leo = Pet.create(name: "Leo", sex: "Male", species: "Cat", birth_date: DateTime.new(2017, 6,3), owner: Owner.find_by(first_name: "Hanna"))
 
-starbuck = Pet.create(name: "Starbuck", species: "Cat", birth_date: DateTime.new(2016, 10,25), owner: Owner.find_by(first_name: "Hank"))
+starbuck = Pet.create(name: "Starbuck", sex: "Female", species: "Cat", birth_date: DateTime.new(2016, 10,25), owner: Owner.find_by(first_name: "Hank"))
 
-prudence = Pet.create(name: "Prudence", species: "Cat", birth_date: DateTime.new(2010, 8, 30), owner: Owner.find_by(first_name: "Miranda"))
+prudence = Pet.create(name: "Prudence", sex: "Female", species: "Cat", birth_date: DateTime.new(2010, 8, 30), owner: Owner.find_by(first_name: "Miranda"))
 
-charlie = Pet.create(name: "Charlie", species: "Cat", birth_date: DateTime.new(2011, 4, 20), owner: Owner.find_by(first_name: "Miranda"))
+charlie = Pet.create(name: "Charlie", sex: "Male", species: "Cat", birth_date: DateTime.new(2011, 4, 20), owner: Owner.find_by(first_name: "Miranda"))
 
-lilly = Pet.create(name: "Lilly", species: "Dog", birth_date: DateTime.new(2005, 5, 19), owner: Owner.find_by(first_name: "Janet"))
+lilly = Pet.create(name: "Lilly", sex: "Female", species: "Dog", birth_date: DateTime.new(2005, 5, 19), owner: Owner.find_by(first_name: "Janet"))
 
-cooper = Pet.create(name: "Cooper", species: "Cat", birth_date: DateTime.new(2016, 8, 4), owner: Owner.find_by(first_name: "Travis"))
+cooper = Pet.create(name: "Cooper", sex: "Male", species: "Cat", birth_date: DateTime.new(2016, 8, 4), owner: Owner.find_by(first_name: "Travis"))
 
-emily = Pet.create(name: "Emily", species: "Dog", birth_date: DateTime.new(2012, 1, 7), owner: Owner.find_by(first_name: "Travis"))
+emily = Pet.create(name: "Emily", sex: "Female", species: "Dog", birth_date: DateTime.new(2012, 1, 7), owner: Owner.find_by(first_name: "Travis"))
 
-mitsie = Pet.create(name: "Mitsie", species: "Dog", birth_date: DateTime.new(2015, 6, 15), owner: Owner.find_by(first_name: "Miranda"))
+mitsie = Pet.create(name: "Mitsie", sex: "Female", species: "Dog", birth_date: DateTime.new(2015, 6, 15), owner: Owner.find_by(first_name: "Miranda"))
 
 joe.pets << [leo, cooper, emily, lilly, starbuck]
 joe.save

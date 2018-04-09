@@ -59,7 +59,8 @@ class HealthScreening < ApplicationRecord
      "Rabies" => 3,
      "Canine Influenza" => 1,
      "Lyme" => 1,
-     "Stool Analysis" => 1}
+     "Stool Analysis" => 1,
+     "Spayed/Neutered" => 1000}
 
   end
 
@@ -71,7 +72,8 @@ class HealthScreening < ApplicationRecord
      "Stool Analysis" => 1,
      "Feline Distemper" => 3,
      "Feline Herpesvirus" => 3,
-     "Calcivirus" => 3}
+     "Calcivirus" => 3,
+     "Spayed/Neutered" => 1000}
   end
 
 end
