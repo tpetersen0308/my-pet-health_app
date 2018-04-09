@@ -65,6 +65,11 @@ class PetsController < ApplicationController
 
   def update
     pet = Pet.find_by(:id => params.require(:id))
+    if pet.update(pet_params)
+      redirect_to user_pet_path(pet.owner, pet)
+    else
+      render :edit
+    end
   end
 
   def destroy
