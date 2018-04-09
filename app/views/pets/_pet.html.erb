@@ -2,6 +2,7 @@
 <p><%= link_to "View #{pet.name}'s screenings", pet_health_screenings_path(pet) %></p>
 <% if pet.owner == current_user %>
   <p><%= link_to "Edit #{pet.name}'s information", edit_user_pet_path(pet.owner, pet) %></p>
+  <p><%= link_to "Remove #{pet.name} from my pets", "/users/#{pet.owner.id}/pets/#{pet.id}", action: "destroy" %></p>
 <% end %>
 <ul></ul>
   <li>Type: <%= pet.sex %> <%= pet.species %></li>
