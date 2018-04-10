@@ -6,7 +6,12 @@ class HealthScreeningsController < ApplicationController
 
   def index
     pet = Pet.find_by(:id => params.require(:pet_id))
-    @health_screenings = HealthScreening.all.select{|hs| hs.pet == pet}
+    if pet 
+      @health_screenings = HealthScreening.all.select{|hs| hs.pet == pet}
+    else
+      flash[:alert] = "Sorry, we were unable to locate that pet in our database."
+      redirect_to pets_path
+    end
   end
 
   def edit
