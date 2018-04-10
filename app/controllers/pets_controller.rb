@@ -15,7 +15,7 @@ class PetsController < ApplicationController
       end
     else
       @search_ok = true
-      @pets = Pet.all  
+      @pets = Pet.all
     end 
   end
 

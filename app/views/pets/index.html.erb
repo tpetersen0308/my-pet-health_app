@@ -11,6 +11,6 @@
   <% end %>
 <% end %>
 <% if @user %>
-  <h2> <%= @user.name %>'s Pets:</h2>
+  <h2> <%= @user.name %>'s <%= (@user.vet? ? "Patient" : "Pet").pluralize(@user.pets.count) %>:</h2>
 <% end %>
 <%= render(@pets) %>
