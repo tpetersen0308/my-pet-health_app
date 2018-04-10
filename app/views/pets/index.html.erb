@@ -10,4 +10,7 @@
     <%= submit_tag "Find Pet" %>
   <% end %>
 <% end %>
+<% if @user %>
+  <h2> <%= @user.name %>'s Pets:</h2>
+<% end %>
 <%= render(@pets) %>
