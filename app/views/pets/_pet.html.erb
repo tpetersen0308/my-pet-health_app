@@ -1,18 +1,3 @@
 <h4><%= pet.name %></h4>
 <p><%= link_to "View #{pet.name}'s screenings", pet_health_screenings_path(pet) %></p>
-<% if pet.owner == current_user %>
-  <p><%= link_to "Edit #{pet.name}'s information", edit_user_pet_path(pet.owner, pet) %></p>
-  <p><%= link_to "Remove #{pet.name} from my pets", "/users/#{pet.owner.id}/pets/#{pet.id}", method: :delete %></p>
-<% end %>
-<ul></ul>
-  <li>Type: <%= pet.sex %> <%= pet.species %></li>
-  <li>Owner: <%= pet.owner.name %></li>
-  <li>Age: <%= pet.age %></li>
-  <li>Veterinarian(s):
-    <ul>
-      <% pet.veterinarians.each do |vet| %>
-        <li><%= link_to vet.name, user_path(vet) %></li>
-      <% end %>
-    </ul>
-  </li>
-</ul>
+<%= render partial: "info", locals: { pet: pet} %>
