@@ -1,4 +1,6 @@
 class PetsController < ApplicationController
+  before_action :owners_only, only: [:new, :edit, :destroy]
+
 
   def index
     if params[:user_id]

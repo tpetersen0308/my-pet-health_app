@@ -1,4 +1,5 @@
 class HealthScreeningsController < ApplicationController
+  before_action :vets_only, only: [:edit]
 
   def index
     pet = Pet.find_by(:id => params.require(:pet_id))
