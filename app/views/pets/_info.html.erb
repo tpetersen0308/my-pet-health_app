@@ -6,7 +6,7 @@
   <li>Type: <%= pet.sex %> <%= pet.species %></li>
   <li>Owner: <%= pet.owner.name %></li>
   <li>Age: <%= pet.age %></li>
-  <li>Veterinarian(s):
+  <li> <%= "Veterinarian".pluralize(pet.veterinarians.count) %>:
     <ul>
       <% pet.veterinarians.each do |vet| %>
         <li><%= link_to vet.name, user_path(vet) %></li>
