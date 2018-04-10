@@ -1,7 +1,7 @@
 class PetsController < ApplicationController
   before_action :logged_in_only, only: [:new, :edit, :destroy]
   before_action :owners_only, only: [:new, :edit, :destroy]
-  before_action :set_pet, only: [:show, :edit, :update]
+  before_action :set_pet, only: [:show, :edit, :update, :destroy]
 
   def index
     if params[:user_id]
@@ -11,7 +11,7 @@ class PetsController < ApplicationController
         @pets = Pet.get_pets_by_user_type(@user)
       else
         flash[:alert] = "Cannot find user."
-        redirect_to root_path
+        redirect_to pets_path
       end
     else
       @search_ok = true
@@ -25,13 +25,13 @@ class PetsController < ApplicationController
       if params[:user_id]
         user = User.find_by(:id => params.require(:user_id))
         if @pet.owner != user || @pet.veterinarians.include?(user)
-          flash[:alert] = "The requests pet and user do not match"
-          redirect_to root_path
+          flash[:alert] = "The request's pet and user do not match."
+          redirect_to pets_path
         end
       end
     else
-      flash[:alert] = "Invalid request"
-      redirect_to root_path
+      flash[:alert] = "Sorry, we were unable to locate that pet in our database."
+      redirect_to pets_path
     end
   end
 
@@ -40,7 +40,7 @@ class PetsController < ApplicationController
       @pet = current_user.pets.build
     elsif current_user
       flash[:alert] = "New pets may only be added to the current user account."
-      redirect_to root_path
+      redirect_to pets_path
     end
 
   end
@@ -58,10 +58,10 @@ class PetsController < ApplicationController
   def edit
     if @pet && @pet.owner != current_user
       flash[:alert] = "Only a pet's owner may edit their information!"
-      render user_path(current_user)
+      redirect_to user_path(current_user)
     elsif !@pet
       flash[:alert] = "Sorry, we were unable to locate that pet in our database."
-      render user_path(current_user)
+      redirect_to user_path(current_user)
     end
   end
 
@@ -75,7 +75,8 @@ class PetsController < ApplicationController
   end
 
   def destroy
-    Pet.find_by(:id => params[:id]).destroy
+    @pet.destroy
+    flash[:message] = "#{@pet.name} has been removed from your pets."
     redirect_to user_path(current_user)
   end
 
@@ -85,7 +86,7 @@ class PetsController < ApplicationController
     if pet && pet.owner == Owner.find_by(:last_name => params.require(:pet).require(:owner_name))
       redirect_to pet_health_screenings_path(pet)
     else
-      flash[:alert] = "Sorry, we are unable to locate a pet that matches your search criteria"
+      flash[:alert] = "Sorry, we are unable to locate a pet that matches your search criteria."
       redirect_to pets_path
     end
   end
