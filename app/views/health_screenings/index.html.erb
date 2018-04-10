@@ -1,2 +1,4 @@
-<h2><%= @health_screenings.first.pet.name %>'s Screenings:</h2>
+<h2><%= @health_screenings.first.pet.name %>'s Information</h2>
+<%= render(@health_screenings.first.pet) %>
+<h3><%= @health_screenings.first.pet.name %>'s Screenings:</h3>
 <%= render(@health_screenings) %>
