@@ -2,16 +2,20 @@ class HealthScreeningsController < ApplicationController
   before_action :logged_in_only, only: [:edit]
   before_action :vets_only, only: [:edit]
   before_action :set_screening, only: [:edit, :update]
+  before_action :set_pet, only: [:index, :show]
 
 
   def index
-    pet = Pet.find_by(:id => params.require(:pet_id))
-    if pet 
-      @health_screenings = HealthScreening.all.select{|hs| hs.pet == pet}
+    if @pet 
+      @health_screenings = HealthScreening.all.select{|hs| hs.pet == @pet}
     else
       flash[:alert] = "Sorry, we were unable to locate that pet in our database."
       redirect_to pets_path
     end
+  end
+
+  def show
+    
   end
 
   def edit
@@ -38,6 +42,10 @@ class HealthScreeningsController < ApplicationController
 
   def set_screening
     @health_screening = HealthScreening.find_by(:id => params.require(:id))
+  end
+
+  def set_pet
+    @pet = Pet.find_by(:id => params.require(:pet_id))
   end
 
 end
