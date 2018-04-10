@@ -5,8 +5,10 @@
     <%= text_field_tag "pet[name]" %> <br><br>
     <%= label_tag "pet[species]", "Species:" %>
     <%= select_tag "pet[species]", options_for_select(["Dog", "Cat"]) %> <br><br>
-    <%= label_tag "pet[owner_name]", "Owner's Last Name:" %> <br>
-    <%= text_field_tag "pet[owner_name]" %> <br>
+    <%= label_tag "pet[owner_first_name]", "Owner's First Name:" %> <br>
+    <%= text_field_tag "pet[owner_first_name]" %> <br>
+    <%= label_tag "pet[owner_last_name]", "Owner's Last Name:" %> <br>
+    <%= text_field_tag "pet[owner_last_name]" %> <br>
     <%= submit_tag "Find Pet" %>
   <% end %>
 <% end %>

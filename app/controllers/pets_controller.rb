@@ -83,7 +83,7 @@ class PetsController < ApplicationController
   def search
     pet = Pet.find_by(pet_search_params)
 
-    if pet && pet.owner == Owner.find_by(:last_name => params.require(:pet).require(:owner_name))
+    if pet && pet.owner == Owner.find_by(:first_name => params.require(:pet).require(:owner_first_name),:last_name => params.require(:pet).require(:owner_last_name))
       redirect_to pet_health_screenings_path(pet)
     else
       flash[:alert] = "Sorry, we are unable to locate a pet that matches your search criteria."
