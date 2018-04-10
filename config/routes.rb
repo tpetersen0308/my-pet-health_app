@@ -6,14 +6,14 @@ Rails.application.routes.draw do
   post "pets/search" => "pets#search"
   
   resources :pets, only: [:index, :show] do
-    resources :health_screenings 
+    resources :health_screenings, only: [:index, :edit, :update] 
   end
 
-  resources :users do 
+  resources :users, only: [:new, :create, :show] do 
     resources :pets
   end
 
-  resources :health_screenings
+  resources :health_screenings, only: [:edit, :update]
 
   root "welcome#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
