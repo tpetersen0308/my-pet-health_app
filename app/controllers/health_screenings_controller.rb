@@ -14,9 +14,6 @@ class HealthScreeningsController < ApplicationController
     end
   end
 
-  def show
-    
-  end
 
   def edit
     if !@health_screening || @health_screening.pet != Pet.find_by(:id => params.require(:pet_id))

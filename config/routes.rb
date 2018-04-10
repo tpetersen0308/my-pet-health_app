@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   post "pets/search" => "pets#search"
   
   resources :pets, only: [:index, :show] do
-    resources :health_screenings, only: [:index, :show, :edit, :update] 
+    resources :health_screenings, only: [:index, :edit, :update] 
   end
 
   resources :users, only: [:new, :create, :show] do 
