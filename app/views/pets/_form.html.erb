@@ -3,10 +3,10 @@
   <%= f.label :name %> <br>
   <%= f.text_field :name %> <br>
   <%= f.label :species %> <br>
-  <%= f.select :species, options_for_select(['Dog', 'Cat']) %> <br>
+  <%= f.select :species, ["Dog", "Cat"], selected: pet.species %> <br>
   <%= f.label :sex %> <br>
-  <%= f.select :sex, options_for_select(['Female', 'Male']) %> <br>
+  <%= f.select :sex, ['Female', 'Male'], selected: pet.sex %> <br>
   <%= f.label :birth_date %> <br>
-  <%= f.date_select :birth_date %> <br>
+  <%= f.date_select :birth_date, {start_year: Date.today.year - 20, end_year: Date.today.year} %> <br>
   <%= f.submit "Register Pet" %>
 <% end %>
