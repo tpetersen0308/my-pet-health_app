@@ -5,10 +5,10 @@ class Pet < ApplicationRecord
   has_many :health_screenings
 
   validates :name, presence: true
-  validates :species, presence: true
+  validates :species, presence: true, inclusion: {in: %w(Dog Cat)}
   validates :owner_id, presence: true
   validates :birth_date, presence: true
-  validates :sex, presence: true
+  validates :sex, presence: true, inclusion: {in: %w(Male Female)}
 
   after_initialize :initialize_screenings
 
