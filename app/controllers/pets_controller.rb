@@ -1,4 +1,5 @@
 class PetsController < ApplicationController
+  before_action :logged_in_only, only: [:new, :edit, :destroy]
   before_action :owners_only, only: [:new, :edit, :destroy]
   before_action :set_pet, only: [:show, :edit, :update]
 

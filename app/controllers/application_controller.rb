@@ -28,4 +28,11 @@ class ApplicationController < ActionController::Base
         redirect_to user_path(current_user)
       end
     end
+
+    def logged_in_only
+      if !logged_in?
+        flash[:alert] = "Please log in to view that page."
+        redirect_to login_path
+      end
+    end
 end
