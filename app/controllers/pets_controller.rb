@@ -5,6 +5,7 @@ class PetsController < ApplicationController
 
   def index
     if params[:user_id]
+      @search_ok = false
       @user = User.find_by(:id => params.require(:user_id))
       if @user
         @pets = Pet.get_pets_by_user_type(@user)
@@ -13,6 +14,7 @@ class PetsController < ApplicationController
         redirect_to root_path
       end
     else
+      @search_ok = true
       @pets = Pet.all  
     end 
   end

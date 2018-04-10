@@ -1,11 +1,13 @@
-<h2>Find a Pet:</h2>
-<%= form_tag "/pets/search" do %> <br>
-  <%= label_tag "pet[name]", "Pet's Name:" %> <br>
-  <%= text_field_tag "pet[name]" %> <br><br>
-  <%= label_tag "pet[species]", "Species:" %>
-  <%= select_tag "pet[species]", options_for_select(["Dog", "Cat"]) %> <br><br>
-  <%= label_tag "pet[owner_name]", "Owner's Last Name:" %> <br>
-  <%= text_field_tag "pet[owner_name]" %> <br>
-  <%= submit_tag "Find Pet" %>
+<% if @search_ok %>
+  <h2>Find a Pet:</h2>
+  <%= form_tag "/pets/search" do %> <br>
+    <%= label_tag "pet[name]", "Pet's Name:" %> <br>
+    <%= text_field_tag "pet[name]" %> <br><br>
+    <%= label_tag "pet[species]", "Species:" %>
+    <%= select_tag "pet[species]", options_for_select(["Dog", "Cat"]) %> <br><br>
+    <%= label_tag "pet[owner_name]", "Owner's Last Name:" %> <br>
+    <%= text_field_tag "pet[owner_name]" %> <br>
+    <%= submit_tag "Find Pet" %>
+  <% end %>
 <% end %>
 <%= render(@pets) %>
