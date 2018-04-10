@@ -1,6 +1,6 @@
 class PetsController < ApplicationController
   before_action :owners_only, only: [:new, :edit, :destroy]
-
+  before_action :set_pet, only: [:show, :edit, :update]
 
   def index
     if params[:user_id]
@@ -18,8 +18,6 @@ class PetsController < ApplicationController
 
 
   def show
-    @pet = Pet.find_by(:id => params.require(:id))
-
     if @pet
       if params[:user_id]
         user = User.find_by(:id => params.require(:user_id))
@@ -55,7 +53,6 @@ class PetsController < ApplicationController
   end
 
   def edit
-    @pet = Pet.find_by(:id => params.require(:id))
     if @pet && @pet.owner != current_user
       flash[:alert] = "Only a pet's owner may edit their information!"
       render user_path(current_user)
@@ -66,9 +63,9 @@ class PetsController < ApplicationController
   end
 
   def update
-    pet = Pet.find_by(:id => params.require(:id))
-    if pet.update(pet_params)
-      redirect_to user_pet_path(pet.owner, pet)
+
+    if @pet.update(pet_params)
+      redirect_to user_pet_path(@pet.owner, @pet)
     else
       render :edit
     end
@@ -97,6 +94,10 @@ private
 
   def pet_search_params
     params.require(:pet).permit(:name, :species)
+  end
+
+  def set_pet
+    @pet = Pet.find_by(:id => params.require(:id))
   end
 
 end
