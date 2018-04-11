@@ -2,17 +2,7 @@
 
 <%= form_tag(users_path) do %>
 
-<% if @user.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@user.errors.count, "error") %> prohibited your signup attempt:</h2>
- 
-    <ul>
-    <% @user.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
-<% end %>
+<%= render "/shared/errors", object: @user %>
 
   <div class="field <%= "field_with_errors" if @user.errors[:first_name].any? %>">
     First Name: <br>
