@@ -17,7 +17,6 @@ class Pet < ApplicationRecord
       (self.cat? ? HealthScreening.cat_screenings : HealthScreening.dog_screenings).each do |name, interval|
         self.health_screenings.build(kind: name, renewal_interval: interval, species: self.species)
       end
-      self.save
     end  
   end
 
