@@ -46,10 +46,10 @@ class PetsController < ApplicationController
   end
 
   def create
-    pet = Pet.new(pet_params)
+    @pet = Pet.new(pet_params)
 
-    if pet.save
-      redirect_to user_pet_path(pet.owner, pet)
+    if @pet.save
+      redirect_to user_pet_path(@pet.owner, @pet)
     else
       render :new
     end
