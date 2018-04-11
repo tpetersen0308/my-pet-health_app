@@ -1,4 +1,5 @@
-<h2><%= @health_screenings.first.pet.name %>'s Information</h2>
-<%= render partial: "/pets/info", locals: {pet: @health_screenings.first.pet} %>
-<h3><%= @health_screenings.first.pet.name %>'s Screenings:</h3>
+<h2><%= @pet.name %>'s Information</h2>
+<%= render partial: "/pets/info", locals: {pet: @pet} %>
+<h3><%= @pet.name %>'s <%= @status.capitalize + " " if @status %>Screenings:</h3>
+<p><%= link_to "All", pet_health_screenings_path(@pet) %> | <%= link_to "Current", pet_health_screenings_status_path(@pet, "current") %> | <%= link_to "Overdue", pet_health_screenings_status_path(@pet, "overdue") %></p>
 <%= render(@health_screenings) %>
