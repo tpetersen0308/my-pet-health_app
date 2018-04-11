@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   
   resources :pets, only: [:index, :show] do
     resources :health_screenings, only: [:index, :edit, :update] 
-    get "health_screenings/:status" => "health_screenings#index"
+    get "health_screenings/:status" => "health_screenings#index", as: "health_screenings_status"
   end
 
   resources :users, only: [:new, :create, :show] do 
