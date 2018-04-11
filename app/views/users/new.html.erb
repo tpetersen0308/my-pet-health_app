@@ -1,5 +1,7 @@
 <h1>Sign Up</h1>
 
+<%= form_tag(users_path) do %>
+
 <% if @user.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(@user.errors.count, "error") %> prohibited your signup attempt:</h2>
@@ -12,7 +14,6 @@
   </div>
 <% end %>
 
-<%= form_tag(users_path) do %>
   First Name: <br>
   <%= text_field_tag 'user[first_name]' %> <br>
   Last Name:  <br>  <%= text_field_tag 'user[last_name]' %> <br>
