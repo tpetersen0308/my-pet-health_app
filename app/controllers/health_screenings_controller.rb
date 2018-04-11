@@ -7,7 +7,12 @@ class HealthScreeningsController < ApplicationController
 
   def index
     if @pet 
-      @health_screenings = HealthScreening.all.select{|hs| hs.pet == @pet}
+      if params[:status]
+        @status = params[:status]
+        @health_screenings = @pet.health_screenings.send(@status)
+      else
+        @health_screenings = HealthScreening.all.select{|hs| hs.pet == @pet}.send
+      end
     else
       flash[:alert] = "Sorry, we were unable to locate that pet in our database."
       redirect_to pets_path
