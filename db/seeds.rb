@@ -8,7 +8,8 @@
 
 HealthScreening.destroy_all
 Pet.destroy_all
-User.destroy_all
+Owner.destroy_all
+Veterinarian.destroy_all
 
 owners_first = ["Travis", "Hanna", "Hank", "Miranda", "Janet"]
 
