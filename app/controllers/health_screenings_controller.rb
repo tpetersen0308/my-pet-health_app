@@ -11,7 +11,7 @@ class HealthScreeningsController < ApplicationController
         @status = params[:status]
         @health_screenings = @pet.health_screenings.send(@status)
       else
-        @health_screenings = HealthScreening.all.select{|hs| hs.pet == @pet}.send
+        @health_screenings = HealthScreening.all.select{|hs| hs.pet == @pet}
       end
     else
       flash[:alert] = "Sorry, we were unable to locate that pet in our database."
