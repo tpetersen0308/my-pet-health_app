@@ -1,5 +1,10 @@
 <%= form_for(health_screening) do |f| %>
-  <%= f.label :last_updated %>
-  <%= f.date_select :last_updated %> <br>
+
+  <%= render "/shared/errors", object: health_screening %>
+
+  <div class="field <%= "field_with_errors" if health_screening.errors[:last_updated].any? %>">
+    <%= f.label :last_updated %>
+    <%= f.date_select :last_updated %> <br>
+  </div>
   <%= f.submit "Update Record" %>
 <% end %>
