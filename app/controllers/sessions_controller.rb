@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
   end
 
   def create
+    binding.pry
     user = User.ci_find("email", params[:email])
 
     if user && user.authenticate(params[:password])
@@ -25,4 +26,9 @@ class SessionsController < ApplicationController
     redirect_to root_path
   end
 
+  private
+
+    def auth
+      request.env['omniauth.auth']
+    end
 end

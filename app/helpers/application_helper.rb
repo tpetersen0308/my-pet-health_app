@@ -12,8 +12,8 @@ module ApplicationHelper
       end
     else
       nav_html += content_tag(:li, link_to("Sign Up", new_user_path)) +
-                  content_tag(:li, link_to("Sign In", login_path))
-                  content_tag(:li, link_to("Find a Pet", pets_path))
+                  content_tag(:li, link_to("Sign In", login_path)) +
+                  content_tag(:li, link_to("Sign In With GitHub", "/auth/github"))
     end
     nav_html += content_tag(:li, link_to("Find a Pet", pets_path))
   end

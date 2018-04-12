@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   post "login" => "sessions#create"
   get "logout" => "sessions#destroy", as: "logout"
   post "pets/search" => "pets#search"
+  get '/auth/github/callback' => 'sessions#create'
   
   resources :pets, only: [:index, :show] do
     resources :health_screenings, only: [:index, :edit, :update] 
