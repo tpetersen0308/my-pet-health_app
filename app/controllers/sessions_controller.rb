@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(:email => params[:email])
+    user = User.ci_find("email", params[:email])
 
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
