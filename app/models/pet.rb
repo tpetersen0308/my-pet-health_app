@@ -30,8 +30,16 @@ class Pet < ApplicationRecord
 
   def age
     now = DateTime.now
-    months = (now.year*12 + now.month) - (self.birth_date.year*12 + self.birth_date.month)
-    "#{months/12} years, #{months%12} months"
+    total_months = (now.year*12 + now.month) - (self.birth_date.year*12 + self.birth_date.month)
+    years = total_months/12
+    months = total_months%12
+    if years > 0 && months > 0
+      "#{years} years, #{months} months"
+    elsif months > 0  
+      "#{months} months"
+    else
+      "#{years} years"
+    end
   end
 
   def self.get_pets_by_user_type(user)
