@@ -4,24 +4,24 @@
 
 <%= render "/shared/errors", object: @user %>
 
-  <div class="field <%= "field_with_errors" if @user.errors[:first_name].any? %>">
+  <div class="field <%= field_with_errors(@user, "first_name") %>">
     First Name: <br>
     <%= text_field_tag 'user[first_name]' %> <br>
   </div>
 
-  <div class="field <%= "field_with_errors" if @user.errors[:last_name].any? %>">
+  <div class="field <%= field_with_errors(@user, "last_name") %>">
     Last Name:  <br>  <%= text_field_tag 'user[last_name]' %> <br>
   </div>
 
-  <div class="field <%= "field_with_errors" if @user.errors[:email].any? %>">
+  <div class="field <%= field_with_errors(@user, "email") %>">
     E-mail:     <br>  <%= text_field_tag 'user[email]' %> <br>
   </div>
 
-  <div class="field <%= "field_with_errors" if @user.errors[:password].any? %>">
+  <div class="field <%= field_with_errors(@user, "password") %>">
     Password:   <br>   <%= password_field_tag 'user[password]' %> <br>
   </div>
 
-  <div class="field <%= "field_with_errors" if @user.errors[:password_confirmation].any? %>">
+  <div class="field <%= field_with_errors(@user, "password_confirmation") %>">
     Confirm Password: <br>  <%= password_field_tag 'user[password_confirmation]' %> <br>
   </div>
   

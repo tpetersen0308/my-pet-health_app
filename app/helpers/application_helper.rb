@@ -17,4 +17,8 @@ module ApplicationHelper
     end
     nav_html += content_tag(:li, link_to("Find a Pet", pets_path))
   end
+
+  def field_with_errors(instance, attr)
+    "field_with_errors" if instance.errors[attr.to_sym].any?
+  end
 end
