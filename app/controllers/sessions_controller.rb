@@ -5,19 +5,34 @@ class SessionsController < ApplicationController
   end
 
   def create
-    binding.pry
-    user = User.ci_find("email", params[:email])
+    if auth
+      user = User.find_or_create_by(uid: auth['uid']) do |u|
+        u.first_name = auth['info']['name'].split(" ").first
+        u.last_name = auth['info']['name'].split(" ").last
+        u.email = auth['info']['email']
+      end
+      
+      user.becomes("Owner")
 
-    if user && user.authenticate(params[:password])
+      user.save
+
       session[:user_id] = user.id
-
-      redirect_to user_path(user)
-    elsif user
-      flash.now[:alert] = "Incorrect password for #{user.email}"
-      render :new
+   
+      render redirect_to user_path(user)
     else
-      flash.now[:alert] = "The email address #{params[:email]} does not exist in our records."
-      render :new
+      user = User.ci_find("email", params[:email])
+
+      if user && user.authenticate(params[:password])
+        session[:user_id] = user.id
+
+        redirect_to user_path(user)
+      elsif user
+        flash.now[:alert] = "Incorrect password for #{user.email}"
+        render :new
+      else
+        flash.now[:alert] = "The email address #{params[:email]} does not exist in our records."
+        render :new
+      end
     end
   end
 
