@@ -11,7 +11,7 @@ Pet.destroy_all
 Owner.destroy_all
 Veterinarian.destroy_all
 
-owners_first = ["Travis", "Hanna", "Hank", "Miranda", "Janet"]
+owners_first = ["Hanna", "Hank", "Miranda", "Janet"]
 
 owners_first.each do |name|
   Owner.create(first_name: name, last_name: "Petersen", email: "#{name}@fake.com", password: "password")
@@ -30,13 +30,11 @@ charlie = Pet.create(name: "Charlie", sex: "Male", species: "Cat", birth_date: D
 
 lilly = Pet.create(name: "Lilly", sex: "Female", species: "Dog", birth_date: DateTime.new(2005, 5, 19), owner: Owner.find_by(first_name: "Janet"))
 
-cooper = Pet.create(name: "Cooper", sex: "Male", species: "Cat", birth_date: DateTime.new(2016, 8, 4), owner: Owner.find_by(first_name: "Travis"))
-
-emily = Pet.create(name: "Emily", sex: "Female", species: "Dog", birth_date: DateTime.new(2012, 1, 7), owner: Owner.find_by(first_name: "Travis"))
+emily = Pet.create(name: "Emily", sex: "Female", species: "Dog", birth_date: DateTime.new(2012, 1, 7), owner: Owner.find_by(first_name: "Janet"))
 
 mitsie = Pet.create(name: "Mitsie", sex: "Female", species: "Dog", birth_date: DateTime.new(2015, 6, 15), owner: Owner.find_by(first_name: "Miranda"))
 
-joe.pets << [leo, cooper, emily, lilly, starbuck]
+joe.pets << [leo, emily, lilly, starbuck]
 joe.save
 
 jane.pets << [prudence, charlie, mitsie, starbuck, leo]
@@ -47,12 +45,6 @@ leo.health_screenings.find_by(kind: "Rabies").update(last_updated: DateTime.new(
 leo.health_screenings.find_by(kind: "Feline Influenza").update(last_updated: DateTime.new(2017,10,1))
 
 leo.health_screenings.find_by(kind: "Stool Analysis").update(last_updated: DateTime.new(2017,10,1))
-
-cooper.health_screenings.find_by(kind: "Rabies").update(last_updated: DateTime.new(2018, 1, 20))
-
-cooper.health_screenings.find_by(kind: "Feline Influenza").update(last_updated: DateTime.new(2018, 1, 20))
-
-cooper.health_screenings.find_by(kind: "Stool Analysis").update(last_updated: DateTime.new(2018, 1, 20))
 
 starbuck.health_screenings.find_by(kind: "Rabies").update(last_updated: DateTime.new(2017,10,1))
 
