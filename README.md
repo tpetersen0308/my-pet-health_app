@@ -1,24 +1,3 @@
-# README
+My Pet Health - A Rails application for pet owners and veterinarians where pet boarding services may confirm the status of health screenings prior to boarding.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+To load this app, run bundle install, rake db:migrate, and then bundle exec rails s to get started.
