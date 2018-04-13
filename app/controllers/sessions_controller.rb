@@ -10,15 +10,14 @@ class SessionsController < ApplicationController
         u.first_name = auth['info']['name'].split(" ").first
         u.last_name = auth['info']['name'].split(" ").last
         u.email = auth['info']['email']
+        u.password = SecureRandom.hex
       end
-      
-      user.becomes("Owner")
 
-      user.save
+      user.update(type: Owner)
 
       session[:user_id] = user.id
    
-      render redirect_to user_path(user)
+      redirect_to user_path(user)
     else
       user = User.ci_find("email", params[:email])
 
