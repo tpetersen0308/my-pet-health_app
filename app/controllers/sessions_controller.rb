@@ -6,12 +6,7 @@ class SessionsController < ApplicationController
 
   def create
     if auth
-      user = User.find_or_create_by(uid: auth['uid']) do |u|
-        u.first_name = auth['info']['name'].split(" ").first
-        u.last_name = auth['info']['name'].split(" ").last
-        u.email = auth['info']['email']
-        u.password = SecureRandom.hex
-      end
+      user = User.from_oauth(auth)
 
       user.update(type: Owner)
 
