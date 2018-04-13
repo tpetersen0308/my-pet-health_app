@@ -16,14 +16,14 @@ class ApplicationController < ActionController::Base
     end
 
     def vets_only
-      if current_user.class.name != "Veterinarian"
+      if !current_user.vet?
         flash[:alert] = "Sorry, that action is only available to veterinarians."
         redirect_to user_path(current_user)
       end
     end
 
     def owners_only
-      if current_user.class.name != "Owner"
+      if !current_user.owner?
         flash[:alert] = "Sorry, that action is only available to pet owners."
         redirect_to user_path(current_user)
       end
