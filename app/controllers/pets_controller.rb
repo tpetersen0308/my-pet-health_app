@@ -8,7 +8,11 @@ class PetsController < ApplicationController
       @search_ok = false
       @user = User.find_by(:id => params.require(:user_id))
       if @user
-        @pets = Pet.get_pets_by_user_type(@user)
+        if params[:species]
+          @pets = @user.pets.send(params[:species].pluralize)
+        else
+          @pets = Pet.get_pets_by_user_type(@user)
+        end
       else
         flash[:alert] = "Cannot find user."
         redirect_to pets_path

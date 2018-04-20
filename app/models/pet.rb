@@ -12,6 +12,9 @@ class Pet < ApplicationRecord
 
   after_initialize :initialize_screenings
 
+  scope :cats, -> {where(species: "Cat")}
+  scope :dogs, -> {where(species: "Dog")}
+
   def initialize_screenings
     if self.health_screenings.empty?
       (self.cat? ? HealthScreening.cat_screenings : HealthScreening.dog_screenings).each do |name, interval|
@@ -19,6 +22,8 @@ class Pet < ApplicationRecord
       end
     end  
   end
+
+
 
   def cat?
     self.species == "Cat"

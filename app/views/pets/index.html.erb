@@ -15,4 +15,5 @@
 <% if @user %>
   <h2> <%= @user.name %>'s <%= (@user.vet? ? "Patient" : "Pet").pluralize(@user.pets.count) %>:</h2>
 <% end %>
+<p> <%= link_to "All", user_pets_path(@user) %> | <%= link_to "Dogs", user_pets_species_path(@user, "dogs") %> | <%= link_to "Cats", user_pets_species_path(@user, "cats") %></p>
 <%= render(@pets) %>

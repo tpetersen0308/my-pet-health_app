@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:new, :create, :show] do 
+    get "/pets/:species" => "pets#index", as: "pets_species"
     resources :pets
   end
 
