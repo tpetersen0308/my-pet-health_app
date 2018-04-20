@@ -3,8 +3,6 @@ class HealthScreening < ApplicationRecord
   validate :last_updated_cannot_be_prior_to_birth_date
   after_find :update_status
 
-
-
   def last_updated_cannot_be_prior_to_birth_date
     if last_updated && last_updated.year*12 + last_updated.month < pet.birth_date.year*12 + pet.birth_date.month
       errors.add(:last_updated, "Cannot be prior to pet's date of birth.")
