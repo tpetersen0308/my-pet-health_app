@@ -1,4 +1,4 @@
-class VeterinarianSerializer < User
+class VeterinarianSerializer < UserSerializer
   attributes :id
   has_many :pets
 end

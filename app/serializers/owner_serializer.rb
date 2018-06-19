@@ -1,4 +1,4 @@
-class OwnerSerializer < User
-  attributes :id
+class OwnerSerializer < UserSerializer
+  attributes :id, :first_name, :last_name
   has_many :pets
 end
