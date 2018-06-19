@@ -2,6 +2,15 @@ class PetsController < ApplicationController
   before_action :logged_in_only, only: [:new, :edit, :destroy]
   before_action :owners_only, only: [:new, :edit, :destroy]
   before_action :set_pet, only: [:show, :edit, :update, :destroy]
+  
+  def new
+    if User.find_by(:id => params.require(:user_id)) == current_user
+      @pet = current_user.pets.build
+    elsif current_user
+      flash[:alert] = "New pets may only be added to the current user account."
+      redirect_to pets_path
+    end
+  end
 
   def index
     if params[:user_id]
@@ -39,15 +48,6 @@ class PetsController < ApplicationController
     end
   end
 
-  def new
-    if User.find_by(:id => params.require(:user_id)) == current_user
-      @pet = current_user.pets.build
-    elsif current_user
-      flash[:alert] = "New pets may only be added to the current user account."
-      redirect_to pets_path
-    end
-
-  end
 
   def create
     @pet = Pet.new(pet_params)

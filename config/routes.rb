@@ -12,8 +12,8 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:new, :create, :show] do 
+    resources :pets, only: [:index, :new, :create, :edit, :update, :destroy ]
     get "/pets/:species" => "pets#index", as: "pets_species"
-    resources :pets
   end
 
   resources :health_screenings, only: [:edit, :update]
