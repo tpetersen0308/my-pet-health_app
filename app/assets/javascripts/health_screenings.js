@@ -5,6 +5,10 @@ class HealthScreening {
     this.lastUpdated = new Date(lastUpdated),
     this.status = status
   }
+
+  displayLastUpdated() {
+    return this.lastUpdated.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  }
 }
 
 function attachListeners() {
@@ -16,6 +20,7 @@ function attachListeners() {
       for(screening of data) {
         screenings.push(new HealthScreening(screening.kind, screening.species, screening.last_updated, screening.status));
         showScreening(screenings[screenings.length - 1], id);
+        debugger
       }
     });
     
