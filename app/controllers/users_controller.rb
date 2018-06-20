@@ -21,6 +21,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(:id => params[:id])
+    conditional_render(:show, @user)
   end
 
   private
