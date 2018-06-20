@@ -22,7 +22,6 @@ class PetsController < ApplicationController
         else
           @pets = Pet.get_pets_by_user_type(@user)
         end
-        conditional_render(:index, @pets)
       else
         flash[:alert] = "Cannot find user."
         redirect_to pets_path
@@ -30,8 +29,8 @@ class PetsController < ApplicationController
     else
       @search_ok = true
       @pets = Pet.all
-      conditional_render(:index, @pets)
     end 
+    conditional_render(:index, @pets)
   end
 
 
@@ -44,11 +43,11 @@ class PetsController < ApplicationController
           redirect_to pets_path
         end
       end
-      conditional_render(:show, @pet)
     else
       flash[:alert] = "Sorry, we were unable to locate that pet in our database."
       redirect_to pets_path
     end
+    conditional_render(:show, @pet)
   end
 
 
