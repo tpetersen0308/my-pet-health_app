@@ -17,6 +17,7 @@ class HealthScreeningsController < ApplicationController
       flash[:alert] = "Sorry, we were unable to locate that pet in our database."
       redirect_to pets_path
     end
+    conditional_render(:index, @health_screenings)
   end
 
 
