@@ -20,7 +20,6 @@ function attachListeners() {
       for(screening of data) {
         screenings.push(new HealthScreening(screening.kind, screening.species, screening.last_updated, screening.status));
         showScreening(screenings[screenings.length - 1], id);
-        debugger
       }
     });
     
@@ -28,7 +27,7 @@ function attachListeners() {
 }
 
 function showScreening(screening, petId) {
-  $("#js-screenings-" + petId).append(`<p>${screening.kind}</p><ul><li>Last Updated: ${screening.lastUpdated}</li><li>Status: ${screening.status}</li></ul>`);
+  $("#js-screenings-" + petId).append(`<p>${screening.kind}</p><ul><li>Last Updated: ${screening.displayLastUpdated()}</li><li>Status: ${screening.status}</li></ul>`);
 }
 
 $(function() {
