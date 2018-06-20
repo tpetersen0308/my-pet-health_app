@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180413000514) do
+ActiveRecord::Schema.define(version: 20180620011301) do
 
   create_table "health_screenings", force: :cascade do |t|
     t.string "kind"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20180413000514) do
     t.integer "owner_id"
     t.datetime "birth_date"
     t.string "sex"
+    t.string "age"
   end
 
   create_table "pets_veterinarians", force: :cascade do |t|
