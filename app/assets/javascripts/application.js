@@ -13,3 +13,4 @@
 //= require jquery
 //= require jquery_ujs
 //= require pets
+//= require health_screenings
