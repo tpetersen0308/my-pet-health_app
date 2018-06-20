@@ -35,4 +35,11 @@ class ApplicationController < ActionController::Base
         redirect_to login_path
       end
     end
+
+    def conditional_render(view, obj)
+      respond_to do |format|
+        format.html { render view.to_sym }
+        format.json { render json: obj }
+      end
+    end
 end

@@ -21,11 +21,4 @@ module ApplicationHelper
   def field_with_errors(instance, attr)
     "field_with_errors" if instance.errors[attr.to_sym].any?
   end
-
-  def conditional_render(view, obj)
-    resond_to do |format|
-      format.html { render view.to_sym }
-      format.json { render json: obj }
-    end
-  end
 end

@@ -42,10 +42,7 @@ class PetsController < ApplicationController
           redirect_to pets_path
         end
       end
-      respond_to do |format|
-        format.html { render :show }
-        format.json { render json: @pet }
-      end
+      conditional_render(:show, @pet)
     else
       flash[:alert] = "Sorry, we were unable to locate that pet in our database."
       redirect_to pets_path
