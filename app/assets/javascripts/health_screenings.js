@@ -14,17 +14,16 @@ function attachListeners() {
     const screenings = [];
     $.getJSON(`/pets/${id}/health_screenings`, function(data){
       for(screening of data) {
-        debugger
         screenings.push(new HealthScreening(screening.kind, screening.species, screening.last_updated, screening.status));
-        showScreening(screenings[screenings.length - 1]);
+        showScreening(screenings[screenings.length - 1], id);
       }
     });
     
   })
 }
 
-function showScreening(screening) {
-  $("#js-screenings").append(`<p>${screening.kind}</p><ul><li>Last Updated: ${screening.lastUpdated}</li><li>Status: ${screening.status}</li></ul>`);
+function showScreening(screening, petId) {
+  $("#js-screenings-" + petId).append(`<p>${screening.kind}</p><ul><li>Last Updated: ${screening.lastUpdated}</li><li>Status: ${screening.status}</li></ul>`);
 }
 
 $(function() {
