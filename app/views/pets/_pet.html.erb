@@ -1,3 +1,4 @@
 <h4><%= pet.name %></h4>
-<p><%= link_to "View #{pet.name}'s screenings", pet_health_screenings_path(pet), class: "js-viewScreenings", data: {id: pet.id.to_s} %></p>
 <%= render partial: "info", locals: { pet: pet} %>
+<p><%= link_to "View #{pet.name}'s screenings", pet_health_screenings_path(pet), class: "js-viewScreenings", data: {id: pet.id.to_s} %></p>
+<div id="js-screenings"></div>
