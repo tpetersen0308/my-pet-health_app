@@ -10,6 +10,7 @@ class Pet < ApplicationRecord
   validates :birth_date, presence: true
   validates :sex, presence: true, inclusion: {in: %w(Male Female)}
 
+  after_find :set_or_update_age
   after_initialize :initialize_screenings
 
   scope :cats, -> {where(species: "Cat")}
@@ -22,8 +23,6 @@ class Pet < ApplicationRecord
       end
     end  
   end
-
-
 
   def cat?
     self.species == "Cat"
