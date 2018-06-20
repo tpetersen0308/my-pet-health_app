@@ -6,3 +6,14 @@ class HealthScreening {
     this.status = status
   }
 }
+
+function attachListeners() {
+  $(".js-viewScreenings").on("click", function(event) {
+    event.preventDefault();
+    debugger
+  })
+}
+
+$(function() {
+  attachListeners();
+})
