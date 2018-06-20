@@ -2,12 +2,16 @@ class HealthScreening {
   constructor(kind, species, lastUpdated, status) {
     this.kind = kind;
     this.species = species;
-    this.lastUpdated = new Date(lastUpdated),
+    this.lastUpdated = lastUpdated ? new Date(lastUpdated) : lastUpdated,
     this.status = status
   }
 
   displayLastUpdated() {
-    return this.lastUpdated.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    if(this.lastUpdated) {
+      return this.lastUpdated.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    } else {
+      return "Never"
+    }
   }
 }
 
