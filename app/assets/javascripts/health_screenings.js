@@ -15,11 +15,15 @@ function attachListeners() {
     $.getJSON(`/pets/${id}/health_screenings`, function(data){
       for(screening of data) {
         screenings.push(new HealthScreening(screening.kind, screening.species, screening.lastUpdated, screening.status));
+        showScreening(screenings[screenings.length - 1]);
       }
-      debugger
     });
     
   })
+}
+
+function showScreening(screening) {
+  $("#js-screenings").append(`<p>${screening.kind}</p><ul><li>Last Updated: ${this.lastUpdated}</li><li>Status: ${this.status}</li></ul>`);
 }
 
 $(function() {
