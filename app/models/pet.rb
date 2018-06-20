@@ -33,17 +33,17 @@ class Pet < ApplicationRecord
     self.species == "Dog"
   end
 
-  def age
+  def set_or_update_age
     now = DateTime.now
     total_months = (now.year*12 + now.month) - (self.birth_date.year*12 + self.birth_date.month)
     years = total_months/12
     months = total_months%12
     if years > 0 && months > 0
-      "#{years} years, #{months} months"
+      self.age = "#{years} years, #{months} months"
     elsif months > 0  
-      "#{months} months"
+      self.age = "#{months} months"
     else
-      "#{years} years"
+      self.age = "#{years} years"
     end
   end
 
