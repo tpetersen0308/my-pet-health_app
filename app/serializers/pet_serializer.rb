@@ -1,5 +1,5 @@
 class PetSerializer < ActiveModel::Serializer
-  attributes :id, :name, :species, :birth_date, :sex
+  attributes :id, :name, :species, :age, :sex
   belongs_to :owner
   has_many :veterinarians
   has_many :health_screenings
