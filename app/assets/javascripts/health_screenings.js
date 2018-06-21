@@ -20,6 +20,9 @@ function attachListeners() {
     event.preventDefault();
     const id = $(this).data("id");
     const screenings = [];
+
+    $("#js-screeningsLink-" + id).html(`<a href='#' data-id=${id}>Hide Screenings</a>`);
+
     $.getJSON(`/pets/${id}/health_screenings`, function(data){
       for(screening of data) {
         screenings.push(new HealthScreening(screening.kind, screening.species, screening.last_updated, screening.status));
