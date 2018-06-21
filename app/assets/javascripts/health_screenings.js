@@ -1,5 +1,6 @@
 class HealthScreening {
-  constructor(kind, species, lastUpdated, status) {
+  constructor(id, kind, species, lastUpdated, status) {
+    this.id = id;
     this.kind = kind;
     this.species = species;
     this.lastUpdated = lastUpdated ? new Date(lastUpdated) : lastUpdated,
@@ -17,7 +18,6 @@ class HealthScreening {
 
 function attachListeners() {
   viewScreenings();
-  //hideScreenings();
 }
 
 function viewScreenings() {
