@@ -50,7 +50,7 @@ function hideScreenings() {
 }
 
 function showScreening(screening, petId) {
-  $("#js-screenings-" + petId).append(`<p>${screening.kind}</p><ul><li>Last Updated: ${screening.displayLastUpdated()}</li><li>Status: ${screening.status}</li></ul>`);
+  $("#js-screenings-" + petId).append(`<p>${screening.kind}</p><ul><li id="js-lastUpdated-${screening.id}">Last Updated: ${screening.displayLastUpdated()} </li><li>Status: ${screening.status}</li></ul>`);
 }
 
 $(function() {
