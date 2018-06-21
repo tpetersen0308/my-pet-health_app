@@ -20,6 +20,10 @@ function attachListeners() {
   viewScreenings();
 }
 
+function currentUserVet() {
+  return $("#js-currentUserVet").val() === "true";
+}
+
 function viewScreenings() {
   $(".js-viewScreenings").on("click", function(event) {
     event.preventDefault();
@@ -33,6 +37,9 @@ function viewScreenings() {
       for(screening of data) {
         screenings.push(new HealthScreening(screening.id, screening.kind, screening.species, screening.last_updated, screening.status));
         showScreening(screenings[screenings.length - 1], id);
+        if(currentUserVet() && screening.status === "Overdue") {
+          $("#js-lastUpdated-" + screening.id).append(`<button class="js-updateScreening" data-id=${screening.id} data-petId=${id}>Update</button>`);
+        }
       }
     });
     hideScreenings();
@@ -51,10 +58,6 @@ function hideScreenings() {
 
 function showScreening(screening, petId) {
   $("#js-screenings-" + petId).append(`<p>${screening.kind}</p><ul><li id="js-lastUpdated-${screening.id}">Last Updated: ${screening.displayLastUpdated()} </li><li>Status: ${screening.status}</li></ul>`);
-}
-
-function currentUserVet() {
-  $("#js-currentUserVet").val();
 }
 
 $(function() {
