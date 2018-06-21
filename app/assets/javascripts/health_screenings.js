@@ -24,7 +24,6 @@ function attachListeners() {
       for(screening of data) {
         screenings.push(new HealthScreening(screening.kind, screening.species, screening.last_updated, screening.status));
         showScreening(screenings[screenings.length - 1], id);
-        debugger
       }
     });
     
