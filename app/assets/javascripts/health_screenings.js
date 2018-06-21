@@ -38,11 +38,20 @@ function viewScreenings() {
         screenings.push(new HealthScreening(screening.id, screening.kind, screening.species, screening.last_updated, screening.status));
         showScreening(screenings[screenings.length - 1], id);
         if(currentUserVet() && screening.status === "Overdue") {
-          $("#js-lastUpdated-" + screening.id).append(`<button class="js-updateScreening" data-id=${screening.id} data-petId=${id}>Update</button>`);
+          $("#js-lastUpdated-" + screening.id).append(`<button class="js-updateScreening" data-id=${screening.id} data-pet-id=${id}>Update</button>`);
+          updateScreening();
         }
       }
     });
     hideScreenings();
+  })
+}
+
+function updateScreening() {
+  $(".js-updateScreening").on("click", function() {
+    let screeningId = $(this).data("id");
+    let petId = $(this).data("pet-id");
+    debugger
   })
 }
 
