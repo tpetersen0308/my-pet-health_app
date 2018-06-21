@@ -31,7 +31,7 @@ function viewScreenings() {
     $.getJSON(`/pets/${id}/health_screenings`, function(data){
       $("#js-screenings-" + id).html(''); //clear screenings div to prevent appending duplicates
       for(screening of data) {
-        screenings.push(new HealthScreening(screening.kind, screening.species, screening.last_updated, screening.status));
+        screenings.push(new HealthScreening(screening.id, screening.kind, screening.species, screening.last_updated, screening.status));
         showScreening(screenings[screenings.length - 1], id);
       }
     });
