@@ -17,6 +17,7 @@ class HealthScreening {
 
 function attachListeners() {
   viewScreenings();
+  hideScreenings();
 }
 
 function viewScreenings() {
@@ -33,7 +34,6 @@ function viewScreenings() {
         showScreening(screenings[screenings.length - 1], id);
       }
     });
-    hideScreenings();
   })
 }
 
@@ -44,7 +44,6 @@ function hideScreenings() {
     $("#js-screeningsLink-" + id).html(`<a class='js-viewScreenings' href='#' data-id=${id}>View Screenings</a>`);
     $("#js-screenings-" + id).html('');
   })
-  viewScreenings();
 }
 
 function showScreening(screening, petId) {
