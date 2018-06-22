@@ -12,9 +12,14 @@ function search() {
     event.preventDefault();
     let values = $(this).serialize();
     let posting = $.post($(this).attr("action"), values);
-    posting.done(function(data){
-      let newPet = new Pet(data.name, data.species, data.age, data.sex);
-      let newPetHTML = `<h4>${newPet.name}</h4><ul><li>Type: ${newPet.sex} ${newPet.species}</li><li>Age: ${newPet.age}</li></ul>`
+    posting.success(function(data){
+      let newPetHTML = `<h3>Search Results: </h3>`;
+      if(data){
+        let newPet = new Pet(data.name, data.species, data.age, data.sex);
+        newPetHTML += `<h4>${newPet.name}</h4><ul><li>Type: ${newPet.sex} ${newPet.species}</li><li>Age: ${newPet.age}</li></ul>`;
+      } else {
+        newPetHTML += "<p>We're sorry, we were unable to find any pets that match your search criteria.</p>";
+      }
       $("#js-searchResults").html(newPetHTML);
     })
   })
