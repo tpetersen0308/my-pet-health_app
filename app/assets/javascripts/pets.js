@@ -23,7 +23,8 @@ function search() {
       let newPetHTML = `<h3>Search Results: </h3>`;
       if(data){
         let newPet = new Pet(data.id, data.name, data.species, data.age, data.sex);
-        newPetHTML += `<h4>${newPet.name}</h4><ul><li>Type: ${newPet.sex} ${newPet.species}</li><li>Age: ${newPet.age}</li></ul>`;
+        let newOwner = new User(data.owner.id, data.owner.first_name, data.owner.last_name);
+        newPetHTML += `<h4>${newPet.name}</h4><ul><li>Type: ${newPet.sex} ${newPet.species}</li><li><a href='/users/${newOwner.id}'>${newOwner.displayFullName()}</a></li><li>Age: ${newPet.age}</li></ul>`;
       } else {
         newPetHTML += "<p>We're sorry, we were unable to find any pets that match your search criteria.</p>";
       }
