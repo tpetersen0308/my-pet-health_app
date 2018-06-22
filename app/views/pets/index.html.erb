@@ -9,7 +9,7 @@
     <%= text_field_tag "pet[owner_first_name]" %> <br>
     <%= label_tag "pet[owner_last_name]", "Owner's Last Name:" %> <br>
     <%= text_field_tag "pet[owner_last_name]" %> <br>
-    <%= submit_tag "Find Pet" %>
+    <%= submit_tag "Find Pet", id: "js-submitSearch" %>
   <% end %>
   <div id="js-searchResults"></div>
 <% end %>
