@@ -26,6 +26,7 @@ class HealthScreeningsController < ApplicationController
       flash[:alert] = "Invalid request"
       redirect_to pets_path
     end
+    render :partial => "health_screenings/form", locals: {health_screening: @health_screening}
   end
 
   def update
