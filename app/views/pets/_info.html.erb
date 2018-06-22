@@ -2,7 +2,7 @@
   <p><%= link_to "Edit #{pet.name}'s information", edit_user_pet_path(pet.owner, pet) %></p>
   <p><%= link_to "Remove #{pet.name} from my pets", "/users/#{pet.owner.id}/pets/#{pet.id}", method: :delete %></p>
 <% end %>
-<ul></ul>
+<ul>
   <li>Type: <%= pet.sex %> <%= pet.species %></li>
   <li>Owner: <%= link_to pet.owner.name, user_path(pet.owner) %></li>
   <li>Age: <%= pet.age %></li>
