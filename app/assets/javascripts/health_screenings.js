@@ -61,6 +61,13 @@ function updateScreening() {
         event.preventDefault();
         let values = $(this).serialize();
         let posting = $.post($(this).attr("action"), values);
+        
+        posting.done(function (data) {
+          $.getJSON(`/health_screenings/${screeningId}`, function(screeningData){
+            let newScreening = new HealthScreening(screeningData.id, screeningData.kind, screeningData.species, screeningData.last_updated, screeningData.status);
+            $("#js-screening-" + screeningId).html(`<p>${newScreening.kind}</p><ul><li id="js-lastUpdated-${newScreening.id}">Last Updated: ${newScreening.displayLastUpdated()} </li><li>Status: ${newScreening.status}</li></ul>`);
+          })
+        })
       })
     })
   })
@@ -78,7 +85,7 @@ function hideScreenings() {
 }
 
 function showScreening(screening, petId) {
-  $("#js-screenings-" + petId).append(`<div data-screening-id=${screening.id}><p>${screening.kind}</p><ul><li id="js-lastUpdated-${screening.id}">Last Updated: ${screening.displayLastUpdated()} </li><li>Status: ${screening.status}</li></ul></div>`);
+  $("#js-screenings-" + petId).append(`<div id='js-screening-${screening.id}'><p>${screening.kind}</p><ul><li id="js-lastUpdated-${screening.id}">Last Updated: ${screening.displayLastUpdated()} </li><li>Status: ${screening.status}</li></ul></div>`);
 }
 
 $(function() {
