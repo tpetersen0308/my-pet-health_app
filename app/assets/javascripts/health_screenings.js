@@ -61,7 +61,6 @@ function updateScreening() {
         event.preventDefault();
         let values = $(this).serialize();
         let posting = $.post($(this).attr("action"), values);
-        
       })
     })
   })
@@ -79,7 +78,7 @@ function hideScreenings() {
 }
 
 function showScreening(screening, petId) {
-  $("#js-screenings-" + petId).append(`<p>${screening.kind}</p><ul><li id="js-lastUpdated-${screening.id}">Last Updated: ${screening.displayLastUpdated()} </li><li>Status: ${screening.status}</li></ul>`);
+  $("#js-screenings-" + petId).append(`<div data-screening-id=${screening.id}><p>${screening.kind}</p><ul><li id="js-lastUpdated-${screening.id}">Last Updated: ${screening.displayLastUpdated()} </li><li>Status: ${screening.status}</li></ul></div>`);
 }
 
 $(function() {
