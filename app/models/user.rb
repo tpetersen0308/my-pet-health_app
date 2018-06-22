@@ -6,7 +6,9 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: {case_sensitive: false}
   validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create
 
-  scope :ci_find, lambda { |attribute, value| where("lower(#{attribute}) = ?", value.downcase).first }
+  def self.ci_find(attribute, value)
+    where("lower(#{attribute}) = ?", value.downcase).first
+  end
 
   def name
     "#{self.first_name} #{self.last_name}"
