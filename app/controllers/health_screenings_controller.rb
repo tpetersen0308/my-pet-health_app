@@ -41,7 +41,7 @@ class HealthScreeningsController < ApplicationController
     if @health_screening.update(screening_params)
       @health_screening.pet.veterinarians << current_user unless @health_screening.pet.veterinarians.include?(current_user)
       @health_screening.pet.save
-      redirect_to pet_health_screenings_path(@health_screening.pet)
+      render json: @health_screening, status: 201
     else
       render :edit
     end
