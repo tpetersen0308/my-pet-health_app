@@ -1,5 +1,6 @@
 class Pet {
-  constructor(name, species, age, sex) {
+  constructor(id, name, species, age, sex) {
+    this.id = id;
     this.name = name;
     this.species = species;
     this.age = age;
@@ -21,7 +22,7 @@ function search() {
       $("#js-submitSearch").removeAttr('disabled');
       let newPetHTML = `<h3>Search Results: </h3>`;
       if(data){
-        let newPet = new Pet(data.name, data.species, data.age, data.sex);
+        let newPet = new Pet(data.id, data.name, data.species, data.age, data.sex);
         newPetHTML += `<h4>${newPet.name}</h4><ul><li>Type: ${newPet.sex} ${newPet.species}</li><li>Age: ${newPet.age}</li></ul>`;
       } else {
         newPetHTML += "<p>We're sorry, we were unable to find any pets that match your search criteria.</p>";
