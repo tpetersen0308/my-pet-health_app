@@ -13,12 +13,12 @@ function search() {
     let values = $(this).serialize();
     let posting = $.post($(this).attr("action"), values);
 
-    $("#js-submitSearch").removeAttr('disabled');
     $("#pet_name").val("");
     $("#pet_owner_first_name").val("");
     $("#pet_owner_last_name").val("");
-
+    
     posting.success(function(data){
+      $("#js-submitSearch").removeAttr('disabled');
       let newPetHTML = `<h3>Search Results: </h3>`;
       if(data){
         let newPet = new Pet(data.name, data.species, data.age, data.sex);
