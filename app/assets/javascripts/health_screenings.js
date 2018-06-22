@@ -51,12 +51,10 @@ function updateScreening() {
   $(".js-updateScreening").on("click", function() {
     let screeningId = $(this).data("id");
     let petId = $(this).data("pet-id");
-    $("#js-lastUpdated-" + screeningId).html(`<form id='js-screeningUpdateForm' action='/health_screenings/${screeningId}', method='post'>
-        <input type='hidden' name='_method' value='patch'>
-        <label>Last Updated </label>
-        <input type='date'>
-        <input type='submit' value='Update'>
-      </form>`);
+
+    $.get(`/pets/${petId}/health_screenings/${screeningId}/edit`, function(data){
+      $("#js-lastUpdated-" + screeningId).html(data);
+    })
   })
 }
 
