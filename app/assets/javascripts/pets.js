@@ -6,3 +6,14 @@ class Pet {
     this.sex = sex;
   }
 }
+
+function search() {
+  $("#js-search").submit(function(event){
+    event.preventDefault();
+    let values = $(this).serialize();
+    let posting = $.post($(this).attr("action"), values);
+    posting.done(function(data){
+      
+    })
+  })
+}
