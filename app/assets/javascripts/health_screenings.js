@@ -52,10 +52,20 @@ function updateScreening() {
     let screeningId = $(this).data("id");
     let petId = $(this).data("pet-id");
 
-    $.get(`/pets/${petId}/health_screenings/${screeningId}/edit`, function(data){
+    let req = $.get(`/pets/${petId}/health_screenings/${screeningId}/edit`, function(data){
       $("#js-lastUpdated-" + screeningId).html(data);
     })
+    
+    req.success(function(){
+      $("form").submit(function(event){
+        event.preventDefault();
+        let values = $(this).serialize();
+        let posting = $.post($(this).attr("action"), values);
+        
+      })
+    })
   })
+
 }
 
 function hideScreenings() {
