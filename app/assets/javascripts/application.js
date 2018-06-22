@@ -14,3 +14,4 @@
 //= require jquery_ujs
 //= require pets
 //= require health_screenings
+//= require users
