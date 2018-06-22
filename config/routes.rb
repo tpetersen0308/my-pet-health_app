@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     get "/pets/:species" => "pets#index", as: "pets_species"
   end
 
-  resources :health_screenings, only: [:edit, :update]
+  resources :health_screenings, only: [:edit, :update, :show]
 
   root "welcome#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

@@ -1,8 +1,8 @@
 class HealthScreeningsController < ApplicationController
   before_action :logged_in_only, only: [:edit]
   before_action :vets_only, only: [:edit]
-  before_action :set_screening, only: [:edit, :update]
-  before_action :set_pet, only: [:index, :show]
+  before_action :set_screening, only: [:edit, :update, :show]
+  before_action :set_pet, only: [:index]
 
 
   def index
@@ -20,6 +20,14 @@ class HealthScreeningsController < ApplicationController
     conditional_render(:index, @health_screenings)
   end
 
+  def show
+    if @health_screening
+      render json: @health_screening
+    else
+      flash[:alert] = "Invalid request"
+      redirect_to pets_path
+    end
+  end
 
   def edit
     if !@health_screening || @health_screening.pet != Pet.find_by(:id => params.require(:pet_id))
