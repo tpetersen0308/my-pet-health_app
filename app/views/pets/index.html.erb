@@ -1,6 +1,6 @@
 <% if @search_ok %>
   <h2>Find a Pet:</h2>
-  <%= form_tag "/pets/search" do %> <br>
+  <%= form_tag "/pets/search", id: "js-search" do %> <br>
     <%= label_tag "pet[name]", "Pet's Name:" %> <br>
     <%= text_field_tag "pet[name]" %> <br><br>
     <%= label_tag "pet[species]", "Species:" %>
