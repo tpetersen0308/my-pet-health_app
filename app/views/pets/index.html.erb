@@ -11,6 +11,7 @@
     <%= text_field_tag "pet[owner_last_name]" %> <br>
     <%= submit_tag "Find Pet" %>
   <% end %>
+  <div id="js-searchResults"></div>
 <% end %>
 <% if @user %>
   <h2> <%= @user.name %>'s <%= (@user.vet? ? "Patient" : "Pet").pluralize(@user.pets.count) %>:</h2>
