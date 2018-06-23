@@ -14,3 +14,7 @@ class User {
 function currentUserVet() {
   return $("#js-currentUserVet").val() === "true";
 }
+
+function userVet(userId) {
+  return $("#js-userVet").val() === "true";
+}
