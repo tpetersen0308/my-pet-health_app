@@ -14,12 +14,18 @@ function viewPets(){
     let userId = $(this).data("id");
     let userName = $(this).data("name");
     
+    $("#js-petsLink-" + id).html(`<a href='#' class='js-hidePets' data-id=${userId} data-name=${userName}>Hide ${userName}'s Pets</a>`);
+
     $.getJSON(`/users/${userId}/pets`, function(data){
       let petsHTML = data.map(pet => displayPet(pet)).join('');
       $("#js-pets-" + userId).html(petsHTML);
       viewScreenings();
     })
   })
+}
+
+function hidePets() {
+
 }
 
 function displayPet(data) {
