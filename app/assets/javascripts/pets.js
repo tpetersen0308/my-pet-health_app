@@ -14,6 +14,7 @@ function displayPet(data) {
   let vets = data.veterinarians.map(vet => new User(vet.id, vet.first_name, vet.last_name));
   let vetsHTML = "<li>Veterinarians:<ul>" + vets.map(vet => `<li><a href='users/${vet.id}'>${vet.displayFullName()}</a></li>`).join('') + "</ul></li>";
   let petHTML = `<h4>${newPet.name}</h4><ul><li>Type: ${newPet.sex} ${newPet.species}</li><li><a href='/users/${newOwner.id}'>${newOwner.displayFullName()}</a></li><li>Age: ${newPet.age}</li>${vetsHTML}</ul>`;
+  petHTML += `<p><a href='#' class='js-viewScreenings' data-id=${newPet.id}>View Screenings</a></p>`
   return petHTML;
 }
 
@@ -31,11 +32,12 @@ function search() {
       $("#js-submitSearch").removeAttr('disabled');
       let newPetHTML = `<h3>Search Results: </h3>`;
       if(data){
-        newPetHTML += displayPet(data);
+        newPetHTML += $("#js-pet-" + data.id).html();
       } else {
         newPetHTML += "<p>We're sorry, we were unable to find any pets that match your search criteria.</p>";
       }
       $("#js-searchResults").html(newPetHTML);
+      viewScreenings();
     })
   })
 }
