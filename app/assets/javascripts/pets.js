@@ -29,7 +29,7 @@ function displayPet(data) {
   let vetsHTML = "<li>Veterinarians:<ul>" + vets.map(vet => `<li><a href="/users/${vet.id}">${vet.displayFullName()}</a></li>`).join('') + "</ul></li>";
   let petHTML = `<div id='js-pet-${newPet.id}'>`; 
   petHTML += `<h4>${newPet.name}</h4><ul><li>Type: ${newPet.sex} ${newPet.species}</li><li><a href="/users/${newOwner.id}">${newOwner.displayFullName()}</a></li><li>Age: ${newPet.age}</li>${vetsHTML}</ul>`;
-  petHTML += `<p><a href='#' class='js-viewScreenings' data-id=${newPet.id}>View Screenings</a></p>`;
+  petHTML += `<p id="js-screeningsLink-${newPet.id}"><a href='#' class='js-viewScreenings' data-id=${newPet.id} data-name=${newPet.name}>View ${newPet.name}'s Screenings</a></p>`;
   petHTML += `</div><div id="js-screenings-${newPet.id}"></div>`;
   return petHTML;
 }
