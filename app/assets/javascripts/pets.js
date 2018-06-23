@@ -8,6 +8,15 @@ class Pet {
   }
 }
 
+function getPets(){
+  $(".js-viewPets").on("click", function(event) {
+    event.preventDefault();
+    let userId = $(this).data(id);
+    let userName = $(this).data(name);
+    
+  })
+}
+
 function displayPet(data) {
   let newPet = new Pet(data.id, data.name, data.species, data.age, data.sex);
   let newOwner = new User(data.owner.id, data.owner.first_name, data.owner.last_name);
