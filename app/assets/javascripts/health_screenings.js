@@ -20,9 +20,9 @@ function attachListeners() {
   viewScreenings();
 }
 
-function currentUserVet() {
-  return $("#js-currentUserVet").val() === "true";
-}
+//function currentUserVet() {
+//  return $("#js-currentUserVet").val() === "true";
+//}
 
 function viewScreenings() {
   $(".js-viewScreenings").on("click", function(event) {

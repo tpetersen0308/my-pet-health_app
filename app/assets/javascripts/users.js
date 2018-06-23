@@ -10,3 +10,7 @@ class User {
     return this.firstName + ' ' + this.lastName;
   }
 }
+
+function currentUserVet() {
+  return $("#js-currentUserVet").val() === "true";
+}
