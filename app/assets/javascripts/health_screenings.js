@@ -28,9 +28,10 @@ function viewScreenings() {
   $(".js-viewScreenings").on("click", function(event) {
     event.preventDefault();
     const id = $(this).data("id");
+    const name = $(this).data("name");
     let screenings = [];
 
-    $("#js-screeningsLink-" + id).html(`<a href='#' class='js-hideScreenings' data-id=${id} >Hide Screenings</a>`);
+    $("#js-screeningsLink-" + id).html(`<a href='#' class='js-hideScreenings' data-id=${id} data-name=${name}>Hide ${name}'s Screenings</a>`);
 
     $.getJSON(`/pets/${id}/health_screenings`, function(data){
       $("#js-screenings-" + id).html(''); //clear screenings div to prevent appending duplicates
@@ -78,7 +79,9 @@ function hideScreenings() {
   $(".js-hideScreenings").on("click", function(event) {
     event.preventDefault();
     let id = $(this).data("id");
-    $("#js-screeningsLink-" + id).html(`<a class='js-viewScreenings' href='#' data-id=${id} >View Screenings</a>`);
+    let name = $(this).data("name");
+
+    $("#js-screeningsLink-" + id).html(`<a class='js-viewScreenings' href='#' data-id=${id} data-name=${name}>View ${name}'s Screenings</a>`);
     $("#js-screenings-" + id).html('');
     viewScreenings();
   })
