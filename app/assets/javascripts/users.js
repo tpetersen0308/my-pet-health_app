@@ -15,6 +15,6 @@ function currentUserVet() {
   return $("#js-currentUserVet").val() === "true";
 }
 
-function userVet(userId) {
+function userVet() {
   return $("#js-userVet").val() === "true";
 }
