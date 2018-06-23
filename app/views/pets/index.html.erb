@@ -13,7 +13,7 @@
   <% end %>
   <div id="js-searchResults"></div>
 <% end %>
-<h3>All Pets: </h3>
+<h3 id="pet-index-header">All Pets: </h3>
 <% if @user %>
   <h2> <%= @user.name %>'s <%= (@user.vet? ? "Patient" : "Pet").pluralize(@user.pets.count) %>:</h2>
   <p> <%= link_to "All", user_pets_path(@user) %> | <%= link_to "Dogs", user_pets_species_path(@user, "dogs") %> | <%= link_to "Cats", user_pets_species_path(@user, "cats") %></p>
