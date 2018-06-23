@@ -17,6 +17,7 @@ function viewPets(){
     $.getJSON(`/users/${userId}/pets`, function(data){
       let petsHTML = data.map(pet => displayPet(pet)).join('');
       $("#js-pets-" + userId).html(petsHTML);
+      viewScreenings();
     })
   })
 }
@@ -29,7 +30,7 @@ function displayPet(data) {
   let petHTML = `<div id='js-pet-${newPet.id}'>`; 
   petHTML += `<h4>${newPet.name}</h4><ul><li>Type: ${newPet.sex} ${newPet.species}</li><li><a href="/users/${newOwner.id}">${newOwner.displayFullName()}</a></li><li>Age: ${newPet.age}</li>${vetsHTML}</ul>`;
   petHTML += `<p><a href='#' class='js-viewScreenings' data-id=${newPet.id}>View Screenings</a></p>`;
-  petHTML += "</div>";
+  petHTML += `</div><div id="js-screenings-${newPet.id}"></div>`;
   return petHTML;
 }
 
