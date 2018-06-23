@@ -11,9 +11,14 @@ class Pet {
 function viewPets(){
   $(".js-viewPets").on("click", function(event) {
     event.preventDefault();
-    let userId = $(this).data(id);
-    let userName = $(this).data(name);
+    let userId = $(this).data("id");
+    let userName = $(this).data("name");
     
+    $.getJSON(`/users/${userId}/pets`, function(data){
+      for(pet of data){
+        
+      }
+    })
   })
 }
 
