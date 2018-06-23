@@ -8,7 +8,7 @@ class Pet {
   }
 }
 
-function getPets(){
+function viewPets(){
   $(".js-viewPets").on("click", function(event) {
     event.preventDefault();
     let userId = $(this).data(id);
@@ -53,4 +53,5 @@ function search() {
 
 $(function() {
   search();
+  viewPets();
 })
