@@ -15,9 +15,8 @@ function viewPets(){
     let userName = $(this).data("name");
     
     $.getJSON(`/users/${userId}/pets`, function(data){
-      for(pet of data){
-
-      }
+      let petsHTML = data.map(pet => displayPet(pet)).join('');
+      $("#js-pets-" + userId).html(petsHTML);
     })
   })
 }
@@ -26,11 +25,11 @@ function displayPet(data) {
   let newPet = new Pet(data.id, data.name, data.species, data.age, data.sex);
   let newOwner = new User(data.owner.id, data.owner.first_name, data.owner.last_name);
   let vets = data.veterinarians.map(vet => new User(vet.id, vet.first_name, vet.last_name));
-  let vetsHTML = "<li>Veterinarians:<ul>" + vets.map(vet => `<li><a href='users/${vet.id}'>${vet.displayFullName()}</a></li>`).join('') + "</ul></li>";
-  let petHTML = `<div id='js-pet-${newPet.id}>`; 
-  petHTML += `<h4>${newPet.name}</h4><ul><li>Type: ${newPet.sex} ${newPet.species}</li><li><a href='/users/${newOwner.id}'>${newOwner.displayFullName()}</a></li><li>Age: ${newPet.age}</li>${vetsHTML}</ul>`;
+  let vetsHTML = "<li>Veterinarians:<ul>" + vets.map(vet => `<li><a href="/users/${vet.id}">${vet.displayFullName()}</a></li>`).join('') + "</ul></li>";
+  let petHTML = `<div id='js-pet-${newPet.id}'>`; 
+  petHTML += `<h4>${newPet.name}</h4><ul><li>Type: ${newPet.sex} ${newPet.species}</li><li><a href="/users/${newOwner.id}">${newOwner.displayFullName()}</a></li><li>Age: ${newPet.age}</li>${vetsHTML}</ul>`;
   petHTML += `<p><a href='#' class='js-viewScreenings' data-id=${newPet.id}>View Screenings</a></p>`;
-  petHTML += "</div>"
+  petHTML += "</div>";
   return petHTML;
 }
 
