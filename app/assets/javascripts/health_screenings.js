@@ -29,23 +29,39 @@ function viewScreenings() {
     event.preventDefault();
     const id = $(this).data("id");
     const name = $(this).data("name");
-    let screenings = [];
+    //let screenings = [];
 
     $("#js-screeningsLink-" + id).html(`<a href='#' class='js-hideScreenings' data-id=${id} data-name=${name}>Hide ${name}'s Screenings</a>`);
 
-    $.getJSON(`/pets/${id}/health_screenings`, function(data){
-      $("#js-screenings-" + id).html(''); //clear screenings div to prevent appending duplicates
-      for(screening of data) {
-        screenings.push(new HealthScreening(screening.id, screening.kind, screening.species, screening.last_updated, screening.status));
-        showScreening(screenings[screenings.length - 1], id);
-        if(currentUserVet() && screening.status === "Overdue") {
-          $("#js-lastUpdated-" + screening.id).append(`<button class="js-updateScreening" data-id=${screening.id} data-pet-id=${id}>Update</button>`);
-          updateScreening();
-        }
-      }
-    });
+    filterScreenings(`/pets/${id}/health_screenings`, id);
+    //$.getJSON(`/pets/${id}/health_screenings`, function(data){
+    //  $("#js-screenings-" + id).html(''); //clear screenings div to prevent appending duplicates
+    //  for(screening of data) {
+    //    screenings.push(new HealthScreening(screening.id, screening.kind, screening.species, screening.last_updated, screening.status));
+    //    showScreening(screenings[screenings.length - 1], id);
+    //    if(currentUserVet() && screening.status === "Overdue") {
+    //      $("#js-lastUpdated-" + screening.id).append(`<button class="js-updateScreening" data-id=${screening.id} data-pet-id=${id}>Update</button>`);
+    //      updateScreening();
+    //    }
+    //  }
+    //});
     hideScreenings();
   })
+}
+
+function filterScreenings(url, petId) {
+  let screenings = [];
+  $.getJSON(url, function(data){
+    $("#js-screenings-" + petId).html(''); //clear screenings div to prevent appending duplicates
+    for(screening of data) {
+      screenings.push(new HealthScreening(screening.id, screening.kind, screening.species, screening.last_updated, screening.status));
+      showScreening(screenings[screenings.length - 1], petId);
+      if(currentUserVet() && screening.status === "Overdue") {
+        $("#js-lastUpdated-" + screening.id).append(`<button class="js-updateScreening" data-id=${screening.id} data-pet-id=${petId}>Update</button>`);
+        updateScreening();
+      }
+    }
+  });
 }
 
 function updateScreening() {
