@@ -33,7 +33,7 @@ function viewScreenings() {
 
     $("#js-screeningsLink-" + id).html(`<a href='#' class='js-filterScreenings' data-id=${id} data-name=${name} data-status='current'>Current</a>`);
     $("#js-screeningsLink-" + id).append(`<span> | </span><a href='#' class='js-filterScreenings' data-id=${id} data-name=${name} data-status='overdue'>Overdue</a>`);
-    $("#js-screeningsLink-" + id).append(`<span> | </span><a href='#' class='js-viewScreenings' data-id=${id} data-name=${name}>All</a>`);
+    $("#js-screeningsLink-" + id).append(`<span> | </span><a href='#' class='js-filterScreenings' data-id=${id} data-name=${name}>All</a>`);
     $("#js-screeningsLink-" + id).append(`<span> | </span><a href='#' class='js-hideScreenings' data-id=${id} data-name=${name}>Hide</a>`);
 
     filterScreenings(`/pets/${id}/health_screenings`, id);
@@ -52,7 +52,7 @@ function viewScreenings() {
     $(".js-filterScreenings").on("click", function(event) {
       event.preventDefault();
       let id = $(this).data("id");
-      let status = $(this).data("status");
+      let status = $(this).data("status") || "";
       filterScreenings(`/pets/${id}/health_screenings/${status}`, id);
     });
 
