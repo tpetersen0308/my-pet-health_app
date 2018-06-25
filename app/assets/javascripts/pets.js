@@ -14,7 +14,10 @@ function viewPets(){
     let userId = $(this).data("id");
     let userName = $(this).data("name");
     
-    $("#js-petsLink-" + userId).html(`<a href='#' class='js-hidePets' data-id=${userId} data-name=${userName}>Hide ${userName}'s ${userVet() ? "Patients" : "Pets"}</a>`);
+    $("#js-petsLink-" + userId).html(`<a href='#' class='js-filterPets' data-id=${userId} data-name=${userName} data-species='dogs'>Dogs</a>`);
+    $("#js-petsLink-" + userId).append(`<span> | </span><a href='#' class='js-filterPets' data-id=${userId} data-name=${userName} data-species='cats'>Cats</a>`);
+    $("#js-petsLink-" + userId).append(`<span> | </span><a href='#' class='js-filterPets' data-id=${userId} data-name=${userName}>All</a>`);
+    $("#js-petsLink-" + userId).append(`<span> | </span><a href='#' class='js-hidePets' data-id=${userId} data-name=${userName}>Hide</a>`);
 
     $.getJSON(`/users/${userId}/pets`, function(data){
       let petsHTML = data.map(pet => displayPet(pet)).join('');
