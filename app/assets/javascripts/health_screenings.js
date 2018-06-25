@@ -31,9 +31,9 @@ function viewScreenings() {
     const name = $(this).data("name");
     //let screenings = [];
 
-    $("#js-screeningsLink-" + id).html(`<a href='#' class='js-currentScreenings' data-id=${id} data-name=${name}>Current</a>`);
-    $("#js-screeningsLink-" + id).append(`<span> | </span><a href='#' class='js-overdueScreenings' data-id=${id} data-name=${name}>Overdue</a>`);
-    $("#js-screeningsLink-" + id).append(`<span> | </span><a href='#' class='js-allScreenings' data-id=${id} data-name=${name}>All</a>`);
+    $("#js-screeningsLink-" + id).html(`<a href='#' class='js-filterScreenings' data-id=${id} data-name=${name} data-status='current'>Current</a>`);
+    $("#js-screeningsLink-" + id).append(`<span> | </span><a href='#' class='js-filterScreenings' data-id=${id} data-name=${name} data-status='overdue'>Overdue</a>`);
+    $("#js-screeningsLink-" + id).append(`<span> | </span><a href='#' class='js-viewScreenings' data-id=${id} data-name=${name}>All</a>`);
     $("#js-screeningsLink-" + id).append(`<span> | </span><a href='#' class='js-hideScreenings' data-id=${id} data-name=${name}>Hide</a>`);
 
     filterScreenings(`/pets/${id}/health_screenings`, id);
