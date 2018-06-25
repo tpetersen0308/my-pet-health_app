@@ -19,11 +19,13 @@ function viewPets(){
     $("#js-petsLink-" + userId).append(`<span> | </span><a href='#' class='js-filterPets' data-id=${userId} data-name=${userName}>All</a>`);
     $("#js-petsLink-" + userId).append(`<span> | </span><a href='#' class='js-hidePets' data-id=${userId} data-name=${userName}>Hide</a>`);
 
-    $.getJSON(`/users/${userId}/pets`, function(data){
-      let petsHTML = data.map(pet => displayPet(pet)).join('');
-      $("#js-pets-" + userId).html(petsHTML);
-      viewScreenings();
-    })
+    //$.getJSON(`/users/${userId}/pets`, function(data){
+    //  let petsHTML = data.map(pet => displayPet(pet)).join('');
+    //  $("#js-pets-" + userId).html(petsHTML);
+    //  viewScreenings();
+    //});
+    filterPets(`/users/${userId}/pets`, userId);
+
     hidePets();
   })
 }
@@ -38,6 +40,14 @@ function hidePets() {
     $("#js-pets-" + userId).html('');
     viewPets();
   })
+}
+
+function filterPets(url, userId) {
+  $.getJSON(`/users/${userId}/pets`, function(data){
+    let petsHTML = data.map(pet => displayPet(pet)).join('');
+    $("#js-pets-" + userId).html(petsHTML);
+    viewScreenings();
+  });
 }
 
 function displayPet(data) {
