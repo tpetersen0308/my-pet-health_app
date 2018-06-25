@@ -26,6 +26,13 @@ function viewPets(){
     //});
     filterPets(`/users/${userId}/pets`, userId);
 
+    $(".js-filterPets").on("click", function(event){
+      event.preventDefault();
+      let id = $(this).data("id");
+      let species = $(this).data("species") || "";
+      filterPets(`/users/${id}/pets/${species}`, id);
+    });
+
     hidePets();
   })
 }
@@ -43,7 +50,7 @@ function hidePets() {
 }
 
 function filterPets(url, userId) {
-  $.getJSON(`/users/${userId}/pets`, function(data){
+  $.getJSON(url, function(data){
     let petsHTML = data.map(pet => displayPet(pet)).join('');
     $("#js-pets-" + userId).html(petsHTML);
     viewScreenings();
