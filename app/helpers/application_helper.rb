@@ -6,7 +6,7 @@ module ApplicationHelper
       nav_html += content_tag(:li, link_to("Sign Out", logout_path))
       if current_user.owner?
         nav_html += content_tag(:li, link_to("My Pets", user_pets_path(current_user))) +
-                    content_tag(:li, link_to("Register a New Pet", new_user_pet_path(current_user)))
+                    content_tag(:li, link_to("Register a New Pet", new_user_pet_path(current_user), {class: "js-registerPet", data: {id: current_user.id}}))
       elsif current_user.vet?
         nav_html += content_tag(:li, link_to("My Patients", user_pets_path(current_user)))
       end
