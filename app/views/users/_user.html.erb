@@ -8,6 +8,4 @@
 
 <p id="js-petsLink-<%= user.id %>"><%= user_pets_link(user) %></p>
 
-<p><%= button_to "Register a New Pet", new_user_pet_path(user), method: :get if user == current_user && current_user.owner? %></p>
-
 <div id="js-pets-<%= user.id %>"></div>
