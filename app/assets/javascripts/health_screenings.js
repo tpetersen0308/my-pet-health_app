@@ -49,7 +49,12 @@ function viewScreenings() {
     //  }
     //});
 
-
+    $(".js-filterScreenings").on("click", function(event) {
+      event.preventDefault();
+      let id = $(this).data("id");
+      let status = $(this).data("status");
+      filterScreenings(`/pets/${id}/health_screenings/${status}`, id);
+    });
 
     hideScreenings();
   })
