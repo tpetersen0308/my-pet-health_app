@@ -15,7 +15,7 @@
 <% end %>
 <% if @user %>
   <h2> <%= @user.name %>'s <%= (@user.vet? ? "Patient" : "Pet").pluralize(@user.pets.count) %>:</h2>
-  <p> <%= link_to "All", user_pets_path(@user) %> | <%= link_to "Dogs", user_pets_species_path(@user, "dogs") %> | <%= link_to "Cats", user_pets_species_path(@user, "cats") %></p>
+  <p> <%= link_to "All", user_pets_path(@user), class: "js-filterPets", data: {id: @user.id, name: @user.first_name} %> | <%= link_to "Dogs", user_pets_species_path(@user, "dogs"), class: "js-filterPets", data: {id: @user.id, name: @user.first_name, species: "dogs"} %> | <%= link_to "Cats", user_pets_species_path(@user, "cats"), class: "js-filterPets", data: {id: @user.id, name: @user.first_name, species: "cats"} %></p>
 <% else %>
   <h3 id="pet-index-header">All Pets: </h3>
 <% end %>
