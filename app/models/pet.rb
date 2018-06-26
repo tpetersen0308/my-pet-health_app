@@ -11,6 +11,7 @@ class Pet < ApplicationRecord
   validates :sex, presence: true, inclusion: {in: %w(Male Female)}
 
   after_save :set_or_update_age
+  after_find :set_or_update_age
   after_initialize :initialize_screenings
 
   scope :cats, -> {where(species: "Cat")}
