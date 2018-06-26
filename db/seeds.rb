@@ -17,8 +17,8 @@ owners_first.each do |name|
   Owner.create(first_name: name, last_name: "Petersen", email: "#{name}@fake.com", password: "password")
 end
 
-joe = Veterinarian.create(first_name: "Dr. Joe", last_name: "Smith", email: "drjoesmith@fake.com", password: "password")
-jane = Veterinarian.create(first_name: "Dr. Jane", last_name: "Doe", email: "drjanedoe@fake.com", password: "password")
+joe = Veterinarian.create(first_name: "Joe", last_name: "Smith", email: "drjoesmith@fake.com", password: "password")
+jane = Veterinarian.create(first_name: "Jane", last_name: "Doe", email: "drjanedoe@fake.com", password: "password")
 
 leo = Pet.create(name: "Leo", sex: "Male", species: "Cat", birth_date: DateTime.new(2017, 6,3), owner: Owner.find_by(first_name: "Hanna"))
 
