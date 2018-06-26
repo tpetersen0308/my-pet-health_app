@@ -74,7 +74,7 @@ function registerPet() {
     event.preventDefault();
     let url = $(this).attr("href");
     
-    let req = $.get(url, function(data){
+    $.get(url, function(data){
       $("#js-content").html(data);
 
       $("#new_pet").submit(function(event){
@@ -85,6 +85,7 @@ function registerPet() {
         posting.success(function(data){
           let petHTML = "<h3>Your pet has been successfully registered:</h3>" + displayPet(data);
           $("#js-content").html(petHTML);
+          $("#js-screeningsLink-" + data.id).html('');
         })
       })
     })
