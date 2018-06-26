@@ -51,7 +51,12 @@ function hidePets() {
 
 function filterPets(url, userId) {
   $.getJSON(url, function(data){
-    let petsHTML = data.map(pet => displayPet(pet)).join('');
+    let petsHTML;
+    if (data.length > 0) {
+      petsHTML = data.map(pet => displayPet(pet)).join('');
+    } else {
+      petsHTML = "<strong>There are no pets to display</strong>"
+    }
     $("#js-pets-" + userId).html(petsHTML);
     viewScreenings();
   });
