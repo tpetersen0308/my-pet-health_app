@@ -56,7 +56,7 @@ class PetsController < ApplicationController
     @pet = Pet.new(pet_params)
 
     if @pet.save
-      redirect_to user_pet_path(@pet.owner, @pet)
+      render json: @pet
     else
       render :new
     end
@@ -76,7 +76,7 @@ class PetsController < ApplicationController
   def update
 
     if @pet.update(pet_params)
-      redirect_to user_pet_path(@pet.owner, @pet)
+      render json: @pet
     else
       render :edit
     end
