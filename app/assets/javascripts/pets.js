@@ -88,8 +88,23 @@ function addDeleteListener() {
   $(".js-deletePet").on("click", function(event){
     event.preventDefault();
     let answer = confirm(`Are you sure you want to remove ${$(this).data("name")} from your pets?`);
-    
-  
+    let name = $(this).data("name");
+    let id = $(this).data("id");
+    let ownerId = $(this).data("owner-id");
+    if(answer){
+      let req = $.ajax({
+        type: "POST",
+        url: `/users/${ownerId}/pets/${id}`,
+        data: {_method: 'delete'},
+        success: function() {
+          $("#js-pet-" + id).remove();
+          $("#js-content").html(`<strong>${name} has been removed from your pets.</strong>`)
+        },
+        error: function (data) {
+          console.error('Error:', data);
+        }
+      })
+    }
   })
 }
 
