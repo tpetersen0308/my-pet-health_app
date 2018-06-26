@@ -84,8 +84,7 @@ class PetsController < ApplicationController
 
   def destroy
     @pet.destroy
-    flash[:message] = "#{@pet.name} has been removed from your pets."
-    redirect_to user_path(current_user)
+    render json: Pet.new, status: 201
   end
 
   def search
