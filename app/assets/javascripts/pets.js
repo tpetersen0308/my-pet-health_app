@@ -78,6 +78,14 @@ function displayPet(data) {
   return petHTML;
 }
 
+function addEditListener() {
+  
+}
+
+function addDeleteListener() {
+
+}
+
 function registerPet() {
   $(".js-registerPet").on("click", function(event) {
     event.preventDefault();
