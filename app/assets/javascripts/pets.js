@@ -112,7 +112,7 @@ function search() {
       $("#js-submitSearch").removeAttr('disabled');
       let newPetHTML = `<h3>Search Results: </h3>`;
       if(data){
-        newPetHTML += $("#js-pet-" + data.id).html();
+        newPetHTML += displayPet(data);//$("#js-pet-" + data.id).html();
       } else {
         newPetHTML += "<p>We're sorry, we were unable to find any pets that match your search criteria.</p>";
       }
