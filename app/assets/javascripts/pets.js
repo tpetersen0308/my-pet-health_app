@@ -76,6 +76,17 @@ function registerPet() {
     
     let req = $.get(url, function(data){
       $("#js-content").html(data);
+
+      $("#new_pet").submit(function(event){
+        event.preventDefault();
+        let values = $(this).serialize();
+        let posting = $.post($(this).attr("action"), values);
+    
+        posting.success(function(data){
+          let petHTML = "<h3>Your pet has been successfully registered:</h3>" + displayPet(data);
+          $("#js-content").html(petHTML);
+        })
+      })
     })
   })
 }
