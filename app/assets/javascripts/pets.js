@@ -81,7 +81,30 @@ function displayPet(data) {
 }
 
 function addEditListener() {
+  $(".js-editPet").on("click", function(event) {
+    event.preventDefault();
+    let url = $(this).attr("href");
+    let id = $(this).data("id");
+    
+    $.get(url, function(data){
+      $("#js-pet-" + id).html(data);
 
+      $("#edit_pet_" + id).submit(function(event){
+        event.preventDefault();
+        let values = $(this).serialize();
+        let posting = $.post($(this).attr("action"), values);
+    
+        posting.success(function(data){
+          let petHTML = "<h3>Your pet's information has been updated:</h3>" + displayPet(data);
+          $("#js-pet-" + id).html(petHTML);
+          addEditListener();
+          addDeleteListener();
+          $("#js-screeningsLink-" + data.id).remove();
+          $("#js-screenings-" + data.id).remove();
+        })
+      })
+    })
+  })
 }
 
 function addDeleteListener() {
@@ -132,10 +155,6 @@ function registerPet() {
       })
     })
   })
-}
-
-function editPet() {
-  
 }
 
 function search() {
