@@ -56,7 +56,7 @@ class PetsController < ApplicationController
     @pet = Pet.new(pet_params)
 
     if @pet.save
-      render json: @pet
+      render json: @pet, status: 201
     else
       render :new
     end
@@ -76,7 +76,7 @@ class PetsController < ApplicationController
   def update
 
     if @pet.update(pet_params)
-      render json: @pet
+      render json: @pet, status: 201
     else
       render :edit
     end
