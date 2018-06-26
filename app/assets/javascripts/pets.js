@@ -58,6 +58,8 @@ function filterPets(url, userId) {
       petsHTML = "<strong>There are no pets to display</strong>"
     }
     $("#js-pets-" + userId).html(petsHTML);
+    addDeleteListener();
+    addEditListener();
     viewScreenings();
   });
 }
@@ -79,11 +81,14 @@ function displayPet(data) {
 }
 
 function addEditListener() {
-  
+
 }
 
 function addDeleteListener() {
-
+  $(".js-deletePet").on("click", function(event){
+    event.preventDefault();
+    debugger
+  })
 }
 
 function registerPet() {
@@ -102,6 +107,8 @@ function registerPet() {
         posting.success(function(data){
           let petHTML = "<h3>Your pet has been successfully registered:</h3>" + displayPet(data);
           $("#js-content").html(petHTML);
+          addEditListener();
+          addDeleteListener();
           $("#js-screeningsLink-" + data.id).remove();
           $("#js-screenings-" + data.id).remove();
         })
@@ -129,6 +136,8 @@ function search() {
         newPetHTML += "<p>We're sorry, we were unable to find any pets that match your search criteria.</p>";
       }
       $("#js-searchResults").html(newPetHTML);
+      addDeleteListener();
+      addEditListener();
       viewScreenings();
     })
   })
