@@ -90,7 +90,8 @@ function registerPet() {
         posting.success(function(data){
           let petHTML = "<h3>Your pet has been successfully registered:</h3>" + displayPet(data);
           $("#js-content").html(petHTML);
-          $("#js-screeningsLink-" + data.id).html('');
+          $("#js-screeningsLink-" + data.id).remove();
+          $("#js-screenings-" + data.id).remove();
         })
       })
     })
