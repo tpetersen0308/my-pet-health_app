@@ -69,6 +69,17 @@ function displayPet(data) {
   return petHTML;
 }
 
+function registerPet() {
+  $(".js-registerPet").on("click", function(event) {
+    event.preventDefault();
+    let url = $(this).attr("href");
+    
+    let req = $.get(url, function(data){
+      $("#js-content").html(data);
+    })
+  })
+}
+
 function search() {
   $("#js-search").submit(function(event){
     event.preventDefault();
@@ -96,4 +107,5 @@ function search() {
 $(function() {
   search();
   viewPets();
+  registerPet();
 })
