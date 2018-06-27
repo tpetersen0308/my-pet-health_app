@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
     def conditional_render(view, obj)
       respond_to do |format|
         format.html { render view.to_sym }
-        format.json { render json: obj }
+        format.json { render json: obj, status: 201 }
       end
     end
 end

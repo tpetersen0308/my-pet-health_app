@@ -22,7 +22,7 @@ class HealthScreeningsController < ApplicationController
 
   def show
     if @health_screening
-      render json: @health_screening
+      render json: @health_screening, status: 201
     else
       flash[:alert] = "Invalid request"
       redirect_to pets_path
