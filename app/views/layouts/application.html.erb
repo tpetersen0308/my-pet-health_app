@@ -34,8 +34,13 @@
   <%= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %>
   <%= content_tag(:div, flash[:alert], :id => "flash_alert") if flash[:alert] %>
 
-  <div id="js-content"></div>
-  <%= yield %>
-
+<div id="wrapper">
+  <div id="page">
+    <div id="content">
+      <div id="js-content"></div>
+      <%= yield %>
+    </div>
+  </div>
+</div>
 </body>
 </html>
