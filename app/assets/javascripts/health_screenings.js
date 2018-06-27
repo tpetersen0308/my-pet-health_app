@@ -26,10 +26,10 @@ function viewScreenings() {
     const id = $(this).data("id");
     const name = $(this).data("name");
 
-    $("#js-screeningsLink-" + id).html(`<a href='#' class='js-filterScreenings' data-id=${id} data-name=${name} data-status='current'>Current</a>`);
-    $("#js-screeningsLink-" + id).append(`<span> | </span><a href='#' class='js-filterScreenings' data-id=${id} data-name=${name} data-status='overdue'>Overdue</a>`);
-    $("#js-screeningsLink-" + id).append(`<span> | </span><a href='#' class='js-filterScreenings' data-id=${id} data-name=${name}>All</a>`);
-    $("#js-screeningsLink-" + id).append(`<span> | </span><a href='#' class='js-hideScreenings' data-id=${id} data-name=${name}>Hide</a>`);
+    $("#js-screeningsLink-" + id).html(`<a href='#' class='js-filterScreenings' data-id=${id} data-name=${name} data-status='current'><strong>Current</strong></a>`);
+    $("#js-screeningsLink-" + id).append(`<span> | </span><a href='#' class='js-filterScreenings' data-id=${id} data-name=${name} data-status='overdue'><strong>Overdue</strong></a>`);
+    $("#js-screeningsLink-" + id).append(`<span> | </span><a href='#' class='js-filterScreenings' data-id=${id} data-name=${name}><strong>All</strong></a>`);
+    $("#js-screeningsLink-" + id).append(`<span> | </span><a href='#' class='js-hideScreenings' data-id=${id} data-name=${name}><strong>Hide</strong></a>`);
 
     filterScreenings(`/pets/${id}/health_screenings`, id);
 
@@ -100,7 +100,7 @@ function hideScreenings() {
     let id = $(this).data("id");
     let name = $(this).data("name");
 
-    $("#js-screeningsLink-" + id).html(`<a class='js-viewScreenings' href='#' data-id=${id} data-name=${name}>View ${name}'s Screenings</a>`);
+    $("#js-screeningsLink-" + id).html(`<a class='js-viewScreenings' href='#' data-id=${id} data-name=${name}><strong>View ${name}'s Screenings</strong></a>`);
     $("#js-screenings-" + id).html('');
     viewScreenings();
   })
