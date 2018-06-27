@@ -9,6 +9,19 @@
 </head>
 <body>
 
+<div id="header-wrapper">
+  <div id="header">
+    <div id="logo">
+      <h1>My Pet Health</h1>
+      
+      <% if logged_in? %>
+        <p>Logged in as <%= current_user.name %></p>
+      <% end %>
+      
+    </div>
+  </div>
+</div>
+
 <div id="menu-wrapper">
   <div id="menu">
     <%= render 'layouts/header' %>
