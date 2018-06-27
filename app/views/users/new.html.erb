@@ -1,4 +1,5 @@
 <h1>Sign Up</h1>
+<br>
 
 <%= form_tag(users_path) do %>
 
@@ -7,24 +8,24 @@
   <div class="field <%= field_with_errors(@user, "first_name") %>">
     First Name: <br>
     <%= text_field_tag 'user[first_name]' %> <br>
-  </div>
+  </div> <br>
 
   <div class="field <%= field_with_errors(@user, "last_name") %>">
     Last Name:  <br>  <%= text_field_tag 'user[last_name]' %> <br>
-  </div>
+  </div> <br>
 
   <div class="field <%= field_with_errors(@user, "email") %>">
     E-mail:     <br>  <%= text_field_tag 'user[email]' %> <br>
-  </div>
+  </div> <br>
 
   <div class="field <%= field_with_errors(@user, "password") %>">
     Password:   <br>   <%= password_field_tag 'user[password]' %> <br>
-  </div>
+  </div> <br>
 
   <div class="field <%= field_with_errors(@user, "password_confirmation") %>">
     Confirm Password: <br>  <%= password_field_tag 'user[password_confirmation]' %> <br>
-  </div>
+  </div> <br>
   
-  Check if you are a veterinarian: <%= check_box_tag 'vet', true %> <br>
-  <%= submit_tag "Sign Up" %>
+  Check if you are a veterinarian: <%= check_box_tag 'vet', true %> <br> <br>
+  <%= submit_tag "Sign Up" %> <br> <br>
 <% end %>
