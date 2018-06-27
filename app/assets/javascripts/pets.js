@@ -90,29 +90,51 @@ function addEditListener() {
     $.get(url, function(data){
       $("#js-pet-" + id).html(`<h4>Edit ${name}'s information:</h4>` + data);
 
-      $("#edit_pet_" + id).submit(function(event){
-        event.preventDefault();
-        let values = $(this).serialize();
-        let posting = $.post($(this).attr("action"), values);
-    
-        posting.success(function(data){
-          if(typeof data === "object"){
-            let petHTML = "<h3>Your pet's information has been updated:</h3>" + displayPet(data);
-            $("#js-pet-" + id).html(petHTML);
-            addEditListener();
-            addDeleteListener();
-            $("#js-screeningsLink-" + data.id).remove();
-            $("#js-screenings-" + data.id).remove();
-          } else {
-            $("#js-pet-" + id).html(`<h4>Edit ${name}'s information:</h4>` + data);
-            
-          }
-        })
-      })
+      submitPet(id);
+      //$("#edit_pet_" + id).submit(function(event){
+      //  event.preventDefault();
+      //  let values = $(this).serialize();
+      //  let posting = $.post($(this).attr("action"), values);
+    //
+      //  posting.success(function(data){
+      //    if(typeof data === "object"){
+      //      let petHTML = "<h3>Your pet's information has been updated:</h3>" + displayPet(data);
+      //      $("#js-pet-" + id).html(petHTML);
+      //      addEditListener();
+      //      addDeleteListener();
+      //      $("#js-screeningsLink-" + data.id).remove();
+      //      $("#js-screenings-" + data.id).remove();
+      //    } else {
+      //      $("#js-pet-" + id).html(`<h4>Edit ${name}'s information:</h4>` + data);
+      //      
+      //    }
+      //  })
+      //})
     })
   })
 }
 
+function submitPet(id) {
+  $("#edit_pet_" + id).submit(function(event){
+    event.preventDefault();
+    let values = $(this).serialize();
+    let posting = $.post($(this).attr("action"), values);
+
+    posting.success(function(data){
+      if(typeof data === "object"){
+        let petHTML = "<h3>Your pet's information has been updated:</h3>" + displayPet(data);
+        $("#js-pet-" + id).html(petHTML);
+        addEditListener();
+        addDeleteListener();
+        $("#js-screeningsLink-" + data.id).remove();
+        $("#js-screenings-" + data.id).remove();
+      } else {
+        $("#js-pet-" + id).html(`<h4>Edit ${name}'s information:</h4>` + data);
+        submitPet(id);
+      }
+    })
+  })
+}
 
 function addDeleteListener() {
   $(".js-deletePet").on("click", function(event){
