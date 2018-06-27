@@ -85,24 +85,41 @@ function updateScreening() {
     })
     
     req.success(function(){
-      $("form").submit(function(event){
-        event.preventDefault();
-        let values = $(this).serialize();
-        let posting = $.post($(this).attr("action"), values);
-        
-        posting.done(function (data) {
-          $.getJSON(`/health_screenings/${screeningId}`, function(screeningData){
-            let newScreening = new HealthScreening(screeningData.id, screeningData.kind, screeningData.species, screeningData.last_updated, screeningData.status);
-            $("#js-screening-" + screeningId).html(`<p>${newScreening.kind}</p><ul><li id="js-lastUpdated-${newScreening.id}">Last Updated: ${newScreening.displayLastUpdated()} </li><li>Status: ${newScreening.status}</li></ul>`);
-          })
-        })
-      })
+      submitScreeningUpdate(screeningId);
+      //$("form").submit(function(event){
+      //  event.preventDefault();
+      //  let values = $(this).serialize();
+      //  let posting = $.post($(this).attr("action"), values);
+      //  
+      //  posting.done(function (data) {
+      //    $.getJSON(`/health_screenings/${screeningId}`, function(screeningData){
+      //      let newScreening = new HealthScreening(screeningData.id, screeningData.kind, screeningData.species, screeningData.last_updated, screeningData.status);
+      //      $("#js-screening-" + screeningId).html(`<p>${newScreening.kind}</p><ul><li id="js-lastUpdated-${newScreening.id}">Last Updated: ${newScreening.displayLastUpdated()} </li><li>Status: ${newScreening.status}</li></ul>`);
+      //    })
+      //  })
+      //})
     })
   })
 }
 
-function submitScreeningUpdate(){
-  
+function submitScreeningUpdate(screeningId){
+  $("form").submit(function(event){
+    event.preventDefault();
+    let values = $(this).serialize();
+    let posting = $.post($(this).attr("action"), values);
+    
+    posting.done(function (data) {
+      if(typeof data === "object") {   
+        $.getJSON(`/health_screenings/${screeningId}`, function(screeningData){
+          let newScreening = new HealthScreening(screeningData.id, screeningData.kind, screeningData.species, screeningData.last_updated, screeningData.status);
+          $("#js-screening-" + screeningId).html(`<p>${newScreening.kind}</p><ul><li id="js-lastUpdated-${newScreening.id}">Last Updated: ${newScreening.displayLastUpdated()} </li><li>Status: ${newScreening.status}</li></ul>`);
+        })
+      } else {
+        $("#js-lastUpdated-" + screeningId).html(data);
+        submitScreeningUpdate(screeningId);
+      }
+    })
+  })
 }
 
 function hideScreenings() {
