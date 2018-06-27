@@ -65,7 +65,7 @@ function displayPet(data) {
   let vets = data.veterinarians.map(vet => new User(vet.id, vet.first_name, vet.last_name));
   let vetsHTML = "<li>Veterinarians:<ul>" + vets.map(vet => `<li><a href="/users/${vet.id}">${vet.displayFullName()}</a></li>`).join('') + "</ul></li>";
   let petHTML = `<div id='js-pet-${newPet.id}'>`; 
-  petHTML += `<h4>${newPet.name}</h4><ul><li>Type: ${newPet.sex} ${newPet.species}</li><li><a href="/users/${newOwner.id}">${newOwner.displayFullName()}</a></li><li>Age: ${newPet.age}</li>${vetsHTML}</ul>`;
+  petHTML += `<h4>${newPet.name}</h4><ul><li>Type: ${newPet.sex} ${newPet.species}</li><li><a href="/users/${newOwner.id}">Owner: ${newOwner.displayFullName()}</a></li><li>Age: ${newPet.age}</li>${vetsHTML}</ul>`;
   if($("#js-currentUserId").val() === newOwner.id.toString()) {
     petHTML += `<p><a href="/users/${newOwner.id}/pets/${newPet.id}/edit" class="js-editPet" data-id=${newPet.id} data-owner-id=${newOwner.id} data-name=${newPet.name}>Edit ${newPet.name}'s information</a></p>`;
     petHTML += `<p><a href="#" class="js-deletePet" data-id=${newPet.id} data-owner-id=${newOwner.id} data-name=${newPet.name}>Remove ${newPet.name} from my pets</a></p>`;
