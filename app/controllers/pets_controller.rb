@@ -78,7 +78,7 @@ class PetsController < ApplicationController
     if @pet.update(pet_params)
       render json: @pet, status: 201
     else
-      render :edit
+      render :partial => "pets/form", locals: {pet: @pet}
     end
   end
 

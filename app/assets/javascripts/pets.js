@@ -96,17 +96,23 @@ function addEditListener() {
         let posting = $.post($(this).attr("action"), values);
     
         posting.success(function(data){
-          let petHTML = "<h3>Your pet's information has been updated:</h3>" + displayPet(data);
-          $("#js-pet-" + id).html(petHTML);
-          addEditListener();
-          addDeleteListener();
-          $("#js-screeningsLink-" + data.id).remove();
-          $("#js-screenings-" + data.id).remove();
+          if(typeof data === "object"){
+            let petHTML = "<h3>Your pet's information has been updated:</h3>" + displayPet(data);
+            $("#js-pet-" + id).html(petHTML);
+            addEditListener();
+            addDeleteListener();
+            $("#js-screeningsLink-" + data.id).remove();
+            $("#js-screenings-" + data.id).remove();
+          } else {
+            $("#js-pet-" + id).html(`<h4>Edit ${name}'s information:</h4>` + data);
+            
+          }
         })
       })
     })
   })
 }
+
 
 function addDeleteListener() {
   $(".js-deletePet").on("click", function(event){
