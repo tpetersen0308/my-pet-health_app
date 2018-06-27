@@ -83,7 +83,7 @@ function addEditListener() {
     let name = $(this).data("name");
     
     $.get(url, function(data){
-      $("#js-pet-" + id).html(`<h3>Edit ${name}'s information:</h3>` + data);
+      $("#js-pet-" + id).html(`<h3>Edit ${name}'s information:</h3><br>` + data);
 
       submitPetUpdates(id, name);
     })
@@ -98,14 +98,14 @@ function submitPetUpdates(id, name) {
 
     posting.success(function(data){
       if(typeof data === "object"){
-        let petHTML = "<h3>Your pet's information has been updated:</h3>" + displayPet(data);
+        let petHTML = "<h1>Your pet's information has been updated:</h1>" + displayPet(data);
         $("#js-pet-" + id).html(petHTML);
         addEditListener();
         addDeleteListener();
         $("#js-screeningsLink-" + data.id).remove();
         $("#js-screenings-" + data.id).remove();
       } else {
-        $("#js-pet-" + id).html(`<h4>Edit ${name}'s information:</h4>` + data);
+        $("#js-pet-" + id).html(`<h3>Edit ${name}'s information:</h3><br>` + data);
         submitPetUpdates(id, name);
       }
     })
@@ -142,7 +142,7 @@ function registerPet() {
     let url = $(this).attr("href");
     
     $.get(url, function(data){
-      $("#js-content").html(data);
+      $("#js-content").html("<h2>Register a New Pet:</h2><br>" + data);
 
       submitNewPet();
     })
@@ -157,14 +157,14 @@ function submitNewPet() {
 
     posting.success(function(data){
       if(typeof data === "object"){
-        let petHTML = "<h2>Your pet has been successfully registered:</h2>" + displayPet(data);
+        let petHTML = "<h2>Your pet has been successfully registered:</h2><br>" + displayPet(data);
         $("#js-content").html(petHTML);
         addEditListener();
         addDeleteListener();
         $("#js-screeningsLink-" + data.id).remove();
         $("#js-screenings-" + data.id).remove();
       } else {
-        $("#js-content").html(data);
+        $("#js-content").html("<h2>Register a New Pet:</h2><br>" + data);
         submitNewPet();
       }
     })
