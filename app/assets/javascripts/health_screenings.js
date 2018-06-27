@@ -99,7 +99,10 @@ function updateScreening() {
       })
     })
   })
+}
 
+function submitScreeningUpdate(){
+  
 }
 
 function hideScreenings() {
