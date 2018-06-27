@@ -27,11 +27,10 @@ class PetsController < ApplicationController
         flash[:alert] = "Cannot find user."
         redirect_to pets_path
       end
+      conditional_render(:index, @pets)
     else
-      @search_ok = true
-      @pets = Pet.all
+      render partial: "search"
     end 
-    conditional_render(:index, @pets)
   end
 
 
