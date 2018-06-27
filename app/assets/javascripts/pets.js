@@ -190,7 +190,7 @@ function search() {
         
         posting.success(function(data){
           $("#js-submitSearch").removeAttr('disabled');
-          let newPetHTML = `<h3>Search Results: </h3>`;
+          let newPetHTML = `<h2>Search Results: </h2><br>`;
           if(data){
             newPetHTML += displayPet(data);
           } else {
