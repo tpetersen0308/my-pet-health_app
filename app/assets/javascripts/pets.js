@@ -111,7 +111,7 @@ function submitPetUpdates(id) {
         $("#js-screenings-" + data.id).remove();
       } else {
         $("#js-pet-" + id).html(`<h4>Edit ${name}'s information:</h4>` + data);
-        submitPet(id);
+        submitPetUpdates(id);
       }
     })
   })
@@ -149,26 +149,45 @@ function registerPet() {
     $.get(url, function(data){
       $("#js-content").html(data);
 
-      $("#new_pet").submit(function(event){
-        event.preventDefault();
-        let values = $(this).serialize();
-        let posting = $.post($(this).attr("action"), values);
-    
-        posting.success(function(data){
-          let petHTML = "<h3>Your pet has been successfully registered:</h3>" + displayPet(data);
-          $("#js-content").html(petHTML);
-          addEditListener();
-          addDeleteListener();
-          $("#js-screeningsLink-" + data.id).remove();
-          $("#js-screenings-" + data.id).remove();
-        })
-      })
+      submitNewPet();
+      //$("#new_pet").submit(function(event){
+      //  event.preventDefault();
+      //  let values = $(this).serialize();
+      //  let posting = $.post($(this).attr("action"), values);
+    //
+      //  posting.success(function(data){
+      //    let petHTML = "<h3>Your pet has been successfully registered:</h3>" + displayPet(data);
+      //    $("#js-content").html(petHTML);
+      //    addEditListener();
+      //    addDeleteListener();
+      //    $("#js-screeningsLink-" + data.id).remove();
+      //    $("#js-screenings-" + data.id).remove();
+      //  })
+      //})
     })
   })
 }
 
 function submitNewPet() {
-  
+  $("#new_pet").submit(function(event){
+    event.preventDefault();
+    let values = $(this).serialize();
+    let posting = $.post($(this).attr("action"), values);
+
+    posting.success(function(data){
+      if(typeof data === "object"){
+        let petHTML = "<h3>Your pet has been successfully registered:</h3>" + displayPet(data);
+        $("#js-content").html(petHTML);
+        addEditListener();
+        addDeleteListener();
+        $("#js-screeningsLink-" + data.id).remove();
+        $("#js-screenings-" + data.id).remove();
+      } else {
+        $("#js-content").html(data);
+        submitNewPet(id);
+      }
+    })
+  })
 }
 
 function search() {
