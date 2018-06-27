@@ -58,7 +58,7 @@ class PetsController < ApplicationController
     if @pet.save
       render json: @pet, status: 201
     else
-      render :new
+      render :partial => "pets/form", locals: {pet: @pet}
     end
   end
 
