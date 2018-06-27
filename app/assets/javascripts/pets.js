@@ -14,10 +14,10 @@ function viewPets(){
     let userId = $(this).data("id");
     let userName = $(this).data("name");
     
-    $("#js-petsLink-" + userId).html(`<a href='#' class='js-filterPets' data-id=${userId} data-name=${userName} data-species='dogs'>Dogs</a>`);
-    $("#js-petsLink-" + userId).append(`<span> | </span><a href='#' class='js-filterPets' data-id=${userId} data-name=${userName} data-species='cats'>Cats</a>`);
-    $("#js-petsLink-" + userId).append(`<span> | </span><a href='#' class='js-filterPets' data-id=${userId} data-name=${userName}>All</a>`);
-    $("#js-petsLink-" + userId).append(`<span> | </span><a href='#' class='js-hidePets' data-id=${userId} data-name=${userName}>Hide</a>`);
+    $("#js-petsLink-" + userId).html(`<a href='#' class='js-filterPets' data-id=${userId} data-name=${userName} data-species='dogs'><strong>Dogs</strong></a>`);
+    $("#js-petsLink-" + userId).append(`<span> | </span><a href='#' class='js-filterPets' data-id=${userId} data-name=${userName} data-species='cats'><strong>Cats</strong></a>`);
+    $("#js-petsLink-" + userId).append(`<span> | </span><a href='#' class='js-filterPets' data-id=${userId} data-name=${userName}><strong>All</strong></a>`);
+    $("#js-petsLink-" + userId).append(`<span> | </span><a href='#' class='js-hidePets' data-id=${userId} data-name=${userName}><strong>Hide</strong></a>`);
 
     filterPets(`/users/${userId}/pets`, userId);
 
@@ -38,7 +38,7 @@ function hidePets() {
     let userId = $(this).data("id");
     let userName = $(this).data("name");
 
-    $("#js-petsLink-" + userId).html(`<a class='js-viewPets' href='#' data-id=${userId} data-name=${userName}>View ${userName}'s ${userVet() ? "Patients" : "Pets"}</a>`);
+    $("#js-petsLink-" + userId).html(`<a class='js-viewPets' href='#' data-id=${userId} data-name=${userName}><strong>View ${userName}'s ${userVet() ? "Patients" : "Pets"}</strong></a>`);
     $("#js-pets-" + userId).html('');
     viewPets();
   })
@@ -50,7 +50,7 @@ function filterPets(url, userId) {
     if (data.length > 0) {
       petsHTML = data.map(pet => displayPet(pet)).join('');
     } else {
-      petsHTML = "<strong>There are no pets to display</strong>"
+      petsHTML = "<h3>There are no pets to display</h3>"
     }
     $("#js-pets-" + userId).html(petsHTML);
     addDeleteListener();
@@ -83,7 +83,7 @@ function addEditListener() {
     let name = $(this).data("name");
     
     $.get(url, function(data){
-      $("#js-pet-" + id).html(`<h4>Edit ${name}'s information:</h4>` + data);
+      $("#js-pet-" + id).html(`<h3>Edit ${name}'s information:</h3>` + data);
 
       submitPetUpdates(id, name);
     })
@@ -126,7 +126,7 @@ function addDeleteListener() {
         data: {_method: 'delete'},
         success: function() {
           $("#js-pet-" + id).remove();
-          $("#js-content").html(`<strong>${name} has been removed from your pets.</strong>`)
+          $("#js-content").html(`<h2>${name} has been removed from your pets.</h2>`)
         },
         error: function (data) {
           console.error('Error:', data);
@@ -157,7 +157,7 @@ function submitNewPet() {
 
     posting.success(function(data){
       if(typeof data === "object"){
-        let petHTML = "<h3>Your pet has been successfully registered:</h3>" + displayPet(data);
+        let petHTML = "<h2>Your pet has been successfully registered:</h2>" + displayPet(data);
         $("#js-content").html(petHTML);
         addEditListener();
         addDeleteListener();
@@ -194,7 +194,7 @@ function search() {
           if(data){
             newPetHTML += displayPet(data);
           } else {
-            newPetHTML += "<p>We're sorry, we were unable to find any pets that match your search criteria.</p>";
+            newPetHTML += "<h3>We're sorry, we were unable to find any pets that match your search criteria.</h3>";
           }
           $("#js-searchResults").html(newPetHTML);
           addDeleteListener();
