@@ -172,29 +172,39 @@ function submitNewPet() {
 }
 
 function search() {
-  $("#js-search").submit(function(event){
+  $("#js-searchLink").on("click", function(event) {
     event.preventDefault();
-    let values = $(this).serialize();
-    let posting = $.post($(this).attr("action"), values);
-
-    $("#pet_name").val("");
-    $("#pet_owner_first_name").val("");
-    $("#pet_owner_last_name").val("");
+    let req = $.get("/pets", function(data){
+      $("#js-content").html(data);
+    })
     
-    posting.success(function(data){
-      $("#js-submitSearch").removeAttr('disabled');
-      let newPetHTML = `<h3>Search Results: </h3>`;
-      if(data){
-        newPetHTML += displayPet(data);
-      } else {
-        newPetHTML += "<p>We're sorry, we were unable to find any pets that match your search criteria.</p>";
-      }
-      $("#js-searchResults").html(newPetHTML);
-      addDeleteListener();
-      addEditListener();
-      viewScreenings();
+    req.done(function() {
+      $("#js-search").submit(function(event){
+        event.preventDefault();
+        let values = $(this).serialize();
+        let posting = $.post($(this).attr("action"), values);
+        
+        $("#pet_name").val("");
+        $("#pet_owner_first_name").val("");
+        $("#pet_owner_last_name").val("");
+        
+        posting.success(function(data){
+          $("#js-submitSearch").removeAttr('disabled');
+          let newPetHTML = `<h3>Search Results: </h3>`;
+          if(data){
+            newPetHTML += displayPet(data);
+          } else {
+            newPetHTML += "<p>We're sorry, we were unable to find any pets that match your search criteria.</p>";
+          }
+          $("#js-searchResults").html(newPetHTML);
+          addDeleteListener();
+          addEditListener();
+          viewScreenings();
+        })
+      })
     })
   })
+    
 }
 
 $(function() {
