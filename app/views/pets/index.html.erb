@@ -6,10 +6,10 @@
     <%= label_tag "pet[species]", "Species:" %>
     <%= select_tag "pet[species]", options_for_select(["Dog", "Cat"]) %> <br><br>
     <%= label_tag "pet[owner_first_name]", "Owner's First Name:" %> <br>
-    <%= text_field_tag "pet[owner_first_name]" %> <br>
+    <%= text_field_tag "pet[owner_first_name]" %> <br> <br>
     <%= label_tag "pet[owner_last_name]", "Owner's Last Name:" %> <br>
-    <%= text_field_tag "pet[owner_last_name]" %> <br>
-    <%= submit_tag "Find Pet", id: "js-submitSearch" %>
+    <%= text_field_tag "pet[owner_last_name]" %> <br> <br>
+    <%= submit_tag "Find Pet", id: "js-submitSearch" %> <br> <br>
   <% end %>
   <div id="js-searchResults"></div>
 <% elsif @user %>
