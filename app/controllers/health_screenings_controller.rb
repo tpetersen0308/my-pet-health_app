@@ -43,7 +43,7 @@ class HealthScreeningsController < ApplicationController
       @health_screening.pet.save
       render json: @health_screening, status: 201
     else
-      render :edit
+      render :partial => "health_screenings/form", locals: {health_screening: @health_screening}
     end
   end
 
