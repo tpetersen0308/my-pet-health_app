@@ -167,6 +167,10 @@ function registerPet() {
   })
 }
 
+function submitNewPet() {
+  
+}
+
 function search() {
   $("#js-search").submit(function(event){
     event.preventDefault();
