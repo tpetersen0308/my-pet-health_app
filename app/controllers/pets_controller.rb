@@ -15,7 +15,6 @@ class PetsController < ApplicationController
 
   def index
     if params[:user_id]
-      @search_ok = false
       @user = User.find_by(:id => params.require(:user_id))
       if @user
         if params[:species]
