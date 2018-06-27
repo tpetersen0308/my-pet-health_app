@@ -15,7 +15,7 @@ module ApplicationHelper
                   content_tag(:li, link_to("Sign In", login_path)) +
                   content_tag(:li, link_to("Sign In With GitHub (Pet Owners Only)", "/auth/github"))
     end
-    nav_html += content_tag(:li, link_to("Find a Pet", pets_path))
+    nav_html += content_tag(:li, link_to("Find a Pet", pets_path, class: "js-search"))
   end
 
   def field_with_errors(instance, attr)
