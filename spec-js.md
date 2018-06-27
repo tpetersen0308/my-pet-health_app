@@ -8,15 +8,15 @@ Specs:
       - Pets and Health Screenings are rendered per these requirements.
 - [x] Include at least one has_many relationship in information rendered via JSON and appended to the DOM.
       - Pets have many screenings, Users have many Pets.
-- [x] Use your Rails API and a form to create a resource and render the response without a page refresh.
-      - Pet registration functions per these requirements.
+- [x] Use your Rails API and a form to create a resource and render the response without a page       refresh.
+      - Health Screening editing and Pet registration and editing function per these requirements.
 - [x] Translate JSON responses into js model objects.
       - JSON responses are translated into js model objects in displayPets() and displayScreenings().
 - [x] At least one of the js model objects must have at least one method added by your code to the prototype.
       - HealthScreenings have a displayLastUpdated() method and Users have a displayFullName() method.
 
 Confirm
-- [ ] You have a large number of small Git commits
-- [ ] Your commit messages are meaningful
-- [ ] You made the changes in a commit that relate to the commit message
-- [ ] You don't include changes in a commit that aren't related to the commit message
+- [x] You have a large number of small Git commits
+- [x] Your commit messages are meaningful
+- [x] You made the changes in a commit that relate to the commit message
+- [x] You don't include changes in a commit that aren't related to the commit message
