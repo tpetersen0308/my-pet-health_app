@@ -90,12 +90,12 @@ function addEditListener() {
     $.get(url, function(data){
       $("#js-pet-" + id).html(`<h4>Edit ${name}'s information:</h4>` + data);
 
-      submitPetUpdates(id);
+      submitPetUpdates(id, name);
     })
   })
 }
 
-function submitPetUpdates(id) {
+function submitPetUpdates(id, name) {
   $("#edit_pet_" + id).submit(function(event){
     event.preventDefault();
     let values = $(this).serialize();
@@ -111,7 +111,7 @@ function submitPetUpdates(id) {
         $("#js-screenings-" + data.id).remove();
       } else {
         $("#js-pet-" + id).html(`<h4>Edit ${name}'s information:</h4>` + data);
-        submitPetUpdates(id);
+        submitPetUpdates(id, name);
       }
     })
   })
