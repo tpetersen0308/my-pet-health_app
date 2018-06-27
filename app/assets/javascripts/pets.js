@@ -19,11 +19,6 @@ function viewPets(){
     $("#js-petsLink-" + userId).append(`<span> | </span><a href='#' class='js-filterPets' data-id=${userId} data-name=${userName}>All</a>`);
     $("#js-petsLink-" + userId).append(`<span> | </span><a href='#' class='js-hidePets' data-id=${userId} data-name=${userName}>Hide</a>`);
 
-    //$.getJSON(`/users/${userId}/pets`, function(data){
-    //  let petsHTML = data.map(pet => displayPet(pet)).join('');
-    //  $("#js-pets-" + userId).html(petsHTML);
-    //  viewScreenings();
-    //});
     filterPets(`/users/${userId}/pets`, userId);
 
     $(".js-filterPets").on("click", function(event){
@@ -150,20 +145,6 @@ function registerPet() {
       $("#js-content").html(data);
 
       submitNewPet();
-      //$("#new_pet").submit(function(event){
-      //  event.preventDefault();
-      //  let values = $(this).serialize();
-      //  let posting = $.post($(this).attr("action"), values);
-    //
-      //  posting.success(function(data){
-      //    let petHTML = "<h3>Your pet has been successfully registered:</h3>" + displayPet(data);
-      //    $("#js-content").html(petHTML);
-      //    addEditListener();
-      //    addDeleteListener();
-      //    $("#js-screeningsLink-" + data.id).remove();
-      //    $("#js-screenings-" + data.id).remove();
-      //  })
-      //})
     })
   })
 }
@@ -204,7 +185,7 @@ function search() {
       $("#js-submitSearch").removeAttr('disabled');
       let newPetHTML = `<h3>Search Results: </h3>`;
       if(data){
-        newPetHTML += displayPet(data);//$("#js-pet-" + data.id).html();
+        newPetHTML += displayPet(data);
       } else {
         newPetHTML += "<p>We're sorry, we were unable to find any pets that match your search criteria.</p>";
       }
