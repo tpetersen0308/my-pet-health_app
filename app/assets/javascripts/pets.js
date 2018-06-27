@@ -184,7 +184,7 @@ function submitNewPet() {
         $("#js-screenings-" + data.id).remove();
       } else {
         $("#js-content").html(data);
-        submitNewPet(id);
+        submitNewPet();
       }
     })
   })
