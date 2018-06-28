@@ -25,9 +25,29 @@ function registerUser() {
 
     $.get("/users/new", function(data) {
       $("#js-content").html(data);
+      submitNewUser();
+    })
+
+  })
+}
+
+function submitNewUser() {
+  $("#js-signUpForm").submit(function(event){
+    event.preventDefault();
+    let values = $(this).serialize();
+    let posting = $.post("/users", values)
+
+    posting.done(function(resp){
+      if(typeof resp === "string") {
+        $("#js-content").html(resp);
+        submitNewUser();
+      } else {
+        window.location.replace("/users/" + resp.id);
+      }
     })
   })
 }
+
 
 $(function() {
   registerUser();
