@@ -38,7 +38,7 @@ function hidePets() {
     let userId = $(this).data("id");
     let userName = $(this).data("name");
 
-    $("#js-petsLink-" + userId).html(`<a class='js-viewPets' href='#' data-id=${userId} data-name=${userName}><strong>View ${userName}'s ${userVet() ? "Patients" : "Pets"}</strong></a>`);
+    $("#js-petsLink-" + userId).html(`<a class='js-viewPets' href='#' data-id=${userId} data-name=${userName}><strong>View${userVet() ? " Dr. "  : " "}${userName}'s ${userVet() ? "Patients" : "Pets"}</strong></a>`);
     $("#js-pets-" + userId).html('');
     viewPets();
   })
@@ -63,7 +63,7 @@ function displayPet(data) {
   let newPet = new Pet(data.id, data.name, data.species, data.age, data.sex);
   let newOwner = new User(data.owner.id, data.owner.first_name, data.owner.last_name);
   let vets = data.veterinarians.map(vet => new User(vet.id, vet.first_name, vet.last_name));
-  let vetsHTML = vets.map(vet => `<li><a href="/users/${vet.id}">${vet.displayFullName()}</a></li>`).join('');
+  let vetsHTML = vets.map(vet => `<li><a href="/users/${vet.id}">Dr. ${vet.displayFullName()}</a></li>`).join('');
   if(vetsHTML.length > 0){
     vetsHTML = "<li>Veterinarians:<ul>" + vetsHTML + "</ul></li>";
   } else {
