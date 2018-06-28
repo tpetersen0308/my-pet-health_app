@@ -19,13 +19,13 @@ function viewPets(){
     $("#js-petsLink-" + userId).append(`<span> | </span><a href='#' class='js-filterPets' data-id=${userId} data-name=${userName}><strong>All</strong></a>`);
     $("#js-petsLink-" + userId).append(`<span> | </span><a href='#' class='js-hidePets' data-id=${userId} data-name=${userName}><strong>Hide</strong></a>`);
 
-    filterPets(`/users/${userId}/pets`, userId);
+    filterPets(`/users/${userId}/pets`, userId, userName);
 
     $(".js-filterPets").on("click", function(event){
       event.preventDefault();
       let id = $(this).data("id");
       let species = $(this).data("species") || "";
-      filterPets(`/users/${id}/pets/${species}`, id);
+      filterPets(`/users/${id}/pets/${species}`, id, userName);
     });
 
     hidePets();
@@ -44,13 +44,19 @@ function hidePets() {
   })
 }
 
-function filterPets(url, userId) {
+function filterPets(url, userId, userName) {
   $.getJSON(url, function(data){
     let petsHTML;
     if (data.length > 0) {
       petsHTML = data.map(pet => displayPet(pet)).join('');
     } else {
-      petsHTML = "<h3>There are no pets to display</h3>"
+      if(url.includes("dogs")) {
+        petsHTML = `<h4>${userName} does not have any dogs</h4>`
+      } else if(url.includes("cats")) {
+        petsHTML = `<h4>${userName} does not have any cats</h4>`
+      } else {
+        petsHTML = `<h4>${userName} not registered any pets</h4>`
+      }
     }
     $("#js-pets-" + userId).html(petsHTML);
     addDeleteListener();
