@@ -59,7 +59,7 @@ function filterScreenings(url, petId, name) {
         }
       }
     } else {
-      $("#js-screenings-" + petId).append(`<h3>All of ${name}'s screenings are ${url.includes("current") ? "overdue" : "current"}</h3><br>`)
+      $("#js-screenings-" + petId).append(`<h4>All of ${name.toUpperCase()}'s screenings are ${url.includes("current") ? "overdue" : "current"}</h4><br>`)
     }
   });
 }
