@@ -176,6 +176,7 @@ function submitNewPet() {
         $("#js-screenings-" + data.id).remove();
       } else {
         $("#js-content").html("<h2>Register a New Pet:</h2><br>" + data);
+        cancel();
         submitNewPet();
       }
     })
