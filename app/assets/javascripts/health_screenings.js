@@ -31,20 +31,20 @@ function viewScreenings() {
     $("#js-screeningsLink-" + id).append(`<span> | </span><a href='#' class='js-filterScreenings' data-id=${id} data-name=${name}><strong>All</strong></a>`);
     $("#js-screeningsLink-" + id).append(`<span> | </span><a href='#' class='js-hideScreenings' data-id=${id} data-name=${name}><strong>Hide</strong></a>`);
 
-    filterScreenings(`/pets/${id}/health_screenings`, id);
+    filterScreenings(`/pets/${id}/health_screenings`, id, name);
 
     $(".js-filterScreenings").on("click", function(event) {
       event.preventDefault();
       let id = $(this).data("id");
       let status = $(this).data("status") || "";
-      filterScreenings(`/pets/${id}/health_screenings/${status}`, id);
+      filterScreenings(`/pets/${id}/health_screenings/${status}`, id, name);
     });
 
     hideScreenings();
   })
 }
 
-function filterScreenings(url, petId) {
+function filterScreenings(url, petId, name) {
   let screenings = [];
   $.getJSON(url, function(data){
     $("#js-screenings-" + petId).html(''); //clear screenings div to prevent appending duplicates
@@ -59,7 +59,7 @@ function filterScreenings(url, petId) {
         }
       }
     } else {
-      $("#js-screenings-" + petId).append("<h3>There are no screenings to display</h3>")
+      $("#js-screenings-" + petId).append(`<h3>All of ${name}'s screenings are ${url.includes("current") ? "overdue" : "current"}</h3><br>`)
     }
   });
 }
