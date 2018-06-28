@@ -1,7 +1,7 @@
 <h1>Sign Up</h1>
 <br>
 
-<%= form_tag(users_path) do %>
+<%= form_tag(users_path, id: "js-signUpForm") do %>
 
 <%= render "/shared/errors", object: user %>
 
