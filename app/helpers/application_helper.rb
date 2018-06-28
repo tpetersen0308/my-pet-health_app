@@ -11,7 +11,7 @@ module ApplicationHelper
         nav_html += content_tag(:li, link_to("My Patients", user_path(current_user)))
       end
     else
-      nav_html += content_tag(:li, link_to("Sign Up", new_user_path)) +
+      nav_html += content_tag(:li, link_to("Sign Up", new_user_path, class: "js-signUp")) +
                   content_tag(:li, link_to("Sign In", login_path)) +
                   content_tag(:li, link_to("Sign In With GitHub (Pet Owners Only)", "/auth/github"))
     end
