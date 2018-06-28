@@ -63,7 +63,12 @@ function displayPet(data) {
   let newPet = new Pet(data.id, data.name, data.species, data.age, data.sex);
   let newOwner = new User(data.owner.id, data.owner.first_name, data.owner.last_name);
   let vets = data.veterinarians.map(vet => new User(vet.id, vet.first_name, vet.last_name));
-  let vetsHTML = "<li>Veterinarians:<ul>" + vets.map(vet => `<li><a href="/users/${vet.id}">${vet.displayFullName()}</a></li>`).join('') + "</ul></li>";
+  let vetsHTML = vets.map(vet => `<li><a href="/users/${vet.id}">${vet.displayFullName()}</a></li>`).join('');
+  if(vetsHTML.length > 0){
+    vetsHTML = "<li>Veterinarians:<ul>" + vetsHTML + "</ul></li>";
+  } else {
+    vetsHTML = `<li>Veterinarians:<ul><li>${newPet.name} is not yet associated with any veterinarians.</li></ul></li>`;
+  }
   let petHTML = `<div id='js-pet-${newPet.id}'>`; 
   petHTML += `<h3>${newPet.name}</h3><ul><li>Type: ${newPet.sex} ${newPet.species}</li><li><a href="/users/${newOwner.id}">Owner: <strong>${newOwner.displayFullName()}</strong></a></li><li>Age: ${newPet.age}</li>${vetsHTML}</ul>`;
   if($("#js-currentUserId").val() === newOwner.id.toString()) {
