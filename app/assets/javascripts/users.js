@@ -22,6 +22,10 @@ function userVet() {
 function registerUser() {
   $(".js-signUp").on("click", function(event) {
     event.preventDefault();
+
+    $.get("/users/new", function(data) {
+      $("#js-content").html(data);
+    })
   })
 }
 
