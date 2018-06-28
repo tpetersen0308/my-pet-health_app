@@ -188,6 +188,7 @@ function search() {
     event.preventDefault();
     let req = $.get("/pets", function(data){
       $("#js-content").html(data);
+      cancel();
     })
     
     req.done(function() {
