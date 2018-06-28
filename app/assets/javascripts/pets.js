@@ -154,7 +154,7 @@ function registerPet() {
     
     $.get(url, function(data){
       $("#js-content").html("<h2>Register a New Pet:</h2><br>" + data);
-
+      cancel();
       submitNewPet();
     })
   })

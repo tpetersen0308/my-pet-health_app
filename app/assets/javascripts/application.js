@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require my_pet_health
 //= require pets
 //= require health_screenings
 //= require users
