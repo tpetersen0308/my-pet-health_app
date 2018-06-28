@@ -18,3 +18,13 @@ function currentUserVet() {
 function userVet() {
   return $("#js-userVet").val() === "true";
 }
+
+function registerUser() {
+  $(".js-signUp").on("click", function(event) {
+    event.preventDefault();
+  })
+}
+
+$(function() {
+  registerUser();
+})
