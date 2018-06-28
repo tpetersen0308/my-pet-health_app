@@ -25,6 +25,7 @@ function registerUser() {
 
     $.get("/users/new", function(data) {
       $("#js-content").html(data);
+      cancel();
       submitNewUser();
     })
 
@@ -40,6 +41,7 @@ function submitNewUser() {
     posting.done(function(resp){
       if(typeof resp === "string") {
         $("#js-content").html(resp);
+        cancel();
         submitNewUser();
       } else {
         window.location.replace("/users/" + resp.id);
