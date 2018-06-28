@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    render partial: "form", locals: {user: @user}
   end
 
   def create
