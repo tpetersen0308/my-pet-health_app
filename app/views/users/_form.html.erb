@@ -27,5 +27,6 @@
   </div> <br>
   
   Check if you are a veterinarian: <%= check_box_tag 'vet', true %> <br> <br>
-  <%= submit_tag "Sign Up" %> <br> <br>
+  <%= submit_tag "Sign Up" %> 
+  <%= link_to "Cancel", "#", class: "js-cancel" %> <br> <br>
 <% end %>

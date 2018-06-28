@@ -15,5 +15,6 @@
   <%= f.select :sex, ['Female', 'Male'], selected: pet.sex %> <br><br>
   <%= f.label :birth_date %> <br>
   <%= f.date_select :birth_date, {start_year: Date.today.year - 20, end_year: Date.today.year} %> <br><br>
-  <%= f.submit "Register Pet" %> <br> <br>
+  <%= f.submit "Register Pet" %> 
+  <%= link_to "Cancel", "#", class: "js-cancel" %> <br> <br>
 <% end %>
