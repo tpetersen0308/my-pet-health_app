@@ -36,6 +36,9 @@
 
 <div id="wrapper">
   <div id="page">
+    <div class="post">
+      <%= render template: "sessions/new" unless logged_in? %>
+    </div>
     <div id="content" class="post">
       <div id="js-content"></div> <br> <br>
       <%= yield %>
