@@ -48,13 +48,18 @@ function filterScreenings(url, petId) {
   let screenings = [];
   $.getJSON(url, function(data){
     $("#js-screenings-" + petId).html(''); //clear screenings div to prevent appending duplicates
-    for(screening of data) {
-      screenings.push(new HealthScreening(screening.id, screening.kind, screening.species, screening.last_updated, screening.status));
-      showScreening(screenings[screenings.length - 1], petId);
-      if(currentUserVet() && screening.status === "Overdue") {
-        $("#js-lastUpdated-" + screening.id).append(`<button class="js-updateScreening" data-id=${screening.id} data-pet-id=${petId}>Update</button>`);
-        updateScreening();
+    
+    if(data.length > 0) {
+      for(screening of data) {
+        screenings.push(new HealthScreening(screening.id, screening.kind, screening.species, screening.last_updated, screening.status));
+        showScreening(screenings[screenings.length - 1], petId);
+        if(currentUserVet() && screening.status === "Overdue") {
+          $("#js-lastUpdated-" + screening.id).append(`<button class="js-updateScreening" data-id=${screening.id} data-pet-id=${petId}>Update</button>`);
+          updateScreening();
+        }
       }
+    } else {
+      $("#js-screenings-" + petId).append("<h3>There are no screenings to display</h3>")
     }
   });
 }
