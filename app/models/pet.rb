@@ -56,6 +56,6 @@ class Pet < ApplicationRecord
   end
 
   def self.ci_search(attribute, value)
-    where("lower(attribute) = ?", value.downcase)
+    where("lower(#{attribute}) = ?", value.downcase)
   end
 end
