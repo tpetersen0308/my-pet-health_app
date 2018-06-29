@@ -71,27 +71,35 @@ function filterScreenings(url, petId, name) {
           updateScreening(); //add event listener to update button
         }
       }
-    } else {
+    } else { //display informative message if there are no screenings to display
       $("#js-screenings-" + petId).append(`<h4>All of ${name.toUpperCase()}'s screenings are ${url.includes("current") ? "overdue" : "current"}</h4><br>`)
     }
   });
 }
 
+/********************************************************************************************
+* updateScreening() attaches an event listener to the update button that sends an AJAX GET  *
+* request which replaces the screening information with an update form.                     *
+*********************************************************************************************/
 function updateScreening() {
   $(".js-updateScreening").on("click", function() {
     let screeningId = $(this).data("id");
     let petId = $(this).data("pet-id");
 
     let req = $.get(`/pets/${petId}/health_screenings/${screeningId}/edit`, function(data){
-      $("#js-lastUpdated-" + screeningId).html(data);
+      $("#js-lastUpdated-" + screeningId).html(data); //append form to DOM
     })
     
     req.success(function(){
-      submitScreeningUpdate(screeningId);
+      submitScreeningUpdate(screeningId); //attach event listener to form
     })
   })
 }
 
+/********************************************************************************************
+* submitScreeningUpdate() attaches an event listener to the submit button on the edit form, *
+* which sends an AJAX POST request to update the resource and renders the updated resource. *
+*********************************************************************************************/
 function submitScreeningUpdate(screeningId){
   $("form").submit(function(event){
     event.preventDefault();
@@ -104,7 +112,7 @@ function submitScreeningUpdate(screeningId){
           let newScreening = new HealthScreening(screeningData.id, screeningData.kind, screeningData.species, screeningData.last_updated, screeningData.status);
           $("#js-screening-" + screeningId).html(`<p>${newScreening.kind}</p><ul><li id="js-lastUpdated-${newScreening.id}">Last Updated: ${newScreening.displayLastUpdated()} </li><li>Status: ${newScreening.status}</li></ul>`);
         })
-      } else {
+      } else { //re-render the form with errors if the update was unsuccessful
         $("#js-lastUpdated-" + screeningId).html(data);
         submitScreeningUpdate(screeningId);
       }
@@ -112,6 +120,11 @@ function submitScreeningUpdate(screeningId){
   })
 }
 
+/********************************************************************************************
+* hideScreenings() adds an event listener to the link for hiding screenings which removes   *
+* the list of screenings from the DOM, and replaces the filtering links with a link to view *
+* screenings.                                                                               *
+*********************************************************************************************/
 function hideScreenings() {
   $(".js-hideScreenings").on("click", function(event) {
     event.preventDefault();
@@ -124,6 +137,9 @@ function hideScreenings() {
   })
 }
 
+/********************************************************************************************
+*  
+*********************************************************************************************/
 function showScreening(screening, petId) {
   $("#js-screenings-" + petId).append(`<div id='js-screening-${screening.id}'><p>${screening.kind}</p><ul><li id="js-lastUpdated-${screening.id}">Last Updated: ${screening.displayLastUpdated()} </li><li>Status: ${screening.status}</li></ul></div>`);
 }
