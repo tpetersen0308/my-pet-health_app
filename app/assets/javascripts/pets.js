@@ -196,16 +196,17 @@ function search() {
         event.preventDefault();
         let values = $(this).serialize();
         let posting = $.post($(this).attr("action"), values);
-        
         $("#pet_name").val("");
-        $("#pet_owner_first_name").val("");
-        $("#pet_owner_last_name").val("");
+        //$("#pet_owner_first_name").val("");
+        //$("#pet_owner_last_name").val("");
         
         posting.success(function(data){
           $("#js-submitSearch").removeAttr('disabled');
           let newPetHTML = `<h2>Search Results: </h2><br>`;
           if(data){
-            newPetHTML += displayPet(data);
+            for(pet of data) {
+              newPetHTML += displayPet(pet);
+            }
           } else {
             newPetHTML += "<h3>We're sorry, we were unable to find any pets that match your search criteria.</h3>";
           }
