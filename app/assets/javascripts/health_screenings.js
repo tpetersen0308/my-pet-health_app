@@ -66,10 +66,6 @@ function filterScreenings(url, petId, name) {
       for(screening of data) {
         screenings.push(new HealthScreening(screening.id, screening.kind, screening.species, screening.last_updated, screening.status));
         showScreening(screenings[screenings.length - 1], petId);
-        //if(currentUserVet() && screening.status === "Overdue") { //display update button only if user is a vet and the screening isn't up to date
-        //  $("#js-lastUpdated-" + screening.id).append(`<button class="js-updateScreening" data-id=${screening.id} data-pet-id=${petId}>Update</button>`);
-        //updateScreening(); //add event listener to update button
-        //}
       }
     } else { //display informative message if there are no screenings to display
       $("#js-screenings-" + petId).append(`<h4>All of ${name.toUpperCase()}'s screenings are ${url.includes("current") ? "overdue" : "current"}</h4><br>`)
@@ -137,9 +133,10 @@ function hideScreenings() {
   })
 }
 
-/********************************************************************************************
-*  
-*********************************************************************************************/
+/*********************************************************************************************
+* showScreening() appends a screening JS object model to the DOM and renders and edit button *
+* if the current user is a vet and the screening is out of date.                             * 
+**********************************************************************************************/
 function showScreening(screening, petId) {
   $("#js-screenings-" + petId).append(`<div id='js-screening-${screening.id}'><p>${screening.kind}</p><ul><li id="js-lastUpdated-${screening.id}">Last Updated: ${screening.displayLastUpdated()} </li><li>Status: ${screening.status}</li></ul></div>`);
   if(currentUserVet() && screening.status === "Overdue") { //display update button only if user is a vet and the screening isn't up to date
