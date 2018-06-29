@@ -90,9 +90,10 @@ class PetsController < ApplicationController
     #if !pets.empty? 
     #  render json: pets, status: 201
     #end
-    if !pet_search_criteria.any?(&:empty?)
-      pets = Pet.where(owner_id: Owner.ci_find("last_name", pet_search_criteria[2]).ci_find("first_name", pet_search_criteria[1]).ids).ci_search("name", pet_search_criteria[0])
+    if !pet_search_criteria.values.any?(&:empty?)
+      pets = Pet.where(owner_id: Owner.ci_find("last_name", pet_search_criteria[:owner_last]).ci_find("first_name", pet_search_criteria[:owner_first]).ids).ci_search("name", pet_search_criteria[:pet_name])
       render json: pets, status: 201
+    
     end
   end
 
@@ -102,7 +103,8 @@ private
   end
 
   def pet_search_criteria
-    params.require(:pet).permit(:name, :owner_first_name, :owner_last_name).values
+    values = params.require(:pet).permit(:name, :owner_first_name, :owner_last_name).values
+    { pet_name: values[0], owner_first: values[1], owner_last: values[2]}
   end
 
   def set_pet
