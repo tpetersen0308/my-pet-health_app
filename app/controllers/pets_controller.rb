@@ -90,9 +90,8 @@ class PetsController < ApplicationController
     #if !pets.empty? 
     #  render json: pets, status: 201
     #end
-    binding.pry
-    if [params[:pet][:name], params[:pet][:owner_first_name], params[:pet][:owner_last_name]]
-      pets = Pet.where(owner_id: Owner.ci_find("last_name", params[:pet][:owner_last_name]).ci_find("first_name", params[:pet][:owner_first_name]).ids).ci_find("name", params[:pet][:name])
+    if !pet_search_criteria.any?(&:empty?)
+      pets = Pet.where(owner_id: Owner.ci_find("last_name", pet_search_criteria[2]).ci_find("first_name", pet_search_criteria[1]).ids).ci_search("name", pet_search_criteria[0])
       render json: pets, status: 201
     end
   end
