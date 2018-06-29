@@ -54,4 +54,8 @@ class Pet < ApplicationRecord
       self.all.select{|pet| pet.veterinarian_ids.include?(user.id)}
     end
   end
+
+  def self.ci_search(attribute, value)
+    where("lower(attribute) = ?", value.downcase)
+  end
 end
