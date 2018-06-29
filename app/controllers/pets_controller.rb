@@ -98,6 +98,8 @@ class PetsController < ApplicationController
       pets = Pet.where(owner_id: Owner.ci_find("first_name", pet_search_criteria[:owner_first]).ids)
     elsif pet_search_criteria[:pet_name].empty? && pet_search_criteria[:owner_first].empty?
       pets = Pet.where(owner_id: Owner.ci_find("last_name", pet_search_criteria[:owner_last]).ids)
+    elsif pet_search_criteria[:pet_name].empty?
+      pets = Pet.where(owner_id: Owner.ci_find("last_name", pet_search_criteria[:owner_last]).ci_find("first_name", pet_search_criteria[:owner_first]).ids)
     end
     render json: pets, status: 201 if !pets.empty?
   end
