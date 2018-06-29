@@ -86,9 +86,9 @@ class PetsController < ApplicationController
   end
 
   def search
-    pets = Pet.find_by(pet_search_params)
-    if pet #&& pet.owner == Owner.find_by_first_and_last_name(params.require(:pet).permit(:owner_first_name, :owner_last_name).values)
-      render json: pet, status: 201
+    pets = Pet.ci_search("name", params[:pet][:name])
+    if !pets.empty? 
+      render json: pets, status: 201
     end
   end
 
@@ -98,7 +98,7 @@ private
   end
 
   def pet_search_params
-    params.require(:pet).permit(:name, :species)
+    params.require(:pet).permit(:name)
   end
 
   def set_pet
