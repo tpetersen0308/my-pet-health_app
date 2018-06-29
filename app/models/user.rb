@@ -7,7 +7,7 @@ class User < ApplicationRecord
   validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create
 
   def self.ci_find(attribute, value)
-    where("lower(#{attribute}) = ?", value.downcase).first
+    where("lower(#{attribute}) = ?", value.downcase)
   end
 
   def name

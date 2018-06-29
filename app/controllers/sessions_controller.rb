@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
    
       redirect_to user_path(user)
     else
-      user = User.ci_find("email", params[:email])
+      user = User.ci_find("email", params[:email]).first
 
       if user && user.authenticate(params[:password])
         session[:user_id] = user.id
