@@ -197,8 +197,8 @@ function search() {
         let values = $(this).serialize();
         let posting = $.post($(this).attr("action"), values);
         $("#pet_name").val("");
-        //$("#pet_owner_first_name").val("");
-        //$("#pet_owner_last_name").val("");
+        $("#pet_owner_first_name").val("");
+        $("#pet_owner_last_name").val("");
         
         posting.success(function(data){
           $("#js-submitSearch").removeAttr('disabled');
