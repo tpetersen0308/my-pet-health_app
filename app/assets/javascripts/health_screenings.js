@@ -7,6 +7,7 @@ class HealthScreening {
     this.status = status
   }
 
+  //displayLastUpdated() returns a screenings lastUpdated attribute as a string-formatted date 
   displayLastUpdated() {
     if(this.lastUpdated) {
       return this.lastUpdated.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
@@ -14,10 +15,6 @@ class HealthScreening {
       return "Never"
     }
   }
-}
-
-function attachListeners() {
-  viewScreenings();
 }
 
 function viewScreenings() {
@@ -116,5 +113,5 @@ function showScreening(screening, petId) {
 }
 
 $(function() {
-  attachListeners();
+  viewScreenings();
 })
