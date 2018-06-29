@@ -7,8 +7,10 @@ class HealthScreening {
     this.status = status
   }
 
-  //displayLastUpdated() returns a screenings lastUpdated attribute as a string-formatted date 
-  displayLastUpdated() {
+/*********************************************************************************************
+* displayLastUpdated() returns a screenings lastUpdated attribute as a string-formatted date *
+**********************************************************************************************/ 
+displayLastUpdated() {
     if(this.lastUpdated) {
       return this.lastUpdated.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
     } else {
@@ -17,42 +19,56 @@ class HealthScreening {
   }
 }
 
+/******************************************************************************************** 
+* viewScreenings() attaches an event listener to links for viewing pet health screenings,   *
+* appends the appropriate filtering links to the DOM with event listeners attached to them. *
+*********************************************************************************************/
 function viewScreenings() {
-  $(".js-viewScreenings").on("click", function(event) {
-    event.preventDefault();
+  $(".js-viewScreenings").on("click", function(event) { //attach listener
+    event.preventDefault(); 
     const id = $(this).data("id");
     const name = $(this).data("name");
 
+    //append filtering links to the DOM
     $("#js-screeningsLink-" + id).html(`<a href='#' class='js-filterScreenings' data-id=${id} data-name=${name} data-status='current'><strong>Current</strong></a>`);
     $("#js-screeningsLink-" + id).append(`<span> | </span><a href='#' class='js-filterScreenings' data-id=${id} data-name=${name} data-status='overdue'><strong>Overdue</strong></a>`);
     $("#js-screeningsLink-" + id).append(`<span> | </span><a href='#' class='js-filterScreenings' data-id=${id} data-name=${name}><strong>All</strong></a>`);
     $("#js-screeningsLink-" + id).append(`<span> | </span><a href='#' class='js-hideScreenings' data-id=${id} data-name=${name}><strong>Hide</strong></a>`);
 
+    //display screenings with filterScreenings()
     filterScreenings(`/pets/${id}/health_screenings`, id, name);
 
+    //attach event listener to filtering links
     $(".js-filterScreenings").on("click", function(event) {
       event.preventDefault();
       let id = $(this).data("id");
       let status = $(this).data("status") || "";
-      filterScreenings(`/pets/${id}/health_screenings/${status}`, id, name);
+      filterScreenings(`/pets/${id}/health_screenings/${status}`, id, name); //display selected screenings
     });
 
-    hideScreenings();
+    hideScreenings(); //attach event listener to hide screenings link
   })
 }
 
+/********************************************************************************************  
+* filterScreenings() sends an AJAX GET request to its url argument, which determines the    *
+* index route to request a collection of screenings from, and appends the collection to the *
+* DOM.                                                                                      *
+*********************************************************************************************/
 function filterScreenings(url, petId, name) {
   let screenings = [];
-  $.getJSON(url, function(data){
+
+  //send GET request for screenings collection
+  $.getJSON(url, function(data){ 
     $("#js-screenings-" + petId).html(''); //clear screenings div to prevent appending duplicates
     
-    if(data.length > 0) {
+    if(data.length > 0) { //build screenings and append to DOM if there are screenings to display
       for(screening of data) {
         screenings.push(new HealthScreening(screening.id, screening.kind, screening.species, screening.last_updated, screening.status));
         showScreening(screenings[screenings.length - 1], petId);
-        if(currentUserVet() && screening.status === "Overdue") {
+        if(currentUserVet() && screening.status === "Overdue") { //display update button only if user is a vet and the screening isn't up to date
           $("#js-lastUpdated-" + screening.id).append(`<button class="js-updateScreening" data-id=${screening.id} data-pet-id=${petId}>Update</button>`);
-          updateScreening();
+          updateScreening(); //add event listener to update button
         }
       }
     } else {
