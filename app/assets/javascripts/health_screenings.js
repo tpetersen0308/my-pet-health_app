@@ -119,11 +119,13 @@ function submitScreeningUpdate(screeningId){
     posting.done(function (data) {
       if(typeof data === "object") {   
         $.getJSON(`/health_screenings/${screeningId}`, function(screeningData){
-          let newScreening = new HealthScreening(screeningData.id, screeningData.kind, screeningData.species, screeningData.last_updated, screeningData.status);
-          $("#js-screening-" + screeningId).html(`<p>${newScreening.kind}</p><ul><li id="js-lastUpdated-${newScreening.id}">Last Updated: ${newScreening.displayLastUpdated()} </li><li>Status: ${newScreening.status}</li></ul>`);
+          //let newScreening = new HealthScreening(screeningData.id, screeningData.kind, screeningData.species, screeningData.last_updated, screeningData.status);
+          //$("#js-screening-" + screeningId).html(`<p>${newScreening.kind}</p><ul><li id="js-lastUpdated-${newScreening.id}">Last Updated: ${newScreening.displayLastUpdated()} </li><li>Status: ${newScreening.status}</li></ul>`);
+          showScreening(screeningData);
         })
       } else { //re-render the form with errors if the update was unsuccessful
         $("#js-lastUpdated-" + screeningId).html(data);
+        cancel(false, screeningId);
         submitScreeningUpdate(screeningId);
       }
     })
