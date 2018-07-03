@@ -35,7 +35,7 @@ function viewPets(){
       let species = $(this).data("species") || "";
       filterPets(`/users/${id}/pets/${species}`, id, userName);
     });
-    viewScreenings(); //attach event listener to view screenings links
+
     hidePets(); //attach event listener to hide pets link
   })
 }
