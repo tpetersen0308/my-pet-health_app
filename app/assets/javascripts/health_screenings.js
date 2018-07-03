@@ -146,6 +146,10 @@ function showScreening(screening, petId) {
   }
 }
 
+/*********************************************************************************************
+* removeUpdateScreening() accepts JSON formatted health screening data and replaces the edit *
+* screening form with the infomation that was displayed before the form was loaded           *
+**********************************************************************************************/
 function removeUpdateScreening(screeningData) {
   let screening = new HealthScreening(screeningData.id, screeningData.kind, screeningData.species, screeningData.last_updated, screeningData.status);
   let screeningHTML = `Last Updated: ${screening.displayLastUpdated()}`;
