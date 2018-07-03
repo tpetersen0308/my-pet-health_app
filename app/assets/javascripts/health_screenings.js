@@ -84,6 +84,7 @@ function updateScreening() {
 
     let req = $.get(`/pets/${petId}/health_screenings/${screeningId}/edit`, function(data){
       $("#js-lastUpdated-" + screeningId).html(data); //append form to DOM
+      cancel(false, screeningId);
     })
     
     req.success(function(){
@@ -143,6 +144,16 @@ function showScreening(screening, petId) {
     $("#js-lastUpdated-" + screening.id).append(`<button class="js-updateScreening" data-id=${screening.id} data-pet-id=${petId}>Update</button>`);
     updateScreening(); //add event listener to update button
   }
+}
+
+function removeUpdateScreening(screeningData) {
+  let screening = new HealthScreening(screeningData.id, screeningData.kind, screeningData.species, screeningData.last_updated, screeningData.status);
+  let screeningHTML = `Last Updated: ${screening.displayLastUpdated()}`;
+  if(currentUserVet() && screening.status === "Overdue") { //display update button only if user is a vet and the screening isn't up to date
+    screeningHTML += `<button class="js-updateScreening" data-id=${screening.id} data-pet-id=${screeningData.pet.id}>Update</button>`;
+    updateScreening(); //add event listener to update button
+  }
+  $("#js-lastUpdated-" + screening.id).html(screeningHTML);
 }
 
 $(function() {
