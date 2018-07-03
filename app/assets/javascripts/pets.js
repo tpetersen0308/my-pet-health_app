@@ -160,6 +160,7 @@ function submitPetUpdates(id, name) {
       } else {
         $("#js-pet-" + id).html(`<h3>Edit ${name}'s information:</h3><br>` + data);
         submitPetUpdates(id, name); //re-attach event listener to form submission
+        cancel(id); //re-attach event listener to cancel link
       }
     })
   })
