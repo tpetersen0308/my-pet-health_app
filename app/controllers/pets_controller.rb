@@ -81,6 +81,7 @@ class PetsController < ApplicationController
   end
 
   def destroy
+    @pet.health_screenings.destroy_all
     @pet.destroy
     render json: Pet.new, status: 201
   end
