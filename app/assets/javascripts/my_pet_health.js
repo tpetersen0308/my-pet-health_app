@@ -1,4 +1,4 @@
-function cancel(id = nil) {
+function cancel(id = false) {
   if(id){
     $("#js-cancel-" + id).on("click", function(event) {
       event.preventDefault();
