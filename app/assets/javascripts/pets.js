@@ -8,19 +8,27 @@ class Pet {
   }
 }
 
+/*********************************************************************************
+* viewPets() adds event listeners to view pets links that create filtering links *
+* when clicked, and adds event listeners to filtering links that properly filter *
+* the list of pets that is displayed.                                            *
+**********************************************************************************/
 function viewPets(){
   $(".js-viewPets").on("click", function(event) {
     event.preventDefault();
     let userId = $(this).data("id");
     let userName = $(this).data("name");
     
+    //append filter links to the DOM
     $("#js-petsLink-" + userId).html(`<a href='#' class='js-filterPets' data-id=${userId} data-name=${userName} data-species='dogs'><strong>Dogs</strong></a>`);
     $("#js-petsLink-" + userId).append(`<span> | </span><a href='#' class='js-filterPets' data-id=${userId} data-name=${userName} data-species='cats'><strong>Cats</strong></a>`);
     $("#js-petsLink-" + userId).append(`<span> | </span><a href='#' class='js-filterPets' data-id=${userId} data-name=${userName}><strong>All</strong></a>`);
     $("#js-petsLink-" + userId).append(`<span> | </span><a href='#' class='js-hidePets' data-id=${userId} data-name=${userName}><strong>Hide</strong></a>`);
 
+    //show all pets the first time view pets is clicked
     filterPets(`/users/${userId}/pets`, userId, userName);
 
+    //attach event listeners to filter links
     $(".js-filterPets").on("click", function(event){
       event.preventDefault();
       let id = $(this).data("id");
@@ -28,75 +36,99 @@ function viewPets(){
       filterPets(`/users/${id}/pets/${species}`, id, userName);
     });
 
-    hidePets();
+    hidePets(); //attach event listener to hide pets link
   })
 }
 
+/*********************************************************************************
+* hidePets() attaches an event listener to the hide pets link such that the pets *
+* list is hidden when the link is clicked.                                       * 
+**********************************************************************************/
 function hidePets() {
   $(".js-hidePets").on("click", function(event) {
     event.preventDefault();
     let userId = $(this).data("id");
     let userName = $(this).data("name");
 
+    //replace filters links with view pets link
     $("#js-petsLink-" + userId).html(`<a class='js-viewPets' href='#' data-id=${userId} data-name=${userName}><strong>View${userVet() ? " Dr. "  : " "}${userName}'s ${userVet() ? "Patients" : "Pets"}</strong></a>`);
-    $("#js-pets-" + userId).html('');
-    viewPets();
+    $("#js-pets-" + userId).html(''); //remove list from DOM
+    viewPets(); //re-attach event listener to view pets link
   })
 }
 
+/*********************************************************************************
+* filterPets() sends an AJAX GET request to the url provided as an argument, and *
+* displays the list of pets from the server response.                            * 
+**********************************************************************************/
 function filterPets(url, userId, userName) {
   $.getJSON(url, function(data){
     let petsHTML;
     if (data.length > 0) {
       petsHTML = data.map(pet => displayPet(pet)).join('');
-    } else {
+    } else { //if the user has no pets to display under given filter, respond with informative message
       if(url.includes("dogs")) {
         petsHTML = `<h4>${userName} does not have any dogs</h4>`
       } else if(url.includes("cats")) {
         petsHTML = `<h4>${userName} does not have any cats</h4>`
       } else {
-        petsHTML = `<h4>${userName} not registered any pets</h4>`
+        petsHTML = `<h4>${userName} has not registered any pets</h4>`
       }
     }
-    $("#js-pets-" + userId).html(petsHTML);
-    addDeleteListener();
-    addEditListener();
-    viewScreenings();
+    $("#js-pets-" + userId).html(petsHTML); //append the list or message to the DOM
+    addDeleteListener(); //attach listener to remove pet link
+    addEditListener(); //attach listener to edit pet link
+    viewScreenings(); //attach listener to view pet's screenings
   });
 }
 
+/*********************************************************************************
+* displayPet() creates new Pet and User JS model objects and returns HTML with   *
+* their information to be appended to the DOM.                                   * 
+**********************************************************************************/
 function displayPet(data) {
   let newPet = new Pet(data.id, data.name, data.species, data.age, data.sex);
   let newOwner = new User(data.owner.id, data.owner.first_name, data.owner.last_name);
   let vets = data.veterinarians.map(vet => new User(vet.id, vet.first_name, vet.last_name));
   let vetsHTML = vets.map(vet => `<li><a href="/users/${vet.id}">Dr. ${vet.displayFullName()}</a></li>`).join('');
-  if(vetsHTML.length > 0){
+  
+  //only include vets list if the pet is associated with at least one vet
+  if(vetsHTML.length > 0){ 
     vetsHTML = "<li>Veterinarians:<ul>" + vetsHTML + "</ul></li>";
-  } else {
+  } else { //display informative message if the pet is not associated with any vets
     vetsHTML = `<li>Veterinarians:<ul><li>${newPet.name} is not yet associated with any veterinarians.</li></ul></li>`;
   }
   let petHTML = `<div id='js-pet-${newPet.id}'>`; 
   petHTML += `<h3>${newPet.name}</h3><ul><li>Type: ${newPet.sex} ${newPet.species}</li><li><a href="/users/${newOwner.id}">Owner: <strong>${newOwner.displayFullName()}</strong></a></li><li>Age: ${newPet.age}</li>${vetsHTML}</ul>`;
-  if($("#js-currentUserId").val() === newOwner.id.toString()) {
+  
+  //if the current user is the pet's owner, display links to remove the pet or edit its info
+  if($("#js-currentUserId").val() === newOwner.id.toString()) { 
     petHTML += `<p><strong><a href="/users/${newOwner.id}/pets/${newPet.id}/edit" class="js-editPet" data-id=${newPet.id} data-owner-id=${newOwner.id} data-name=${newPet.name}>Edit ${newPet.name}'s information</a></strong></p>`;
     petHTML += `<p><strong><a href="#" class="js-deletePet" data-id=${newPet.id} data-owner-id=${newOwner.id} data-name=${newPet.name}>Remove ${newPet.name} from my pets</a></strong></p>`;
   }
+
   petHTML += `<p id="js-screeningsLink-${newPet.id}"><strong><a href='#' class='js-viewScreenings' data-id=${newPet.id} data-name=${newPet.name}>View ${newPet.name}'s Screenings</a></strong></p>`;
   petHTML += `</div><div id="js-screenings-${newPet.id}"></div>`;
+  
   return petHTML;
 }
 
+/*********************************************************************************
+* addEditListener() appends the edit pet form to the DOM when the edit pet link  *
+* is clicked.                                                                    * 
+**********************************************************************************/
 function addEditListener() {
   $(".js-editPet").on("click", function(event) {
     event.preventDefault();
-    let url = $(this).attr("href");
+    let url = $(this).attr("href"); //assign the href attribute of the form to url variable
     let id = $(this).data("id");
     let name = $(this).data("name");
     
+    //send AJAX GET request for the edit form and append it to the DOM
     $.get(url, function(data){
       $("#js-pet-" + id).html(`<h3>Edit ${name}'s information:</h3><br>` + data);
-      cancel(id);
-      submitPetUpdates(id, name);
+      cancel(id); //attach event listener to cancel link
+      submitPetUpdates(id, name); //attach even listener to submit button
     })
   })
 }
