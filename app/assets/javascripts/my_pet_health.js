@@ -11,8 +11,7 @@ function cancel(petId = false, screeningId = false) {
     $("#js-cancel-" + screeningId).on("click", function(event) {
       event.preventDefault();
       $.getJSON("/health_screenings/" + screeningId, function(data) {
-        removeUpdateScreening(data);
-        updateScreening();
+        showScreening(data);
       })
     })
   } else {
