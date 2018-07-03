@@ -74,7 +74,7 @@ function filterScreenings(url, petId, name) {
 }
 
 /*********************************************************************************************
-* showScreening() appends a screening JS object model to the DOM and renders and edit button *
+* showScreening() appends a screening JS object model to the DOM and renders an edit button  *
 * if the current user is a vet and the screening is out of date.                             * 
 **********************************************************************************************/
 function showScreening(screening) {
