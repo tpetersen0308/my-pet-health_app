@@ -53,8 +53,8 @@ function viewScreenings() {
 
 /********************************************************************************************  
 * filterScreenings() sends an AJAX GET request to its url argument, which determines the    *
-* index route to request a collection of screenings from, and appends the collection to the *
-* DOM.                                                                                      *
+* index action to request a collection of screenings from, and appends the collection to    *
+* the DOM.                                                                                  *
 *********************************************************************************************/
 function filterScreenings(url, petId, name) {
 
@@ -88,7 +88,8 @@ function showScreening(screening) {
 
 /********************************************************************************************
 * updateScreening() attaches an event listener to the update button that sends an AJAX GET  *
-* request which replaces the screening information with an update form.                     *
+* request to the health_screenings#edit controller action, and replaces the screening       *
+* information with an update form.                                                          *
 *********************************************************************************************/
 function updateScreening() {
   $(".js-updateScreening").on("click", function() {
@@ -108,25 +109,24 @@ function updateScreening() {
 
 /********************************************************************************************
 * submitScreeningUpdate() attaches an event listener to the submit button on the edit form, *
-* which sends an AJAX POST request to update the resource and renders the updated resource. *
+* which sends an AJAX POST request to the health_screenings#update controller action and    *
+* renders the updated resource in the DOM.                                                  *
 *********************************************************************************************/
 function submitScreeningUpdate(screeningId){
   $("form").submit(function(event){
     event.preventDefault();
     let values = $(this).serialize();
-    let posting = $.post($(this).attr("action"), values);
+    let posting = $.post($(this).attr("action"), values); //submit form to health_screenings#update
     
     posting.done(function (data) {
       if(typeof data === "object") {   
         $.getJSON(`/health_screenings/${screeningId}`, function(screeningData){
-          //let newScreening = new HealthScreening(screeningData.id, screeningData.kind, screeningData.species, screeningData.last_updated, screeningData.status);
-          //$("#js-screening-" + screeningId).html(`<p>${newScreening.kind}</p><ul><li id="js-lastUpdated-${newScreening.id}">Last Updated: ${newScreening.displayLastUpdated()} </li><li>Status: ${newScreening.status}</li></ul>`);
-          showScreening(screeningData);
+          showScreening(screeningData); //display updated information on successful update
         })
       } else { //re-render the form with errors if the update was unsuccessful
         $("#js-lastUpdated-" + screeningId).html(data);
-        cancel(false, screeningId);
-        submitScreeningUpdate(screeningId);
+        cancel(false, screeningId); //attach event listener to cancel link
+        submitScreeningUpdate(screeningId); //attach event listener to form submission
       }
     })
   })
@@ -149,6 +149,7 @@ function hideScreenings() {
   })
 }
 
+//on document: ready, attach event listeners to view screenings links
 $(function() {
   viewScreenings();
 })

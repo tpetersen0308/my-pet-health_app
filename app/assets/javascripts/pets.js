@@ -124,7 +124,7 @@ function addEditListener() {
     let id = $(this).data("id");
     let name = $(this).data("name");
     
-    //send AJAX GET request for the edit form and append it to the DOM
+    //send AJAX GET request to pets#new for the edit form and append it to the DOM
     $.get(url, function(data){
       $("#js-pet-" + id).html(`<h3>Edit ${name}'s information:</h3><br>` + data);
       cancel(id); //attach event listener to cancel link
@@ -133,13 +133,22 @@ function addEditListener() {
   })
 }
 
+/*********************************************************************************
+* submitPetUpdates() attaches an event listener to the edit pet form and submits *
+* an AJAX POST request to the pets#update controller action. If the server       *
+* responds with a JSON object, the updates are displayed. Otherwise, the form is *
+* reloaded with errors.                                                          * 
+**********************************************************************************/
 function submitPetUpdates(id, name) {
+  //attach event listener
   $("#edit_pet_" + id).submit(function(event){
     event.preventDefault();
     let values = $(this).serialize();
-    let posting = $.post($(this).attr("action"), values);
+    let posting = $.post($(this).attr("action"), values); //submit form to pets#update
 
+    
     posting.success(function(data){
+      //if response is a JSON object, append the updated pet info to the DOM
       if(typeof data === "object"){
         let petHTML = "<h1>Your pet's information has been updated:</h1>" + displayPet(data);
         $("#js-pet-" + id).html(petHTML);
@@ -147,26 +156,36 @@ function submitPetUpdates(id, name) {
         addDeleteListener();
         $("#js-screeningsLink-" + data.id).remove();
         $("#js-screenings-" + data.id).remove();
+      //if response is html, append the form with errors
       } else {
         $("#js-pet-" + id).html(`<h3>Edit ${name}'s information:</h3><br>` + data);
-        submitPetUpdates(id, name);
+        submitPetUpdates(id, name); //re-attach event listener to form submission
       }
     })
   })
 }
 
+/*********************************************************************************
+* addDeleteListener() attaches an event listener to the remove pet links which   *
+* submits an AJAX POST request to the pets#delete controller action.             * 
+**********************************************************************************/
 function addDeleteListener() {
+  //attach event listener
   $(".js-deletePet").on("click", function(event){
     event.preventDefault();
+    //confirm that user wants to remove the resource from their pets
     let answer = confirm(`Are you sure you want to remove ${$(this).data("name")} from your pets?`);
     let name = $(this).data("name");
     let id = $(this).data("id");
     let ownerId = $(this).data("owner-id");
+
+    //on user confirmation, submit AJAX POST request to pets#delete
     if(answer){
       let req = $.ajax({
         type: "POST",
         url: `/users/${ownerId}/pets/${id}`,
         data: {_method: 'delete'},
+        //when resource is successfully deleted, remove the pet from the DOM and display confirmation message.
         success: function() {
           $("#js-pet-" + id).remove();
           $("#js-content").html(`<h2>${name} has been removed from your pets.</h2>`)
@@ -179,71 +198,96 @@ function addDeleteListener() {
   })
 }
 
+/**********************************************************************************
+* registerPet() attaches an event listener to the register pet link which appends *
+* the pet registration form to the DOM.                                           * 
+***********************************************************************************/
 function registerPet() {
+  //attach event listener
   $(".js-registerPet").on("click", function(event) {
     event.preventDefault();
     let url = $(this).attr("href");
     
+    //make AJAX GET request to pets#new action and append the form to the DOM
     $.get(url, function(data){
       $("#js-content").html("<h2>Register a New Pet:</h2><br>" + data);
-      cancel();
-      submitNewPet();
+      cancel(); //attach event listener to cancel link
+      submitNewPet(); //attach event listener to form submission
     })
   })
 }
 
+/*********************************************************************************
+* submitNewPet() attaches an event listener to the pet registration form, which  *
+* makes an AJAX POST request to the pets#create controller action and appends    *
+* the results to the DOM.                                                        *
+**********************************************************************************/
 function submitNewPet() {
+  //attach event listener
   $("#new_pet").submit(function(event){
     event.preventDefault();
     let values = $(this).serialize();
-    let posting = $.post($(this).attr("action"), values);
+    let posting = $.post($(this).attr("action"), values); //submit form to pets#create
 
     posting.success(function(data){
+      //if the server responds with a JSON object, append the new pet information to the DOM
       if(typeof data === "object"){
         let petHTML = "<h2>Your pet has been successfully registered:</h2><br>" + displayPet(data);
-        $("#js-content").html(petHTML);
-        addEditListener();
-        addDeleteListener();
-        $("#js-screeningsLink-" + data.id).remove();
+        $("#js-content").html(petHTML); //append new pet
+        addEditListener(); //attach listener to edit pet link
+        addDeleteListener(); //attach listener to remove pet link
+        $("#js-screeningsLink-" + data.id).remove(); //new pets have no current screenings, so links are not displayed here
         $("#js-screenings-" + data.id).remove();
       } else {
+        //if the server responds with html, re-render the form with errors
         $("#js-content").html("<h2>Register a New Pet:</h2><br>" + data);
-        cancel();
-        submitNewPet();
+        cancel(); //attach event listener to cancel link
+        submitNewPet(); //attach event listener to form submission
       }
     })
   })
 }
 
+/*********************************************************************************
+* search() attaches an event listner to the find a pet link, which appends the   *
+* search form to the DOM and then attaches an event listener to search form      *
+* submission, which makes an AJAX POST request to the pets#search controller     *
+* action.                                                                        *
+**********************************************************************************/
 function search() {
+  //attach event listener to find a pet link
   $("#js-searchLink").on("click", function(event) {
     event.preventDefault();
+    // make AJAX GET request for pet search form and append it to the DOM
     let req = $.get("/pets", function(data){
       $("#js-content").html(data);
-      cancel();
+      cancel(); //attache event listener to cancel link
     })
     
     req.done(function() {
+      //attach event listener to search form submission
       $("#js-search").submit(function(event){
         event.preventDefault();
         let values = $(this).serialize();
-        let posting = $.post($(this).attr("action"), values);
-        $("#pet_name").val("");
+        let posting = $.post($(this).attr("action"), values); //make AJAX POST request to pets#search
+        $("#pet_name").val(""); //clear search form fields
         $("#pet_owner_first_name").val("");
         $("#pet_owner_last_name").val("");
         
         posting.success(function(data){
-          $("#js-submitSearch").removeAttr('disabled');
+          $("#js-submitSearch").removeAttr('disabled'); //re-enable search for submit button
           let newPetHTML = `<h2>Search Results: </h2><br>`;
+          //if search results are positive, append all results to the DOM
           if(data){
             for(pet of data) {
               newPetHTML += displayPet(pet);
             }
           } else {
+            //if search results are negative, display informative message
             newPetHTML += "<h3>We're sorry, we were unable to find any pets that match your search criteria.</h3>";
           }
           $("#js-searchResults").html(newPetHTML);
-          addDeleteListener();
+          addDeleteListener(); //attach event listeners to pet links
           addEditListener();
           viewScreenings();
         })
@@ -253,6 +297,7 @@ function search() {
     
 }
 
+//on document: ready, attach event listeners to find a pet, view pets, and register pet links
 $(function() {
   search();
   viewPets();
