@@ -4,6 +4,7 @@ function cancel(id = false) {
       event.preventDefault();
       $.getJSON("/pets/" + id, function(data) {
         $("#js-pet-" + id).html(displayPet(data));
+        addEditListener();
       })
     })
   } else {

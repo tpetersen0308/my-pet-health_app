@@ -95,7 +95,7 @@ function addEditListener() {
     
     $.get(url, function(data){
       $("#js-pet-" + id).html(`<h3>Edit ${name}'s information:</h3><br>` + data);
-
+      cancel(id);
       submitPetUpdates(id, name);
     })
   })
