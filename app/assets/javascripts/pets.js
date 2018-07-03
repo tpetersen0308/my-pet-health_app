@@ -238,12 +238,13 @@ function submitNewPet() {
         addDeleteListener(); //attach listener to remove pet link
         $("#js-screeningsLink-" + data.id).remove(); //new pets have no current screenings, so links are not displayed here
         $("#js-screenings-" + data.id).remove();
+        $("#js-content").append(`<p><a href="#" class="js-cancel">Done</a></p>`);
       } else {
         //if the server responds with html, re-render the form with errors
         $("#js-content").html("<h2>Register a New Pet:</h2><br>" + data);
-        cancel(); //attach event listener to cancel link
         submitNewPet(); //attach event listener to form submission
       }
+      cancel(); //attach event listener to cancel link
     })
   })
 }
