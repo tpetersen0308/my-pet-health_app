@@ -14,6 +14,8 @@ function cancel(petId = false, screeningId = false) {
       $.getJSON("/pets/" + petId, function(data) {
         $("#js-pet-" + petId).html(displayPet(data)); //replace the form with the pet's information
         addEditListener(); //re-attach event listener to edit pet link
+        addDeleteListener(); //re-attach event listener to remove pet link
+        viewScreenings(); //re-attach event listener to view screenings link
       })
     })
   } else if(screeningId) {
