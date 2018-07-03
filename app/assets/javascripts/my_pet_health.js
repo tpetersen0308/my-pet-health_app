@@ -1,9 +1,9 @@
-function cancel(id = false) {
-  if(id){
-    $("#js-cancel-" + id).on("click", function(event) {
+function cancel(petId = false, screeningId = false) {
+  if(petId){
+    $("#js-cancel-" + petId).on("click", function(event) {
       event.preventDefault();
-      $.getJSON("/pets/" + id, function(data) {
-        $("#js-pet-" + id).html(displayPet(data));
+      $.getJSON("/pets/" + petId, function(data) {
+        $("#js-pet-" + petId).html(displayPet(data));
         addEditListener();
       })
     })
