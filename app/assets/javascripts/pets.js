@@ -154,8 +154,7 @@ function submitPetUpdates(id, name) {
         $("#js-pet-" + id).html(petHTML);
         addEditListener();
         addDeleteListener();
-        $("#js-screeningsLink-" + data.id).remove();
-        $("#js-screenings-" + data.id).remove();
+        viewScreenings();
       //if response is html, append the form with errors
       } else {
         $("#js-pet-" + id).html(`<h3>Edit ${name}'s information:</h3><br>` + data);
