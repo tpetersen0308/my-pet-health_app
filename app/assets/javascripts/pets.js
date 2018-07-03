@@ -173,15 +173,15 @@ function addDeleteListener() {
   //attach event listener
   $(".js-deletePet").on("click", function(event){
     event.preventDefault();
-    //confirm that user wants to remove the resource from their pets
-    let answer = confirm(`Are you sure you want to remove ${$(this).data("name")} from your pets?`);
     let name = $(this).data("name");
     let id = $(this).data("id");
     let ownerId = $(this).data("owner-id");
+    //confirm that user wants to remove the resource from their pets
+    let answer = confirm(`Are you sure you want to remove ${name} from your pets?`);
 
     //on user confirmation, submit AJAX POST request to pets#delete
     if(answer){
-      let req = $.ajax({
+      $.ajax({
         type: "POST",
         url: `/users/${ownerId}/pets/${id}`,
         data: {_method: 'delete'},
