@@ -7,6 +7,14 @@ function cancel(petId = false, screeningId = false) {
         addEditListener();
       })
     })
+  } else if(screeningId) {
+    $("#js-cancel-" + screeningId).on("click", function(event) {
+      event.preventDefault();
+      $.getJSON("/health_screenings/" + screeningId, function(data) {
+        $("#js-screening-" + screeningId).html(displayScreening(data));
+        updateScreening();
+      })
+    })
   } else {
     $(".js-cancel").on("click", function(event) {
       event.preventDefault();
