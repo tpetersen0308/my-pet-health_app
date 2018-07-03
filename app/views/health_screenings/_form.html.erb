@@ -6,5 +6,5 @@
     <%= f.label :last_updated %>
     <%= f.date_select :last_updated %> <br>
   </div>
-  <%= f.submit "Update Record" %>
+  <%= f.submit "Update Record" %> <%= link_to "Cancel", "#", id: "js-cancel-#{health_screening.id}" %>
 <% end %>
