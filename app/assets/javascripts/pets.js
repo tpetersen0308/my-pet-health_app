@@ -189,7 +189,7 @@ function addDeleteListener() {
         success: function() {
           $("#js-pet-" + id).remove();
           $("#js-content").html(`<h2>${name} has been removed from your pets.</h2>`);
-          $("#js-content").append(`<h4><a href="#" class="js-cancel">Done</a></h4>`);
+          $("#js-content").append(`<br><h4><a href="#" class="js-cancel">Done</a></h4>`);
           cancel();
         },
         error: function (data) {
