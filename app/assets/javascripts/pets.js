@@ -126,6 +126,8 @@ function addEditListener() {
     
     //send AJAX GET request to pets#new for the edit form and append it to the DOM
     $.get(url, function(data){
+      $("#js-screeningsLink-" + id).remove();
+      $("#js-screenings-" + id).remove();
       $("#js-pet-" + id).html(`<h3>Edit ${name}'s information:</h3><br>` + data);
       cancel(id); //attach event listener to cancel link
       submitPetUpdates(id, name); //attach even listener to submit button
