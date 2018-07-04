@@ -188,7 +188,9 @@ function addDeleteListener() {
         //when resource is successfully deleted, remove the pet from the DOM and display confirmation message.
         success: function() {
           $("#js-pet-" + id).remove();
-          $("#js-content").html(`<h2>${name} has been removed from your pets.</h2>`)
+          $("#js-content").html(`<h2>${name} has been removed from your pets.</h2>`);
+          $("#js-content").append(`<h4><a href="#" class="js-cancel">Done</a></h4>`);
+          cancel();
         },
         error: function (data) {
           console.error('Error:', data);
@@ -238,7 +240,7 @@ function submitNewPet() {
         addDeleteListener(); //attach listener to remove pet link
         $("#js-screeningsLink-" + data.id).remove(); //new pets have no current screenings, so links are not displayed here
         $("#js-screenings-" + data.id).remove();
-        $("#js-content").append(`<p><a href="#" class="js-cancel">Done</a></p>`);
+        $("#js-content").append(`<h4><a href="#" class="js-cancel">Done</a></h4>`);
       } else {
         //if the server responds with html, re-render the form with errors
         $("#js-content").html("<h2>Register a New Pet:</h2><br>" + data);
