@@ -65,7 +65,16 @@ function filterPets(url, userId, userName) {
   $.getJSON(url, function(data){
     let petsHTML;
     if (data.length > 0) {
-      petsHTML = data.map(pet => displayPet(pet)).join('');
+      let sortedPets = data.sort(function(petA, petB) {
+        if(petA.name.toLowerCase() < petB.name.toLowerCase()) {
+          return -1 
+        } else if(petA.name.toLowerCase() > petB.name.toLowerCase()) {
+          return 1
+        } else {
+          return 0
+        }
+      })
+      petsHTML = sortedPets.map(pet => displayPet(pet)).join('');
     } else { //if the user has no pets to display under given filter, respond with informative message
       if(url.includes("dogs")) {
         petsHTML = `<h4>${userName} does not have any dogs</h4>`
